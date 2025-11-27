@@ -1,6 +1,6 @@
 # sacloud/workflows-api-go
 
-Go言語向け さくらのクラウド Workflows APIライブラリ
+Go言語向けのさくらのクラウド Workflows APIライブラリ
 
 マニュアル: https://manual.sakura.ad.jp/cloud/appliance/workflows/
 APIドキュメント: https://manual.sakura.ad.jp/api/cloud/workflows/
