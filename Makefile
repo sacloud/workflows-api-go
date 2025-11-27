@@ -1,8 +1,8 @@
-#====================
-AUTHOR         ?= The sacloud/go-template Authors
+#CHANGELOG.md====================
+AUTHOR         ?= The sacloud/workflows-api-go Authors
 COPYRIGHT_YEAR ?= 2022-2025
 
-BIN            ?= go-template
+BIN            ?= workflows-api-go
 GO_FILES       ?= $(shell find . -name '*.go')
 
 include includes/go/common.mk
