@@ -1,4 +1,4 @@
-#CHANGELOG.md====================
+#====================
 AUTHOR         ?= The sacloud/workflows-api-go Authors
 COPYRIGHT_YEAR ?= 2022-2025
 
