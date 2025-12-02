@@ -43,7 +43,7 @@ type Invoker interface {
 	// ワークフローのリビジョンを追加する.
 	//
 	// POST /workflows/{id}/revisions
-	CreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error)
+	CreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error)
 	// DeleteExecution invokes deleteExecution operation.
 	//
 	// ワークフローの実行を削除する.
@@ -115,7 +115,7 @@ type Invoker interface {
 	// ワークフローのリビジョンエイリアスを更新する.
 	//
 	// PUT /workflows/{id}/revisions/{revisionId}/revision_alias
-	UpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error)
+	UpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error)
 }
 
 // Client implements OAS client.
@@ -358,23 +358,16 @@ func (c *Client) sendCreateWorkflow(ctx context.Context, request *CreateWorkflow
 // ワークフローのリビジョンを追加する.
 //
 // POST /workflows/{id}/revisions
-func (c *Client) CreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error) {
+func (c *Client) CreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error) {
 	res, err := c.sendCreateWorkflowRevision(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendCreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (res CreateWorkflowRevisionRes, err error) {
+func (c *Client) sendCreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (res CreateWorkflowRevisionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if value, ok := request.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
+		if err := request.Validate(); err != nil {
+			return err
 		}
 		return nil
 	}(); err != nil {
@@ -596,7 +589,7 @@ func (c *Client) sendDeleteWorkflowRevisionAlias(ctx context.Context, params Del
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
+			return e.EncodeValue(conv.IntToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -797,7 +790,7 @@ func (c *Client) sendGetWorkflowRevisions(ctx context.Context, params GetWorkflo
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
+			return e.EncodeValue(conv.IntToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -1437,23 +1430,16 @@ func (c *Client) sendUpdateWorkflow(ctx context.Context, request *UpdateWorkflow
 // ワークフローのリビジョンエイリアスを更新する.
 //
 // PUT /workflows/{id}/revisions/{revisionId}/revision_alias
-func (c *Client) UpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error) {
+func (c *Client) UpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error) {
 	res, err := c.sendUpdateWorkflowRevisionAlias(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (res UpdateWorkflowRevisionAliasRes, err error) {
+func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (res UpdateWorkflowRevisionAliasRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if value, ok := request.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
+		if err := request.Validate(); err != nil {
+			return err
 		}
 		return nil
 	}(); err != nil {
@@ -1490,7 +1476,7 @@ func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request Op
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
+			return e.EncodeValue(conv.IntToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
