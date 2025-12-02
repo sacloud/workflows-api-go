@@ -95,9 +95,7 @@ func (op *workflowOp) List(ctx context.Context, params v1.ListWorkflowParams) (*
 func (op *workflowOp) Read(ctx context.Context, id string) (*v1.GetWorkflowOKWorkflow, error) {
 	const methodName = "Workflow.Read"
 
-	res, err := op.client.GetWorkflow(ctx, v1.GetWorkflowParams{
-		ID: id,
-	})
+	res, err := op.client.GetWorkflow(ctx, v1.GetWorkflowParams{ID: id})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
@@ -149,9 +147,7 @@ func (op *workflowOp) Update(ctx context.Context, id string, req v1.UpdateWorkfl
 func (op *workflowOp) Delete(ctx context.Context, id string) error {
 	const methodName = "Workflow.Delete"
 
-	res, err := op.client.DeleteWorkflow(ctx, v1.DeleteWorkflowParams{
-		ID: id,
-	})
+	res, err := op.client.DeleteWorkflow(ctx, v1.DeleteWorkflowParams{ID: id})
 	if err != nil {
 		return NewAPIError(methodName, 0, err)
 	}
