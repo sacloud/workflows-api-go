@@ -37,7 +37,7 @@ type Invoker interface {
 	// ワークフローを作成する.
 	//
 	// POST /workflows/
-	CreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (CreateWorkflowRes, error)
+	CreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (CreateWorkflowRes, error)
 	// CreateWorkflowRevision invokes createWorkflowRevision operation.
 	//
 	// ワークフローのリビジョンを追加する.
@@ -310,23 +310,16 @@ func (c *Client) sendCreateExecution(ctx context.Context, request OptCreateExecu
 // ワークフローを作成する.
 //
 // POST /workflows/
-func (c *Client) CreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (CreateWorkflowRes, error) {
+func (c *Client) CreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (CreateWorkflowRes, error) {
 	res, err := c.sendCreateWorkflow(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendCreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (res CreateWorkflowRes, err error) {
+func (c *Client) sendCreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (res CreateWorkflowRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if value, ok := request.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
+		if err := request.Validate(); err != nil {
+			return err
 		}
 		return nil
 	}(); err != nil {

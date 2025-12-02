@@ -2521,15 +2521,6 @@ func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCreateWorkflowReq) SetFake() {
-	var elem CreateWorkflowReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptCreateWorkflowReqServicePrincipalId) SetFake() {
 	var elem CreateWorkflowReqServicePrincipalId
 	{

@@ -43,8 +43,7 @@ func NewWorkflowOp(client *v1.Client) WorkflowAPI {
 func (op *workflowOp) Create(ctx context.Context, req v1.CreateWorkflowReq) (*v1.CreateWorkflowCreatedWorkflow, error) {
 	const methodName = "Workflow.Create"
 
-	// TODO: why opt req
-	res, err := op.client.CreateWorkflow(ctx, v1.NewOptCreateWorkflowReq(req))
+	res, err := op.client.CreateWorkflow(ctx, &req)
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
