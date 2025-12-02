@@ -25,7 +25,7 @@ import (
 type ExecutionAPI interface {
 	Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error)
 	List(ctx context.Context, params v1.ListExecutionParams) (*v1.ListExecutionOK, error)
-	Read(ctx context.Context, id string) (*v1.GetExecutionOKExecution, error)
+	Read(ctx context.Context, params v1.GetExecutionParams) (*v1.GetExecutionOKExecution, error)
 	Cancel(ctx context.Context, params v1.CancelExecutionParams) (*v1.CancelExecutionAcceptedExecution, error)
 	Delete(ctx context.Context, params v1.DeleteExecutionParams) error
 	ListHistory(ctx context.Context, params v1.ListExecutionHistoryParams) (*v1.ListExecutionHistoryOK, error)
@@ -93,12 +93,10 @@ func (op *executionOp) List(ctx context.Context, params v1.ListExecutionParams) 
 	}
 }
 
-func (op *executionOp) Read(ctx context.Context, id string) (*v1.GetExecutionOKExecution, error) {
+func (op *executionOp) Read(ctx context.Context, params v1.GetExecutionParams) (*v1.GetExecutionOKExecution, error) {
 	const methodName = "Execution.Read"
 
-	res, err := op.client.GetExecution(ctx, v1.GetExecutionParams{
-		ID: id,
-	})
+	res, err := op.client.GetExecution(ctx, params)
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
