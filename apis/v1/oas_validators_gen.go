@@ -1054,8 +1054,8 @@ func (s *CreateWorkflowCreatedWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -2262,8 +2262,8 @@ func (s *GetWorkflowOKWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -3491,8 +3491,8 @@ func (s *ListWorkflowOKWorkflowsItem) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -3939,8 +3939,8 @@ func (s *UpdateWorkflowOKWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,

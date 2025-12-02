@@ -38,11 +38,10 @@ func TestWorkflowAPI(t *testing.T) {
 
 	// CreateWorkflow
 	respCreate, err := workflowAPI.Create(ctx, v1.CreateWorkflowReq{
-		Name:        "test-workflow",
-		Description: v1.NewOptString("test workflow"), // TODO: somehow it's required on the server side
-		Runbook:     sampleRunbook,
-		Publish:     false,
-		Logging:     false,
+		Name:    "test-workflow",
+		Runbook: sampleRunbook,
+		Publish: false,
+		Logging: false,
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
@@ -59,7 +58,7 @@ func TestWorkflowAPI(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, respRead)
 	assert.Equal(t, "test-workflow", respRead.Name)
-	assert.Equal(t, v1.NewOptString("test workflow"), respRead.Description)
+	assert.Equal(t, v1.NewOptString(""), respRead.Description) // empty
 	assert.Equal(t, false, respRead.Publish)
 	assert.Equal(t, false, respRead.Logging)
 
@@ -71,7 +70,7 @@ func TestWorkflowAPI(t *testing.T) {
 		if workflow.ID == respCreate.ID {
 			found = true
 			assert.Equal(t, "test-workflow", respRead.Name)
-			assert.Equal(t, v1.NewOptString("test workflow"), respRead.Description)
+			assert.Equal(t, v1.NewOptString(""), respRead.Description) // empty
 			assert.Equal(t, false, respRead.Publish)
 			assert.Equal(t, false, respRead.Logging)
 		}
@@ -80,13 +79,15 @@ func TestWorkflowAPI(t *testing.T) {
 
 	// UpdateWorkflow
 	respUpdate, err := workflowAPI.Update(ctx, respCreate.ID, v1.UpdateWorkflowReq{
-		Name:    v1.NewOptString("test-workflow-updated"),
-		Publish: v1.NewOptBool(true),
-		Logging: v1.NewOptBool(true),
+		Name:        v1.NewOptString("test-workflow-updated"),
+		Description: v1.NewOptString("test workflow updated"),
+		Publish:     v1.NewOptBool(true),
+		Logging:     v1.NewOptBool(true),
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respUpdate)
 	assert.Equal(t, "test-workflow-updated", respUpdate.Name)
+	assert.Equal(t, v1.NewOptString("test workflow updated"), respUpdate.Description)
 	assert.Equal(t, true, respUpdate.Publish)
 	assert.Equal(t, true, respUpdate.Logging)
 }
