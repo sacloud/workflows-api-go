@@ -109,7 +109,7 @@ type Invoker interface {
 	// ワークフローを更新する.
 	//
 	// PATCH /workflows/{id}
-	UpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error)
+	UpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error)
 	// UpdateWorkflowRevisionAlias invokes updateWorkflowRevisionAlias operation.
 	//
 	// ワークフローのリビジョンエイリアスを更新する.
@@ -1371,23 +1371,16 @@ func (c *Client) sendListWorkflowRevisions(ctx context.Context, params ListWorkf
 // ワークフローを更新する.
 //
 // PATCH /workflows/{id}
-func (c *Client) UpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error) {
+func (c *Client) UpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error) {
 	res, err := c.sendUpdateWorkflow(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendUpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (res UpdateWorkflowRes, err error) {
+func (c *Client) sendUpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (res UpdateWorkflowRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if value, ok := request.Get(); ok {
-			if err := func() error {
-				if err := value.Validate(); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return err
-			}
+		if err := request.Validate(); err != nil {
+			return err
 		}
 		return nil
 	}(); err != nil {

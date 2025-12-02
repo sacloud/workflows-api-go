@@ -2620,15 +2620,6 @@ func (s *OptUpdateWorkflowOKWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptUpdateWorkflowReq) SetFake() {
-	var elem UpdateWorkflowReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptUpdateWorkflowRevisionAliasReq) SetFake() {
 	var elem UpdateWorkflowRevisionAliasReq
 	{

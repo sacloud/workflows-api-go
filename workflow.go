@@ -123,7 +123,7 @@ func (op *workflowOp) Read(ctx context.Context, id string) (*v1.GetWorkflowOKWor
 func (op *workflowOp) Update(ctx context.Context, id string, req v1.UpdateWorkflowReq) (*v1.UpdateWorkflowOKWorkflow, error) {
 	const methodName = "Workflow.Update"
 
-	res, err := op.client.UpdateWorkflow(ctx, v1.NewOptUpdateWorkflowReq(req), v1.UpdateWorkflowParams{ID: id})
+	res, err := op.client.UpdateWorkflow(ctx, &req, v1.UpdateWorkflowParams{ID: id})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
