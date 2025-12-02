@@ -44,7 +44,7 @@ func (s *CancelExecutionAcceptedExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -306,7 +306,7 @@ func (s *CreateExecutionCreatedExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -1257,7 +1257,7 @@ func (s *GetExecutionOKExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -1959,7 +1959,7 @@ func (s *ListExecutionOKExecutionsItem) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -2462,15 +2462,6 @@ func (s *OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) SetFake()
 }
 
 // SetFake set fake values.
-func (s *OptCreateExecutionReq) SetFake() {
-	var elem CreateExecutionReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 	var elem CreateWorkflowCreatedWorkflowServicePrincipalId
 	{
@@ -2498,15 +2489,6 @@ func (s *OptDateTime) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptFloat64) SetFake() {
-	var elem float64
-	{
-		elem = float64(0)
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptGetExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem GetExecutionOKExecutionWorkflowServicePrincipalId
 	{
@@ -2520,6 +2502,15 @@ func (s *OptGetWorkflowOKWorkflowServicePrincipalId) SetFake() {
 	var elem GetWorkflowOKWorkflowServicePrincipalId
 	{
 		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptInt) SetFake() {
+	var elem int
+	{
+		elem = int(0)
 	}
 	s.SetTo(elem)
 }

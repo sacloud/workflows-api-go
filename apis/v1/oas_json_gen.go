@@ -151,7 +151,7 @@ func (s *CancelExecutionAcceptedExecution) encodeFields(e *jx.Encoder) {
 	}
 	{
 		e.FieldStart("Revision")
-		e.Float64(s.Revision)
+		e.Int(s.Revision)
 	}
 	{
 		e.FieldStart("RevisionAlias")
@@ -284,8 +284,8 @@ func (s *CancelExecutionAcceptedExecution) Decode(d *jx.Decoder) error {
 		case "Revision":
 			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
-				v, err := d.Float64()
-				s.Revision = float64(v)
+				v, err := d.Int()
+				s.Revision = int(v)
 				if err != nil {
 					return err
 				}
@@ -1725,7 +1725,7 @@ func (s *CreateExecutionCreatedExecution) encodeFields(e *jx.Encoder) {
 	}
 	{
 		e.FieldStart("Revision")
-		e.Float64(s.Revision)
+		e.Int(s.Revision)
 	}
 	{
 		e.FieldStart("RevisionAlias")
@@ -1858,8 +1858,8 @@ func (s *CreateExecutionCreatedExecution) Decode(d *jx.Decoder) error {
 		case "Revision":
 			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
-				v, err := d.Float64()
-				s.Revision = float64(v)
+				v, err := d.Int()
+				s.Revision = int(v)
 				if err != nil {
 					return err
 				}
@@ -8225,7 +8225,7 @@ func (s *GetExecutionOKExecution) encodeFields(e *jx.Encoder) {
 	}
 	{
 		e.FieldStart("Revision")
-		e.Float64(s.Revision)
+		e.Int(s.Revision)
 	}
 	{
 		e.FieldStart("RevisionAlias")
@@ -8358,8 +8358,8 @@ func (s *GetExecutionOKExecution) Decode(d *jx.Decoder) error {
 		case "Revision":
 			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
-				v, err := d.Float64()
-				s.Revision = float64(v)
+				v, err := d.Int()
+				s.Revision = int(v)
 				if err != nil {
 					return err
 				}
@@ -12683,7 +12683,7 @@ func (s *ListExecutionOKExecutionsItem) encodeFields(e *jx.Encoder) {
 	}
 	{
 		e.FieldStart("Revision")
-		e.Float64(s.Revision)
+		e.Int(s.Revision)
 	}
 	{
 		e.FieldStart("RevisionAlias")
@@ -12816,8 +12816,8 @@ func (s *ListExecutionOKExecutionsItem) Decode(d *jx.Decoder) error {
 		case "Revision":
 			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
-				v, err := d.Float64()
-				s.Revision = float64(v)
+				v, err := d.Int()
+				s.Revision = int(v)
 				if err != nil {
 					return err
 				}
@@ -15705,39 +15705,6 @@ func (s *OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) Unmarshal
 	return s.Decode(d)
 }
 
-// Encode encodes CreateExecutionReq as json.
-func (o OptCreateExecutionReq) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes CreateExecutionReq from json.
-func (o *OptCreateExecutionReq) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptCreateExecutionReq to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptCreateExecutionReq) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptCreateExecutionReq) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes CreateWorkflowCreatedWorkflowServicePrincipalId as json.
 func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -15839,41 +15806,6 @@ func (s *OptDateTime) UnmarshalJSON(data []byte) error {
 	return s.Decode(d, json.DecodeDateTime)
 }
 
-// Encode encodes float64 as json.
-func (o OptFloat64) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	e.Float64(float64(o.Value))
-}
-
-// Decode decodes float64 from json.
-func (o *OptFloat64) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptFloat64 to nil")
-	}
-	o.Set = true
-	v, err := d.Float64()
-	if err != nil {
-		return err
-	}
-	o.Value = float64(v)
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptFloat64) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptFloat64) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes GetExecutionOKExecutionWorkflowServicePrincipalId as json.
 func (o OptGetExecutionOKExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -15936,6 +15868,41 @@ func (s OptGetWorkflowOKWorkflowServicePrincipalId) MarshalJSON() ([]byte, error
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptGetWorkflowOKWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes int as json.
+func (o OptInt) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Int(int(o.Value))
+}
+
+// Decode decodes int from json.
+func (o *OptInt) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptInt to nil")
+	}
+	o.Set = true
+	v, err := d.Int()
+	if err != nil {
+		return err
+	}
+	o.Value = int(v)
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptInt) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptInt) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }

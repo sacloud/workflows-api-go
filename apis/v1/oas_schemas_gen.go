@@ -40,7 +40,7 @@ type CancelExecutionAcceptedExecution struct {
 	Name              string                                   `json:"Name"`
 	Workflow          CancelExecutionAcceptedExecutionWorkflow `json:"Workflow"`
 	Status            CancelExecutionAcceptedExecutionStatus   `json:"Status"`
-	Revision          float64                                  `json:"Revision"`
+	Revision          int                                      `json:"Revision"`
 	RevisionAlias     string                                   `json:"RevisionAlias"`
 	Args              string                                   `json:"Args"`
 	Result            string                                   `json:"Result"`
@@ -75,7 +75,7 @@ func (s *CancelExecutionAcceptedExecution) GetStatus() CancelExecutionAcceptedEx
 }
 
 // GetRevision returns the value of Revision.
-func (s *CancelExecutionAcceptedExecution) GetRevision() float64 {
+func (s *CancelExecutionAcceptedExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -155,7 +155,7 @@ func (s *CancelExecutionAcceptedExecution) SetStatus(val CancelExecutionAccepted
 }
 
 // SetRevision sets the value of Revision.
-func (s *CancelExecutionAcceptedExecution) SetRevision(val float64) {
+func (s *CancelExecutionAcceptedExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -661,7 +661,7 @@ type CreateExecutionCreatedExecution struct {
 	Name              string                                  `json:"Name"`
 	Workflow          CreateExecutionCreatedExecutionWorkflow `json:"Workflow"`
 	Status            CreateExecutionCreatedExecutionStatus   `json:"Status"`
-	Revision          float64                                 `json:"Revision"`
+	Revision          int                                     `json:"Revision"`
 	RevisionAlias     string                                  `json:"RevisionAlias"`
 	Args              string                                  `json:"Args"`
 	Result            string                                  `json:"Result"`
@@ -696,7 +696,7 @@ func (s *CreateExecutionCreatedExecution) GetStatus() CreateExecutionCreatedExec
 }
 
 // GetRevision returns the value of Revision.
-func (s *CreateExecutionCreatedExecution) GetRevision() float64 {
+func (s *CreateExecutionCreatedExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -776,7 +776,7 @@ func (s *CreateExecutionCreatedExecution) SetStatus(val CreateExecutionCreatedEx
 }
 
 // SetRevision sets the value of Revision.
-func (s *CreateExecutionCreatedExecution) SetRevision(val float64) {
+func (s *CreateExecutionCreatedExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -1170,14 +1170,14 @@ func (s *CreateExecutionNotFound) SetMessage(val string) {
 func (*CreateExecutionNotFound) createExecutionRes() {}
 
 type CreateExecutionReq struct {
-	RevisionId    OptFloat64 `json:"RevisionId"`
-	RevisionAlias OptString  `json:"RevisionAlias"`
-	Args          OptString  `json:"Args"`
-	Name          OptString  `json:"Name"`
+	RevisionId    OptInt    `json:"RevisionId"`
+	RevisionAlias OptString `json:"RevisionAlias"`
+	Args          OptString `json:"Args"`
+	Name          OptString `json:"Name"`
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *CreateExecutionReq) GetRevisionId() OptFloat64 {
+func (s *CreateExecutionReq) GetRevisionId() OptInt {
 	return s.RevisionId
 }
 
@@ -1197,7 +1197,7 @@ func (s *CreateExecutionReq) GetName() OptString {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *CreateExecutionReq) SetRevisionId(val OptFloat64) {
+func (s *CreateExecutionReq) SetRevisionId(val OptInt) {
 	s.RevisionId = val
 }
 
@@ -2691,7 +2691,7 @@ type GetExecutionOKExecution struct {
 	Name              string                          `json:"Name"`
 	Workflow          GetExecutionOKExecutionWorkflow `json:"Workflow"`
 	Status            GetExecutionOKExecutionStatus   `json:"Status"`
-	Revision          float64                         `json:"Revision"`
+	Revision          int                             `json:"Revision"`
 	RevisionAlias     string                          `json:"RevisionAlias"`
 	Args              string                          `json:"Args"`
 	Result            string                          `json:"Result"`
@@ -2726,7 +2726,7 @@ func (s *GetExecutionOKExecution) GetStatus() GetExecutionOKExecutionStatus {
 }
 
 // GetRevision returns the value of Revision.
-func (s *GetExecutionOKExecution) GetRevision() float64 {
+func (s *GetExecutionOKExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -2806,7 +2806,7 @@ func (s *GetExecutionOKExecution) SetStatus(val GetExecutionOKExecutionStatus) {
 }
 
 // SetRevision sets the value of Revision.
-func (s *GetExecutionOKExecution) SetRevision(val float64) {
+func (s *GetExecutionOKExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -4326,7 +4326,7 @@ type ListExecutionOKExecutionsItem struct {
 	Name              string                                `json:"Name"`
 	Workflow          ListExecutionOKExecutionsItemWorkflow `json:"Workflow"`
 	Status            ListExecutionOKExecutionsItemStatus   `json:"Status"`
-	Revision          float64                               `json:"Revision"`
+	Revision          int                                   `json:"Revision"`
 	RevisionAlias     string                                `json:"RevisionAlias"`
 	Args              string                                `json:"Args"`
 	Result            string                                `json:"Result"`
@@ -4361,7 +4361,7 @@ func (s *ListExecutionOKExecutionsItem) GetStatus() ListExecutionOKExecutionsIte
 }
 
 // GetRevision returns the value of Revision.
-func (s *ListExecutionOKExecutionsItem) GetRevision() float64 {
+func (s *ListExecutionOKExecutionsItem) GetRevision() int {
 	return s.Revision
 }
 
@@ -4441,7 +4441,7 @@ func (s *ListExecutionOKExecutionsItem) SetStatus(val ListExecutionOKExecutionsI
 }
 
 // SetRevision sets the value of Revision.
-func (s *ListExecutionOKExecutionsItem) SetRevision(val float64) {
+func (s *ListExecutionOKExecutionsItem) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -5821,52 +5821,6 @@ func (o OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) Or(d Creat
 	return d
 }
 
-// NewOptCreateExecutionReq returns new OptCreateExecutionReq with value set to v.
-func NewOptCreateExecutionReq(v CreateExecutionReq) OptCreateExecutionReq {
-	return OptCreateExecutionReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateExecutionReq is optional CreateExecutionReq.
-type OptCreateExecutionReq struct {
-	Value CreateExecutionReq
-	Set   bool
-}
-
-// IsSet returns true if OptCreateExecutionReq was set.
-func (o OptCreateExecutionReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateExecutionReq) Reset() {
-	var v CreateExecutionReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateExecutionReq) SetTo(v CreateExecutionReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateExecutionReq) Get() (v CreateExecutionReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateExecutionReq) Or(d CreateExecutionReq) CreateExecutionReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptCreateWorkflowCreatedWorkflowServicePrincipalId returns new OptCreateWorkflowCreatedWorkflowServicePrincipalId with value set to v.
 func NewOptCreateWorkflowCreatedWorkflowServicePrincipalId(v CreateWorkflowCreatedWorkflowServicePrincipalId) OptCreateWorkflowCreatedWorkflowServicePrincipalId {
 	return OptCreateWorkflowCreatedWorkflowServicePrincipalId{
@@ -5999,52 +5953,6 @@ func (o OptDateTime) Get() (v time.Time, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptDateTime) Or(d time.Time) time.Time {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptFloat64 returns new OptFloat64 with value set to v.
-func NewOptFloat64(v float64) OptFloat64 {
-	return OptFloat64{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptFloat64 is optional float64.
-type OptFloat64 struct {
-	Value float64
-	Set   bool
-}
-
-// IsSet returns true if OptFloat64 was set.
-func (o OptFloat64) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptFloat64) Reset() {
-	var v float64
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptFloat64) SetTo(v float64) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptFloat64) Get() (v float64, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptFloat64) Or(d float64) float64 {
 	if v, ok := o.Get(); ok {
 		return v
 	}
