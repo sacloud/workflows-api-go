@@ -17,7 +17,6 @@ package workflows
 import (
 	"context"
 	"errors"
-	"log"
 	"net/http"
 
 	v1 "github.com/sacloud/workflows-api-go/apis/v1"
@@ -25,6 +24,7 @@ import (
 
 type WorkflowAPI interface {
 	Create(ctx context.Context, request v1.CreateWorkflowReq) (*v1.CreateWorkflowCreatedWorkflow, error)
+	Delete(ctx context.Context, id string) error
 }
 
 var _ WorkflowAPI = (*workflowOp)(nil)
@@ -37,14 +37,12 @@ func NewWorkflowOp(client *v1.Client) WorkflowAPI {
 	return &workflowOp{client: client}
 }
 
-// TODO: common return type
 func (op *workflowOp) Create(ctx context.Context, req v1.CreateWorkflowReq) (*v1.CreateWorkflowCreatedWorkflow, error) {
 	const methodName = "Workflow.Create"
 
 	// TODO: why opt req
 	res, err := op.client.CreateWorkflow(ctx, v1.NewOptCreateWorkflowReq(req))
 	if err != nil {
-		log.Printf("[DEBUG] %s: response: %+v, %v", methodName, res, err)
 		return nil, NewAPIError(methodName, 0, err)
 	}
 
@@ -63,5 +61,33 @@ func (op *workflowOp) Create(ctx context.Context, req v1.CreateWorkflowReq) (*v1
 		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
 	default:
 		return nil, NewAPIError(methodName, 0, err)
+	}
+}
+
+func (op *workflowOp) Delete(ctx context.Context, id string) error {
+	const methodName = "Workflow.Delete"
+
+	res, err := op.client.DeleteWorkflow(ctx, v1.DeleteWorkflowParams{
+		ID: id,
+	})
+	if err != nil {
+		return NewAPIError(methodName, 0, err)
+	}
+
+	switch r := res.(type) {
+	case *v1.DeleteWorkflowOK:
+		return nil
+	case *v1.DeleteWorkflowBadRequest:
+		return NewAPIError(methodName, http.StatusBadRequest, errors.New(r.Message))
+	case *v1.DeleteWorkflowUnauthorized:
+		return NewAPIError(methodName, http.StatusUnauthorized, errors.New(r.Message))
+	case *v1.DeleteWorkflowForbidden:
+		return NewAPIError(methodName, http.StatusForbidden, errors.New(r.Message))
+	case *v1.DeleteWorkflowNotFound:
+		return NewAPIError(methodName, http.StatusNotFound, errors.New(r.Message))
+	case *v1.DeleteWorkflowInternalServerError:
+		return NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
+	default:
+		return NewAPIError(methodName, 0, err)
 	}
 }
