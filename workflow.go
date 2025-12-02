@@ -26,6 +26,7 @@ type WorkflowAPI interface {
 	Create(ctx context.Context, request v1.CreateWorkflowReq) (*v1.CreateWorkflowCreatedWorkflow, error)
 	List(ctx context.Context, parameter v1.ListWorkflowParams) (*v1.ListWorkflowOK, error)
 	Read(ctx context.Context, id string) (*v1.GetWorkflowOKWorkflow, error)
+	Update(ctx context.Context, id string, request v1.UpdateWorkflowReq) (*v1.UpdateWorkflowOKWorkflow, error)
 	Delete(ctx context.Context, id string) error
 }
 
@@ -114,6 +115,32 @@ func (op *workflowOp) Read(ctx context.Context, id string) (*v1.GetWorkflowOKWor
 	case *v1.GetWorkflowNotFound:
 		return nil, NewAPIError(methodName, http.StatusNotFound, errors.New(r.Message))
 	case *v1.GetWorkflowInternalServerError:
+		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
+	default:
+		return nil, NewAPIError(methodName, 0, err)
+	}
+}
+
+func (op *workflowOp) Update(ctx context.Context, id string, req v1.UpdateWorkflowReq) (*v1.UpdateWorkflowOKWorkflow, error) {
+	const methodName = "Workflow.Update"
+
+	res, err := op.client.UpdateWorkflow(ctx, v1.NewOptUpdateWorkflowReq(req), v1.UpdateWorkflowParams{ID: id})
+	if err != nil {
+		return nil, NewAPIError(methodName, 0, err)
+	}
+
+	switch r := res.(type) {
+	case *v1.UpdateWorkflowOK:
+		return &r.Workflow, nil
+	case *v1.UpdateWorkflowBadRequest:
+		return nil, NewAPIError(methodName, http.StatusBadRequest, errors.New(r.Message))
+	case *v1.UpdateWorkflowUnauthorized:
+		return nil, NewAPIError(methodName, http.StatusUnauthorized, errors.New(r.Message))
+	case *v1.UpdateWorkflowForbidden:
+		return nil, NewAPIError(methodName, http.StatusForbidden, errors.New(r.Message))
+	case *v1.UpdateWorkflowNotFound:
+		return nil, NewAPIError(methodName, http.StatusNotFound, errors.New(r.Message))
+	case *v1.UpdateWorkflowInternalServerError:
 		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
 	default:
 		return nil, NewAPIError(methodName, 0, err)

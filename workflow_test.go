@@ -32,7 +32,7 @@ func TestWorkflowAPI(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
-	assert.Equal(t, respCreate.Name, "test-workflow")
+	assert.Equal(t, "test-workflow", respCreate.Name)
 
 	defer func() {
 		// DeleteWorkflow
@@ -44,10 +44,10 @@ func TestWorkflowAPI(t *testing.T) {
 	respRead, err := workflowAPI.Read(ctx, respCreate.ID)
 	require.NoError(t, err)
 	require.NotNil(t, respRead)
-	assert.Equal(t, respRead.Name, "test-workflow")
-	assert.Equal(t, respRead.Description, v1.NewOptString("test workflow"))
-	assert.Equal(t, respRead.Publish, false)
-	assert.Equal(t, respRead.Logging, false)
+	assert.Equal(t, "test-workflow", respRead.Name)
+	assert.Equal(t, v1.NewOptString("test workflow"), respRead.Description)
+	assert.Equal(t, false, respRead.Publish)
+	assert.Equal(t, false, respRead.Logging)
 
 	// ListWorkflows
 	respList, err := workflowAPI.List(ctx, v1.ListWorkflowParams{})
@@ -56,13 +56,25 @@ func TestWorkflowAPI(t *testing.T) {
 	for _, workflow := range respList.Workflows {
 		if workflow.ID == respCreate.ID {
 			found = true
-			assert.Equal(t, respRead.Name, "test-workflow")
-			assert.Equal(t, respRead.Description, v1.NewOptString("test workflow"))
-			assert.Equal(t, respRead.Publish, false)
-			assert.Equal(t, respRead.Logging, false)
+			assert.Equal(t, "test-workflow", respRead.Name)
+			assert.Equal(t, v1.NewOptString("test workflow"), respRead.Description)
+			assert.Equal(t, false, respRead.Publish)
+			assert.Equal(t, false, respRead.Logging)
 		}
 	}
 	assert.True(t, found, "Created Workflow not found in list")
+
+	// UpdateWorkflow
+	respUpdate, err := workflowAPI.Update(ctx, respCreate.ID, v1.UpdateWorkflowReq{
+		Name:    v1.NewOptString("test-workflow-updated"),
+		Publish: v1.NewOptBool(true),
+		Logging: v1.NewOptBool(true),
+	})
+	require.NoError(t, err)
+	require.NotNil(t, respUpdate)
+	assert.Equal(t, "test-workflow-updated", respUpdate.Name)
+	assert.Equal(t, true, respUpdate.Publish)
+	assert.Equal(t, true, respUpdate.Logging)
 }
 
 const sampleRunbook = `
