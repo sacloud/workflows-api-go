@@ -23,7 +23,7 @@ func TestWorkflowAPI(t *testing.T) {
 	workflowAPI := workflows.NewWorkflowOp(client)
 
 	// CreateWorkflow
-	createRes, err := workflowAPI.Create(ctx, v1.CreateWorkflowReq{
+	respCreate, err := workflowAPI.Create(ctx, v1.CreateWorkflowReq{
 		Name:        "test-workflow",
 		Description: v1.NewOptString("test workflow"), // TODO: somehow it's required on the server side
 		Runbook:     sampleRunbook,
@@ -31,14 +31,38 @@ func TestWorkflowAPI(t *testing.T) {
 		Logging:     false,
 	})
 	require.NoError(t, err)
-	require.NotNil(t, createRes)
-	assert.Equal(t, createRes.Name, "test-workflow")
+	require.NotNil(t, respCreate)
+	assert.Equal(t, respCreate.Name, "test-workflow")
 
 	defer func() {
 		// DeleteWorkflow
-		err = workflowAPI.Delete(ctx, createRes.ID)
+		err = workflowAPI.Delete(ctx, respCreate.ID)
 		require.NoError(t, err)
 	}()
+
+	// ReadWorkflow
+	respRead, err := workflowAPI.Read(ctx, respCreate.ID)
+	require.NoError(t, err)
+	require.NotNil(t, respRead)
+	assert.Equal(t, respRead.Name, "test-workflow")
+	assert.Equal(t, respRead.Description, v1.NewOptString("test workflow"))
+	assert.Equal(t, respRead.Publish, false)
+	assert.Equal(t, respRead.Logging, false)
+
+	// ListWorkflows
+	respList, err := workflowAPI.List(ctx, v1.ListWorkflowParams{})
+	require.NoError(t, err)
+	found := false
+	for _, workflow := range respList.Workflows {
+		if workflow.ID == respCreate.ID {
+			found = true
+			assert.Equal(t, respRead.Name, "test-workflow")
+			assert.Equal(t, respRead.Description, v1.NewOptString("test workflow"))
+			assert.Equal(t, respRead.Publish, false)
+			assert.Equal(t, respRead.Logging, false)
+		}
+	}
+	assert.True(t, found, "Created Workflow not found in list")
 }
 
 const sampleRunbook = `
