@@ -25,9 +25,9 @@ import (
 type ExecutionAPI interface {
 	Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error)
 	List(ctx context.Context, params v1.ListExecutionParams) (*v1.ListExecutionOK, error)
-	Read(ctx context.Context, params v1.GetExecutionParams) (*v1.GetExecutionOKExecution, error)
-	Cancel(ctx context.Context, params v1.CancelExecutionParams) (*v1.CancelExecutionAcceptedExecution, error)
-	Delete(ctx context.Context, params v1.DeleteExecutionParams) error
+	Read(ctx context.Context, workflowID, executionID string) (*v1.GetExecutionOKExecution, error)
+	Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionAcceptedExecution, error)
+	Delete(ctx context.Context, workflowID, executionID string) error
 	ListHistory(ctx context.Context, params v1.ListExecutionHistoryParams) (*v1.ListExecutionHistoryOK, error)
 }
 
@@ -44,7 +44,7 @@ func NewExecutionOp(client *v1.Client) ExecutionAPI {
 func (op *executionOp) Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error) {
 	const methodName = "Execution.Create"
 
-	res, err := op.client.CreateExecution(ctx, &req, v1.CreateExecutionParams{ID: workflowID})
+	res, err := op.client.CreateExecution(ctx, v1.NewOptCreateExecutionReq(req), v1.CreateExecutionParams{ID: workflowID})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
@@ -60,6 +60,8 @@ func (op *executionOp) Create(ctx context.Context, workflowID string, req v1.Cre
 		return nil, NewAPIError(methodName, http.StatusForbidden, errors.New(r.Message))
 	case *v1.CreateExecutionNotFound:
 		return nil, NewAPIError(methodName, http.StatusNotFound, errors.New(r.Message))
+	case *v1.CreateExecutionConflict:
+		return nil, NewAPIError(methodName, http.StatusConflict, errors.New(r.Message))
 	case *v1.CreateExecutionInternalServerError:
 		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
 	default:
@@ -93,10 +95,13 @@ func (op *executionOp) List(ctx context.Context, params v1.ListExecutionParams) 
 	}
 }
 
-func (op *executionOp) Read(ctx context.Context, params v1.GetExecutionParams) (*v1.GetExecutionOKExecution, error) {
+func (op *executionOp) Read(ctx context.Context, workflowID, executionID string) (*v1.GetExecutionOKExecution, error) {
 	const methodName = "Execution.Read"
 
-	res, err := op.client.GetExecution(ctx, params)
+	res, err := op.client.GetExecution(ctx, v1.GetExecutionParams{
+		ID:          workflowID,
+		ExecutionId: executionID,
+	})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
@@ -119,10 +124,13 @@ func (op *executionOp) Read(ctx context.Context, params v1.GetExecutionParams) (
 	}
 }
 
-func (op *executionOp) Cancel(ctx context.Context, params v1.CancelExecutionParams) (*v1.CancelExecutionAcceptedExecution, error) {
+func (op *executionOp) Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionAcceptedExecution, error) {
 	const methodName = "Execution.Cancel"
 
-	res, err := op.client.CancelExecution(ctx, params)
+	res, err := op.client.CancelExecution(ctx, v1.CancelExecutionParams{
+		ID:          workflowID,
+		ExecutionId: executionID,
+	})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
@@ -145,10 +153,13 @@ func (op *executionOp) Cancel(ctx context.Context, params v1.CancelExecutionPara
 	}
 }
 
-func (op *executionOp) Delete(ctx context.Context, params v1.DeleteExecutionParams) error {
+func (op *executionOp) Delete(ctx context.Context, workflowID, executionID string) error {
 	const methodName = "Execution.Delete"
 
-	res, err := op.client.DeleteExecution(ctx, params)
+	res, err := op.client.DeleteExecution(ctx, v1.DeleteExecutionParams{
+		ID:          workflowID,
+		ExecutionId: executionID,
+	})
 	if err != nil {
 		return NewAPIError(methodName, 0, err)
 	}

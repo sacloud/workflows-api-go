@@ -629,6 +629,33 @@ func (s *CreateExecutionBadRequest) SetMessage(val string) {
 
 func (*CreateExecutionBadRequest) createExecutionRes() {}
 
+type CreateExecutionConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *CreateExecutionConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *CreateExecutionConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *CreateExecutionConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *CreateExecutionConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*CreateExecutionConflict) createExecutionRes() {}
+
 type CreateExecutionCreated struct {
 	IsOk      bool                            `json:"is_ok"`
 	Execution CreateExecutionCreatedExecution `json:"Execution"`
@@ -5815,6 +5842,52 @@ func (o OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) Get() (v C
 
 // Or returns value if set, or given parameter if does not.
 func (o OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) Or(d CreateExecutionCreatedExecutionWorkflowServicePrincipalId) CreateExecutionCreatedExecutionWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptCreateExecutionReq returns new OptCreateExecutionReq with value set to v.
+func NewOptCreateExecutionReq(v CreateExecutionReq) OptCreateExecutionReq {
+	return OptCreateExecutionReq{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateExecutionReq is optional CreateExecutionReq.
+type OptCreateExecutionReq struct {
+	Value CreateExecutionReq
+	Set   bool
+}
+
+// IsSet returns true if OptCreateExecutionReq was set.
+func (o OptCreateExecutionReq) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateExecutionReq) Reset() {
+	var v CreateExecutionReq
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateExecutionReq) SetTo(v CreateExecutionReq) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateExecutionReq) Get() (v CreateExecutionReq, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateExecutionReq) Or(d CreateExecutionReq) CreateExecutionReq {
 	if v, ok := o.Get(); ok {
 		return v
 	}

@@ -269,6 +269,20 @@ func (s *CreateExecutionBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CreateExecutionConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CreateExecutionCreated) SetFake() {
 	{
 		{
@@ -2455,6 +2469,15 @@ func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake(
 // SetFake set fake values.
 func (s *OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem CreateExecutionCreatedExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptCreateExecutionReq) SetFake() {
+	var elem CreateExecutionReq
 	{
 		elem.SetFake()
 	}

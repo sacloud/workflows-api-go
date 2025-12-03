@@ -108,8 +108,8 @@ func (s *CancelExecutionAcceptedExecution) Validate() error {
 	}
 	if err := func() error {
 		if err := (validate.String{
-			MinLength:     1,
-			MinLengthSet:  true,
+			MinLength:     0,
+			MinLengthSet:  false,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
@@ -279,8 +279,8 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -520,13 +520,13 @@ func (s *CreateExecutionCreatedExecution) Validate() error {
 	}
 	if err := func() error {
 		if err := (validate.String{
-			MinLength:     1,
-			MinLengthSet:  true,
+			MinLength:     0,
+			MinLengthSet:  false,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
 			Hostname:      false,
-			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
 			MinNumeric:    0,
 			MinNumericSet: false,
 			MaxNumeric:    0,
@@ -691,8 +691,8 @@ func (s *CreateExecutionCreatedExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -1414,8 +1414,8 @@ func (s *CreateWorkflowRevisionCreatedRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -1544,8 +1544,8 @@ func (s *DeleteWorkflowRevisionAliasOKRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -1675,8 +1675,8 @@ func (s *GetExecutionOKExecution) Validate() error {
 	}
 	if err := func() error {
 		if err := (validate.String{
-			MinLength:     1,
-			MinLengthSet:  true,
+			MinLength:     0,
+			MinLengthSet:  false,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
@@ -1846,8 +1846,8 @@ func (s *GetExecutionOKExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -2265,8 +2265,8 @@ func (s *GetWorkflowRevisionsOKRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -2780,8 +2780,8 @@ func (s *ListExecutionOKExecutionsItem) Validate() error {
 	}
 	if err := func() error {
 		if err := (validate.String{
-			MinLength:     1,
-			MinLengthSet:  true,
+			MinLength:     0,
+			MinLengthSet:  false,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
@@ -2951,8 +2951,8 @@ func (s *ListExecutionOKExecutionsItemWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -3563,8 +3563,8 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -4041,8 +4041,8 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     1,
-					MinLengthSet:  true,
+					MinLength:     0,
+					MinLengthSet:  false,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,

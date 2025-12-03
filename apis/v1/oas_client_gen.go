@@ -31,7 +31,7 @@ type Invoker interface {
 	// ワークフローを実行する.
 	//
 	// POST /workflows/{id}/executions
-	CreateExecution(ctx context.Context, request *CreateExecutionReq, params CreateExecutionParams) (CreateExecutionRes, error)
+	CreateExecution(ctx context.Context, request OptCreateExecutionReq, params CreateExecutionParams) (CreateExecutionRes, error)
 	// CreateWorkflow invokes createWorkflow operation.
 	//
 	// ワークフローを作成する.
@@ -236,16 +236,23 @@ func (c *Client) sendCancelExecution(ctx context.Context, params CancelExecution
 // ワークフローを実行する.
 //
 // POST /workflows/{id}/executions
-func (c *Client) CreateExecution(ctx context.Context, request *CreateExecutionReq, params CreateExecutionParams) (CreateExecutionRes, error) {
+func (c *Client) CreateExecution(ctx context.Context, request OptCreateExecutionReq, params CreateExecutionParams) (CreateExecutionRes, error) {
 	res, err := c.sendCreateExecution(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendCreateExecution(ctx context.Context, request *CreateExecutionReq, params CreateExecutionParams) (res CreateExecutionRes, err error) {
+func (c *Client) sendCreateExecution(ctx context.Context, request OptCreateExecutionReq, params CreateExecutionParams) (res CreateExecutionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
 		}
 		return nil
 	}(); err != nil {

@@ -16,6 +16,7 @@ package workflows_test
 
 import (
 	"testing"
+	"time"
 
 	"github.com/sacloud/packages-go/testutil"
 	"github.com/sacloud/saclient-go"
@@ -39,12 +40,13 @@ func TestExecutionAPI(t *testing.T) {
 	workflow, err := workflowAPI.Create(ctx, v1.CreateWorkflowReq{
 		Name:    "test-workflow",
 		Runbook: sampleRunbook,
-		Publish: false,
+		Publish: true, // workflow executable only when published
 		Logging: false,
 	})
 	require.NoError(t, err)
 	require.NotNil(t, workflow)
 	defer func() {
+		time.Sleep(10 * time.Second) // wait for execution to be done/cancelled
 		err := workflowAPI.Delete(ctx, workflow.ID)
 		require.NoError(t, err)
 	}()
@@ -52,8 +54,16 @@ func TestExecutionAPI(t *testing.T) {
 	executionAPI := workflows.NewExecutionOp(client)
 
 	// Create
-	respCreate, err := executionAPI.Create(ctx, workflow.ID, v1.CreateExecutionReq{})
+	respCreate, err := executionAPI.Create(ctx, workflow.ID, v1.CreateExecutionReq{
+		Args: v1.NewOptString(`{"maxNumber": 10}`),
+	})
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
+	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
+
+	// Cancel
+	respCancel, err := executionAPI.Cancel(ctx, workflow.ID, respCreate.ExecutionId)
+	require.NoError(t, err) // TODO: somehow returned 200
+	require.NotNil(t, respCancel)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
 }
