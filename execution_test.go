@@ -97,7 +97,6 @@ func TestExecutionAPI(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respListHistory)
-	t.Logf("histories: %+v", respListHistory.Histories)
 
 	// Delete
 	err = executionAPI.Delete(ctx, workflow.ID, respCreate.ExecutionId)
