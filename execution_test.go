@@ -55,18 +55,24 @@ func TestExecutionAPI(t *testing.T) {
 
 	// Create
 	respCreate, err := executionAPI.Create(ctx, workflow.ID, v1.CreateExecutionReq{
-		Args: v1.NewOptString(`{"maxNumber": 10}`),
+		Args: v1.NewOptString(`{"maxNumber": 100000}`), // run longer so that it can be cancelled later
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
+	// TODO: add more asserts?
+
+	// Read
+	respRead, err := executionAPI.Read(ctx, workflow.ID, respCreate.ExecutionId)
+	require.NoError(t, err)
+	require.NotNil(t, respRead)
+	assert.Equal(t, workflow.ID, respRead.Workflow.ID)
 
 	// Cancel
 	respCancel, err := executionAPI.Cancel(ctx, workflow.ID, respCreate.ExecutionId)
 	require.NoError(t, err)
 	require.NotNil(t, respCancel)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
-	// TODO: add more asserts?
 
 	// List
 	respList, err := executionAPI.List(ctx, v1.ListExecutionParams{
@@ -83,4 +89,17 @@ func TestExecutionAPI(t *testing.T) {
 		}
 	}
 	assert.True(t, found, "Created Execution not found in list")
+
+	// ListHistory
+	respListHistory, err := executionAPI.ListHistory(ctx, v1.ListExecutionHistoryParams{
+		ID:          workflow.ID,
+		ExecutionId: respCreate.ExecutionId,
+	})
+	require.NoError(t, err)
+	require.NotNil(t, respListHistory)
+	t.Logf("histories: %+v", respListHistory.Histories)
+
+	// Delete
+	err = executionAPI.Delete(ctx, workflow.ID, respCreate.ExecutionId)
+	require.NoError(t, err)
 }
