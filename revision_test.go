@@ -84,7 +84,7 @@ func TestRevisionAPI(t *testing.T) {
 			assert.Equal(t, respCreate.CreatedAt, revision.CreatedAt)
 		}
 	}
-	assert.True(t, found, "Created Workflow not found in list")
+	assert.True(t, found, "Created Revision not found in list")
 
 	// UpdateAlias
 	respUpdate, err := revisionAPI.UpdateAlias(ctx, workflow.ID, respCreate.RevisionId, v1.UpdateWorkflowRevisionAliasReq{
