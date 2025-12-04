@@ -14,902 +14,6 @@ import (
 )
 
 // Encode implements json.Marshaler.
-func (s *CancelExecutionAccepted) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CancelExecutionAccepted) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("is_ok")
-		e.Bool(s.IsOk)
-	}
-	{
-		e.FieldStart("Execution")
-		s.Execution.Encode(e)
-	}
-}
-
-var jsonFieldsNameOfCancelExecutionAccepted = [2]string{
-	0: "is_ok",
-	1: "Execution",
-}
-
-// Decode decodes CancelExecutionAccepted from json.
-func (s *CancelExecutionAccepted) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAccepted to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "is_ok":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Bool()
-				s.IsOk = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"is_ok\"")
-			}
-		case "Execution":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				if err := s.Execution.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Execution\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CancelExecutionAccepted")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000011,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCancelExecutionAccepted) {
-					name = jsonFieldsNameOfCancelExecutionAccepted[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CancelExecutionAccepted) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAccepted) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CancelExecutionAcceptedExecution) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CancelExecutionAcceptedExecution) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("ExecutionId")
-		e.Str(s.ExecutionId)
-	}
-	{
-		e.FieldStart("Name")
-		e.Str(s.Name)
-	}
-	{
-		e.FieldStart("Workflow")
-		s.Workflow.Encode(e)
-	}
-	{
-		e.FieldStart("Status")
-		s.Status.Encode(e)
-	}
-	{
-		e.FieldStart("Revision")
-		e.Int(s.Revision)
-	}
-	{
-		e.FieldStart("RevisionAlias")
-		e.Str(s.RevisionAlias)
-	}
-	{
-		e.FieldStart("Args")
-		e.Str(s.Args)
-	}
-	{
-		e.FieldStart("Result")
-		e.Str(s.Result)
-	}
-	{
-		e.FieldStart("Error")
-		e.Str(s.Error)
-	}
-	{
-		e.FieldStart("CreatedAt")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
-	{
-		e.FieldStart("UpdatedAt")
-		json.EncodeDateTime(e, s.UpdatedAt)
-	}
-	{
-		if s.RunAt.Set {
-			e.FieldStart("RunAt")
-			s.RunAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-	{
-		if s.FailedAt.Set {
-			e.FieldStart("FailedAt")
-			s.FailedAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-	{
-		if s.SucceededAt.Set {
-			e.FieldStart("SucceededAt")
-			s.SucceededAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-	{
-		if s.CancelRequestedAt.Set {
-			e.FieldStart("CancelRequestedAt")
-			s.CancelRequestedAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-	{
-		if s.CanceledAt.Set {
-			e.FieldStart("CanceledAt")
-			s.CanceledAt.Encode(e, json.EncodeDateTime)
-		}
-	}
-}
-
-var jsonFieldsNameOfCancelExecutionAcceptedExecution = [16]string{
-	0:  "ExecutionId",
-	1:  "Name",
-	2:  "Workflow",
-	3:  "Status",
-	4:  "Revision",
-	5:  "RevisionAlias",
-	6:  "Args",
-	7:  "Result",
-	8:  "Error",
-	9:  "CreatedAt",
-	10: "UpdatedAt",
-	11: "RunAt",
-	12: "FailedAt",
-	13: "SucceededAt",
-	14: "CancelRequestedAt",
-	15: "CanceledAt",
-}
-
-// Decode decodes CancelExecutionAcceptedExecution from json.
-func (s *CancelExecutionAcceptedExecution) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecution to nil")
-	}
-	var requiredBitSet [2]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "ExecutionId":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.ExecutionId = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"ExecutionId\"")
-			}
-		case "Name":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.Name = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Name\"")
-			}
-		case "Workflow":
-			requiredBitSet[0] |= 1 << 2
-			if err := func() error {
-				if err := s.Workflow.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Workflow\"")
-			}
-		case "Status":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				if err := s.Status.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Status\"")
-			}
-		case "Revision":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Int()
-				s.Revision = int(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Revision\"")
-			}
-		case "RevisionAlias":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				v, err := d.Str()
-				s.RevisionAlias = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"RevisionAlias\"")
-			}
-		case "Args":
-			requiredBitSet[0] |= 1 << 6
-			if err := func() error {
-				v, err := d.Str()
-				s.Args = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Args\"")
-			}
-		case "Result":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := d.Str()
-				s.Result = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Result\"")
-			}
-		case "Error":
-			requiredBitSet[1] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.Error = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Error\"")
-			}
-		case "CreatedAt":
-			requiredBitSet[1] |= 1 << 1
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"CreatedAt\"")
-			}
-		case "UpdatedAt":
-			requiredBitSet[1] |= 1 << 2
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.UpdatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"UpdatedAt\"")
-			}
-		case "RunAt":
-			if err := func() error {
-				s.RunAt.Reset()
-				if err := s.RunAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"RunAt\"")
-			}
-		case "FailedAt":
-			if err := func() error {
-				s.FailedAt.Reset()
-				if err := s.FailedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"FailedAt\"")
-			}
-		case "SucceededAt":
-			if err := func() error {
-				s.SucceededAt.Reset()
-				if err := s.SucceededAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"SucceededAt\"")
-			}
-		case "CancelRequestedAt":
-			if err := func() error {
-				s.CancelRequestedAt.Reset()
-				if err := s.CancelRequestedAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"CancelRequestedAt\"")
-			}
-		case "CanceledAt":
-			if err := func() error {
-				s.CanceledAt.Reset()
-				if err := s.CanceledAt.Decode(d, json.DecodeDateTime); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"CanceledAt\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CancelExecutionAcceptedExecution")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [2]uint8{
-		0b11111111,
-		0b00000111,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCancelExecutionAcceptedExecution) {
-					name = jsonFieldsNameOfCancelExecutionAcceptedExecution[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CancelExecutionAcceptedExecution) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAcceptedExecution) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CancelExecutionAcceptedExecutionStatus as json.
-func (s CancelExecutionAcceptedExecutionStatus) Encode(e *jx.Encoder) {
-	e.Str(string(s))
-}
-
-// Decode decodes CancelExecutionAcceptedExecutionStatus from json.
-func (s *CancelExecutionAcceptedExecutionStatus) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecutionStatus to nil")
-	}
-	v, err := d.StrBytes()
-	if err != nil {
-		return err
-	}
-	// Try to use constant string.
-	switch CancelExecutionAcceptedExecutionStatus(v) {
-	case CancelExecutionAcceptedExecutionStatusQueued:
-		*s = CancelExecutionAcceptedExecutionStatusQueued
-	case CancelExecutionAcceptedExecutionStatusRunning:
-		*s = CancelExecutionAcceptedExecutionStatusRunning
-	case CancelExecutionAcceptedExecutionStatusSucceeded:
-		*s = CancelExecutionAcceptedExecutionStatusSucceeded
-	case CancelExecutionAcceptedExecutionStatusFailed:
-		*s = CancelExecutionAcceptedExecutionStatusFailed
-	case CancelExecutionAcceptedExecutionStatusCanceling:
-		*s = CancelExecutionAcceptedExecutionStatusCanceling
-	case CancelExecutionAcceptedExecutionStatusCanceled:
-		*s = CancelExecutionAcceptedExecutionStatusCanceled
-	default:
-		*s = CancelExecutionAcceptedExecutionStatus(v)
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s CancelExecutionAcceptedExecutionStatus) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAcceptedExecutionStatus) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflow) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CancelExecutionAcceptedExecutionWorkflow) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("Id")
-		e.Str(s.ID)
-	}
-	{
-		e.FieldStart("Name")
-		e.Str(s.Name)
-	}
-	{
-		if s.Description.Set {
-			e.FieldStart("Description")
-			s.Description.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("Publish")
-		e.Bool(s.Publish)
-	}
-	{
-		e.FieldStart("Logging")
-		e.Bool(s.Logging)
-	}
-	{
-		e.FieldStart("Tags")
-		e.ArrStart()
-		for _, elem := range s.Tags {
-			elem.Encode(e)
-		}
-		e.ArrEnd()
-	}
-	{
-		if s.ServicePrincipalId.Set {
-			e.FieldStart("ServicePrincipalId")
-			s.ServicePrincipalId.Encode(e)
-		}
-	}
-	{
-		e.FieldStart("CreatedAt")
-		json.EncodeDateTime(e, s.CreatedAt)
-	}
-	{
-		e.FieldStart("UpdatedAt")
-		json.EncodeDateTime(e, s.UpdatedAt)
-	}
-}
-
-var jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow = [9]string{
-	0: "Id",
-	1: "Name",
-	2: "Description",
-	3: "Publish",
-	4: "Logging",
-	5: "Tags",
-	6: "ServicePrincipalId",
-	7: "CreatedAt",
-	8: "UpdatedAt",
-}
-
-// Decode decodes CancelExecutionAcceptedExecutionWorkflow from json.
-func (s *CancelExecutionAcceptedExecutionWorkflow) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecutionWorkflow to nil")
-	}
-	var requiredBitSet [2]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "Id":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.ID = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Id\"")
-			}
-		case "Name":
-			requiredBitSet[0] |= 1 << 1
-			if err := func() error {
-				v, err := d.Str()
-				s.Name = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Name\"")
-			}
-		case "Description":
-			if err := func() error {
-				s.Description.Reset()
-				if err := s.Description.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Description\"")
-			}
-		case "Publish":
-			requiredBitSet[0] |= 1 << 3
-			if err := func() error {
-				v, err := d.Bool()
-				s.Publish = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Publish\"")
-			}
-		case "Logging":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Bool()
-				s.Logging = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Logging\"")
-			}
-		case "Tags":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				s.Tags = make([]CancelExecutionAcceptedExecutionWorkflowTagsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem CancelExecutionAcceptedExecutionWorkflowTagsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Tags = append(s.Tags, elem)
-					return nil
-				}); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Tags\"")
-			}
-		case "ServicePrincipalId":
-			if err := func() error {
-				s.ServicePrincipalId.Reset()
-				if err := s.ServicePrincipalId.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"ServicePrincipalId\"")
-			}
-		case "CreatedAt":
-			requiredBitSet[0] |= 1 << 7
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.CreatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"CreatedAt\"")
-			}
-		case "UpdatedAt":
-			requiredBitSet[1] |= 1 << 0
-			if err := func() error {
-				v, err := json.DecodeDateTime(d)
-				s.UpdatedAt = v
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"UpdatedAt\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CancelExecutionAcceptedExecutionWorkflow")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [2]uint8{
-		0b10111011,
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow) {
-					name = jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflow) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflow) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes CancelExecutionAcceptedExecutionWorkflowServicePrincipalId as json.
-func (s CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
-	switch s.Type {
-	case StringCancelExecutionAcceptedExecutionWorkflowServicePrincipalId:
-		e.Str(s.String)
-	case Float64CancelExecutionAcceptedExecutionWorkflowServicePrincipalId:
-		e.Float64(s.Float64)
-	}
-}
-
-// Decode decodes CancelExecutionAcceptedExecutionWorkflowServicePrincipalId from json.
-func (s *CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecutionWorkflowServicePrincipalId to nil")
-	}
-	// Sum type type_discriminator.
-	switch t := d.Next(); t {
-	case jx.Number:
-		v, err := d.Float64()
-		s.Float64 = float64(v)
-		if err != nil {
-			return err
-		}
-		s.Type = Float64CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
-	case jx.String:
-		v, err := d.Str()
-		s.String = string(v)
-		if err != nil {
-			return err
-		}
-		s.Type = StringCancelExecutionAcceptedExecutionWorkflowServicePrincipalId
-	default:
-		return errors.Errorf("unexpected json type %q", t)
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("Name")
-		e.Str(s.Name)
-	}
-}
-
-var jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflowTagsItem = [1]string{
-	0: "Name",
-}
-
-// Decode decodes CancelExecutionAcceptedExecutionWorkflowTagsItem from json.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecutionWorkflowTagsItem to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "Name":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.Name = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Name\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode CancelExecutionAcceptedExecutionWorkflowTagsItem")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflowTagsItem) {
-					name = jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflowTagsItem[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
 func (s *CancelExecutionBadRequest) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
@@ -1357,6 +461,902 @@ func (s *CancelExecutionNotFound) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CancelExecutionNotFound) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *CancelExecutionOK) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *CancelExecutionOK) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("is_ok")
+		e.Bool(s.IsOk)
+	}
+	{
+		e.FieldStart("Execution")
+		s.Execution.Encode(e)
+	}
+}
+
+var jsonFieldsNameOfCancelExecutionOK = [2]string{
+	0: "is_ok",
+	1: "Execution",
+}
+
+// Decode decodes CancelExecutionOK from json.
+func (s *CancelExecutionOK) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOK to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "is_ok":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := d.Bool()
+				s.IsOk = bool(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"is_ok\"")
+			}
+		case "Execution":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				if err := s.Execution.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Execution\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode CancelExecutionOK")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000011,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfCancelExecutionOK) {
+					name = jsonFieldsNameOfCancelExecutionOK[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *CancelExecutionOK) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOK) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *CancelExecutionOKExecution) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *CancelExecutionOKExecution) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("ExecutionId")
+		e.Str(s.ExecutionId)
+	}
+	{
+		e.FieldStart("Name")
+		e.Str(s.Name)
+	}
+	{
+		e.FieldStart("Workflow")
+		s.Workflow.Encode(e)
+	}
+	{
+		e.FieldStart("Status")
+		s.Status.Encode(e)
+	}
+	{
+		e.FieldStart("Revision")
+		e.Int(s.Revision)
+	}
+	{
+		e.FieldStart("RevisionAlias")
+		e.Str(s.RevisionAlias)
+	}
+	{
+		e.FieldStart("Args")
+		e.Str(s.Args)
+	}
+	{
+		e.FieldStart("Result")
+		e.Str(s.Result)
+	}
+	{
+		e.FieldStart("Error")
+		e.Str(s.Error)
+	}
+	{
+		e.FieldStart("CreatedAt")
+		json.EncodeDateTime(e, s.CreatedAt)
+	}
+	{
+		e.FieldStart("UpdatedAt")
+		json.EncodeDateTime(e, s.UpdatedAt)
+	}
+	{
+		if s.RunAt.Set {
+			e.FieldStart("RunAt")
+			s.RunAt.Encode(e, json.EncodeDateTime)
+		}
+	}
+	{
+		if s.FailedAt.Set {
+			e.FieldStart("FailedAt")
+			s.FailedAt.Encode(e, json.EncodeDateTime)
+		}
+	}
+	{
+		if s.SucceededAt.Set {
+			e.FieldStart("SucceededAt")
+			s.SucceededAt.Encode(e, json.EncodeDateTime)
+		}
+	}
+	{
+		if s.CancelRequestedAt.Set {
+			e.FieldStart("CancelRequestedAt")
+			s.CancelRequestedAt.Encode(e, json.EncodeDateTime)
+		}
+	}
+	{
+		if s.CanceledAt.Set {
+			e.FieldStart("CanceledAt")
+			s.CanceledAt.Encode(e, json.EncodeDateTime)
+		}
+	}
+}
+
+var jsonFieldsNameOfCancelExecutionOKExecution = [16]string{
+	0:  "ExecutionId",
+	1:  "Name",
+	2:  "Workflow",
+	3:  "Status",
+	4:  "Revision",
+	5:  "RevisionAlias",
+	6:  "Args",
+	7:  "Result",
+	8:  "Error",
+	9:  "CreatedAt",
+	10: "UpdatedAt",
+	11: "RunAt",
+	12: "FailedAt",
+	13: "SucceededAt",
+	14: "CancelRequestedAt",
+	15: "CanceledAt",
+}
+
+// Decode decodes CancelExecutionOKExecution from json.
+func (s *CancelExecutionOKExecution) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecution to nil")
+	}
+	var requiredBitSet [2]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "ExecutionId":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := d.Str()
+				s.ExecutionId = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ExecutionId\"")
+			}
+		case "Name":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Str()
+				s.Name = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Name\"")
+			}
+		case "Workflow":
+			requiredBitSet[0] |= 1 << 2
+			if err := func() error {
+				if err := s.Workflow.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Workflow\"")
+			}
+		case "Status":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				if err := s.Status.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Status\"")
+			}
+		case "Revision":
+			requiredBitSet[0] |= 1 << 4
+			if err := func() error {
+				v, err := d.Int()
+				s.Revision = int(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Revision\"")
+			}
+		case "RevisionAlias":
+			requiredBitSet[0] |= 1 << 5
+			if err := func() error {
+				v, err := d.Str()
+				s.RevisionAlias = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"RevisionAlias\"")
+			}
+		case "Args":
+			requiredBitSet[0] |= 1 << 6
+			if err := func() error {
+				v, err := d.Str()
+				s.Args = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Args\"")
+			}
+		case "Result":
+			requiredBitSet[0] |= 1 << 7
+			if err := func() error {
+				v, err := d.Str()
+				s.Result = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Result\"")
+			}
+		case "Error":
+			requiredBitSet[1] |= 1 << 0
+			if err := func() error {
+				v, err := d.Str()
+				s.Error = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Error\"")
+			}
+		case "CreatedAt":
+			requiredBitSet[1] |= 1 << 1
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.CreatedAt = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"CreatedAt\"")
+			}
+		case "UpdatedAt":
+			requiredBitSet[1] |= 1 << 2
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.UpdatedAt = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"UpdatedAt\"")
+			}
+		case "RunAt":
+			if err := func() error {
+				s.RunAt.Reset()
+				if err := s.RunAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"RunAt\"")
+			}
+		case "FailedAt":
+			if err := func() error {
+				s.FailedAt.Reset()
+				if err := s.FailedAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"FailedAt\"")
+			}
+		case "SucceededAt":
+			if err := func() error {
+				s.SucceededAt.Reset()
+				if err := s.SucceededAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"SucceededAt\"")
+			}
+		case "CancelRequestedAt":
+			if err := func() error {
+				s.CancelRequestedAt.Reset()
+				if err := s.CancelRequestedAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"CancelRequestedAt\"")
+			}
+		case "CanceledAt":
+			if err := func() error {
+				s.CanceledAt.Reset()
+				if err := s.CanceledAt.Decode(d, json.DecodeDateTime); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"CanceledAt\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode CancelExecutionOKExecution")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [2]uint8{
+		0b11111111,
+		0b00000111,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfCancelExecutionOKExecution) {
+					name = jsonFieldsNameOfCancelExecutionOKExecution[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *CancelExecutionOKExecution) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecution) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CancelExecutionOKExecutionStatus as json.
+func (s CancelExecutionOKExecutionStatus) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CancelExecutionOKExecutionStatus from json.
+func (s *CancelExecutionOKExecutionStatus) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecutionStatus to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CancelExecutionOKExecutionStatus(v) {
+	case CancelExecutionOKExecutionStatusQueued:
+		*s = CancelExecutionOKExecutionStatusQueued
+	case CancelExecutionOKExecutionStatusRunning:
+		*s = CancelExecutionOKExecutionStatusRunning
+	case CancelExecutionOKExecutionStatusSucceeded:
+		*s = CancelExecutionOKExecutionStatusSucceeded
+	case CancelExecutionOKExecutionStatusFailed:
+		*s = CancelExecutionOKExecutionStatusFailed
+	case CancelExecutionOKExecutionStatusCanceling:
+		*s = CancelExecutionOKExecutionStatusCanceling
+	case CancelExecutionOKExecutionStatusCanceled:
+		*s = CancelExecutionOKExecutionStatusCanceled
+	default:
+		*s = CancelExecutionOKExecutionStatus(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CancelExecutionOKExecutionStatus) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecutionStatus) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *CancelExecutionOKExecutionWorkflow) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *CancelExecutionOKExecutionWorkflow) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("Id")
+		e.Str(s.ID)
+	}
+	{
+		e.FieldStart("Name")
+		e.Str(s.Name)
+	}
+	{
+		if s.Description.Set {
+			e.FieldStart("Description")
+			s.Description.Encode(e)
+		}
+	}
+	{
+		e.FieldStart("Publish")
+		e.Bool(s.Publish)
+	}
+	{
+		e.FieldStart("Logging")
+		e.Bool(s.Logging)
+	}
+	{
+		e.FieldStart("Tags")
+		e.ArrStart()
+		for _, elem := range s.Tags {
+			elem.Encode(e)
+		}
+		e.ArrEnd()
+	}
+	{
+		if s.ServicePrincipalId.Set {
+			e.FieldStart("ServicePrincipalId")
+			s.ServicePrincipalId.Encode(e)
+		}
+	}
+	{
+		e.FieldStart("CreatedAt")
+		json.EncodeDateTime(e, s.CreatedAt)
+	}
+	{
+		e.FieldStart("UpdatedAt")
+		json.EncodeDateTime(e, s.UpdatedAt)
+	}
+}
+
+var jsonFieldsNameOfCancelExecutionOKExecutionWorkflow = [9]string{
+	0: "Id",
+	1: "Name",
+	2: "Description",
+	3: "Publish",
+	4: "Logging",
+	5: "Tags",
+	6: "ServicePrincipalId",
+	7: "CreatedAt",
+	8: "UpdatedAt",
+}
+
+// Decode decodes CancelExecutionOKExecutionWorkflow from json.
+func (s *CancelExecutionOKExecutionWorkflow) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecutionWorkflow to nil")
+	}
+	var requiredBitSet [2]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "Id":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := d.Str()
+				s.ID = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Id\"")
+			}
+		case "Name":
+			requiredBitSet[0] |= 1 << 1
+			if err := func() error {
+				v, err := d.Str()
+				s.Name = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Name\"")
+			}
+		case "Description":
+			if err := func() error {
+				s.Description.Reset()
+				if err := s.Description.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Description\"")
+			}
+		case "Publish":
+			requiredBitSet[0] |= 1 << 3
+			if err := func() error {
+				v, err := d.Bool()
+				s.Publish = bool(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Publish\"")
+			}
+		case "Logging":
+			requiredBitSet[0] |= 1 << 4
+			if err := func() error {
+				v, err := d.Bool()
+				s.Logging = bool(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Logging\"")
+			}
+		case "Tags":
+			requiredBitSet[0] |= 1 << 5
+			if err := func() error {
+				s.Tags = make([]CancelExecutionOKExecutionWorkflowTagsItem, 0)
+				if err := d.Arr(func(d *jx.Decoder) error {
+					var elem CancelExecutionOKExecutionWorkflowTagsItem
+					if err := elem.Decode(d); err != nil {
+						return err
+					}
+					s.Tags = append(s.Tags, elem)
+					return nil
+				}); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Tags\"")
+			}
+		case "ServicePrincipalId":
+			if err := func() error {
+				s.ServicePrincipalId.Reset()
+				if err := s.ServicePrincipalId.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ServicePrincipalId\"")
+			}
+		case "CreatedAt":
+			requiredBitSet[0] |= 1 << 7
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.CreatedAt = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"CreatedAt\"")
+			}
+		case "UpdatedAt":
+			requiredBitSet[1] |= 1 << 0
+			if err := func() error {
+				v, err := json.DecodeDateTime(d)
+				s.UpdatedAt = v
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"UpdatedAt\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode CancelExecutionOKExecutionWorkflow")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [2]uint8{
+		0b10111011,
+		0b00000001,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfCancelExecutionOKExecutionWorkflow) {
+					name = jsonFieldsNameOfCancelExecutionOKExecutionWorkflow[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *CancelExecutionOKExecutionWorkflow) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecutionWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CancelExecutionOKExecutionWorkflowServicePrincipalId as json.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
+	switch s.Type {
+	case StringCancelExecutionOKExecutionWorkflowServicePrincipalId:
+		e.Str(s.String)
+	case Float64CancelExecutionOKExecutionWorkflowServicePrincipalId:
+		e.Float64(s.Float64)
+	}
+}
+
+// Decode decodes CancelExecutionOKExecutionWorkflowServicePrincipalId from json.
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecutionWorkflowServicePrincipalId to nil")
+	}
+	// Sum type type_discriminator.
+	switch t := d.Next(); t {
+	case jx.Number:
+		v, err := d.Float64()
+		s.Float64 = float64(v)
+		if err != nil {
+			return err
+		}
+		s.Type = Float64CancelExecutionOKExecutionWorkflowServicePrincipalId
+	case jx.String:
+		v, err := d.Str()
+		s.String = string(v)
+		if err != nil {
+			return err
+		}
+		s.Type = StringCancelExecutionOKExecutionWorkflowServicePrincipalId
+	default:
+		return errors.Errorf("unexpected json type %q", t)
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode implements json.Marshaler.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) Encode(e *jx.Encoder) {
+	e.ObjStart()
+	s.encodeFields(e)
+	e.ObjEnd()
+}
+
+// encodeFields encodes fields.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) encodeFields(e *jx.Encoder) {
+	{
+		e.FieldStart("Name")
+		e.Str(s.Name)
+	}
+}
+
+var jsonFieldsNameOfCancelExecutionOKExecutionWorkflowTagsItem = [1]string{
+	0: "Name",
+}
+
+// Decode decodes CancelExecutionOKExecutionWorkflowTagsItem from json.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecutionWorkflowTagsItem to nil")
+	}
+	var requiredBitSet [1]uint8
+
+	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
+		switch string(k) {
+		case "Name":
+			requiredBitSet[0] |= 1 << 0
+			if err := func() error {
+				v, err := d.Str()
+				s.Name = string(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"Name\"")
+			}
+		default:
+			return d.Skip()
+		}
+		return nil
+	}); err != nil {
+		return errors.Wrap(err, "decode CancelExecutionOKExecutionWorkflowTagsItem")
+	}
+	// Validate required fields.
+	var failures []validate.FieldError
+	for i, mask := range [1]uint8{
+		0b00000001,
+	} {
+		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
+			// Mask only required fields and check equality to mask using XOR.
+			//
+			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
+			// Bits of fields which would be set are actually bits of missed fields.
+			missed := bits.OnesCount8(result)
+			for bitN := 0; bitN < missed; bitN++ {
+				bitIdx := bits.TrailingZeros8(result)
+				fieldIdx := i*8 + bitIdx
+				var name string
+				if fieldIdx < len(jsonFieldsNameOfCancelExecutionOKExecutionWorkflowTagsItem) {
+					name = jsonFieldsNameOfCancelExecutionOKExecutionWorkflowTagsItem[fieldIdx]
+				} else {
+					name = strconv.Itoa(fieldIdx)
+				}
+				failures = append(failures, validate.FieldError{
+					Name:  name,
+					Error: validate.ErrFieldRequired,
+				})
+				// Reset bit.
+				result &^= 1 << bitIdx
+			}
+		}
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -15752,18 +15752,18 @@ func (s *OptBool) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
-// Encode encodes CancelExecutionAcceptedExecutionWorkflowServicePrincipalId as json.
-func (o OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
+// Encode encodes CancelExecutionOKExecutionWorkflowServicePrincipalId as json.
+func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
 		return
 	}
 	o.Value.Encode(e)
 }
 
-// Decode decodes CancelExecutionAcceptedExecutionWorkflowServicePrincipalId from json.
-func (o *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
+// Decode decodes CancelExecutionOKExecutionWorkflowServicePrincipalId from json.
+func (o *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
 	if o == nil {
-		return errors.New("invalid: unable to decode OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId to nil")
+		return errors.New("invalid: unable to decode OptCancelExecutionOKExecutionWorkflowServicePrincipalId to nil")
 	}
 	o.Set = true
 	if err := o.Value.Decode(d); err != nil {
@@ -15773,14 +15773,14 @@ func (o *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Decode(d
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
+func (s OptCancelExecutionOKExecutionWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+func (s *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }

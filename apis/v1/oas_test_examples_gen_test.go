@@ -15,107 +15,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestCancelExecutionAccepted_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAccepted
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAccepted
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-
-func TestCancelExecutionAccepted_Examples(t *testing.T) {
-
-	for i, tc := range []struct {
-		Input string
-	}{
-		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
-	} {
-		tc := tc
-		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
-			var typ CancelExecutionAccepted
-
-			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
-				if validateErr, ok := errors.Into[*validate.Error](err); ok {
-					t.Skipf("Validation error: %v", validateErr)
-					return
-				}
-				require.NoErrorf(t, err, "Input: %s", tc.Input)
-			}
-
-			e := jx.Encoder{}
-			typ.Encode(&e)
-			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
-
-			var typ2 CancelExecutionAccepted
-			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
-		})
-	}
-}
-func TestCancelExecutionAcceptedExecution_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAcceptedExecution
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAcceptedExecution
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestCancelExecutionAcceptedExecutionStatus_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAcceptedExecutionStatus
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAcceptedExecutionStatus
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestCancelExecutionAcceptedExecutionWorkflow_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAcceptedExecutionWorkflow
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAcceptedExecutionWorkflow
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestCancelExecutionAcceptedExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestCancelExecutionAcceptedExecutionWorkflowTagsItem_EncodeDecode(t *testing.T) {
-	var typ CancelExecutionAcceptedExecutionWorkflowTagsItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 CancelExecutionAcceptedExecutionWorkflowTagsItem
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
 func TestCancelExecutionBadRequest_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionBadRequest
 	typ.SetFake()
@@ -279,6 +178,107 @@ func TestCancelExecutionNotFound_Examples(t *testing.T) {
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}
+}
+func TestCancelExecutionOK_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOK
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOK
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestCancelExecutionOK_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ CancelExecutionOK
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 CancelExecutionOK
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
+func TestCancelExecutionOKExecution_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecution
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecution
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionStatus_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionStatus
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionStatus
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflow_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflow
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflow
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflowServicePrincipalId
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflowServicePrincipalId
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflowTagsItem_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflowTagsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflowTagsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCancelExecutionUnauthorized_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionUnauthorized

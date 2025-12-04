@@ -63,7 +63,24 @@ func TestExecutionAPI(t *testing.T) {
 
 	// Cancel
 	respCancel, err := executionAPI.Cancel(ctx, workflow.ID, respCreate.ExecutionId)
-	require.NoError(t, err) // TODO: somehow returned 200
+	require.NoError(t, err)
 	require.NotNil(t, respCancel)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
+	// TODO: add more asserts?
+
+	// List
+	respList, err := executionAPI.List(ctx, v1.ListExecutionParams{
+		ID: workflow.ID,
+	})
+	require.NoError(t, err)
+	require.NotNil(t, respList)
+	found := false
+	for _, execution := range respList.Executions {
+		if execution.ExecutionId == respCreate.ExecutionId {
+			found = true
+			assert.Equal(t, workflow.ID, execution.Workflow.ID)
+			assert.Equal(t, respCreate.CreatedAt, execution.CreatedAt)
+		}
+	}
+	assert.True(t, found, "Created Execution not found in list")
 }

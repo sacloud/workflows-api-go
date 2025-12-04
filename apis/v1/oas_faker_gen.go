@@ -7,7 +7,63 @@ import (
 )
 
 // SetFake set fake values.
-func (s *CancelExecutionAccepted) SetFake() {
+func (s *CancelExecutionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOK) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -21,7 +77,7 @@ func (s *CancelExecutionAccepted) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CancelExecutionAcceptedExecution) SetFake() {
+func (s *CancelExecutionOKExecution) SetFake() {
 	{
 		{
 			s.ExecutionId = "string"
@@ -105,12 +161,12 @@ func (s *CancelExecutionAcceptedExecution) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CancelExecutionAcceptedExecutionStatus) SetFake() {
-	*s = CancelExecutionAcceptedExecutionStatusQueued
+func (s *CancelExecutionOKExecutionStatus) SetFake() {
+	*s = CancelExecutionOKExecutionStatusQueued
 }
 
 // SetFake set fake values.
-func (s *CancelExecutionAcceptedExecutionWorkflow) SetFake() {
+func (s *CancelExecutionOKExecutionWorkflow) SetFake() {
 	{
 		{
 			s.ID = "string"
@@ -140,7 +196,7 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) SetFake() {
 		{
 			s.Tags = nil
 			for i := 0; i < 0; i++ {
-				var elem CancelExecutionAcceptedExecutionWorkflowTagsItem
+				var elem CancelExecutionOKExecutionWorkflowTagsItem
 				{
 					elem.SetFake()
 				}
@@ -166,7 +222,7 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 	var variant string
 
 	{
@@ -176,66 +232,10 @@ func (s *CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) SetFake() {
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) SetFake() {
 	{
 		{
 			s.Name = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CancelExecutionBadRequest) SetFake() {
-	{
-		{
-			s.IsOk = true
-		}
-	}
-	{
-		{
-			s.Message = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CancelExecutionForbidden) SetFake() {
-	{
-		{
-			s.IsOk = true
-		}
-	}
-	{
-		{
-			s.Message = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CancelExecutionInternalServerError) SetFake() {
-	{
-		{
-			s.IsOk = true
-		}
-	}
-	{
-		{
-			s.Message = "string"
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *CancelExecutionNotFound) SetFake() {
-	{
-		{
-			s.IsOk = true
-		}
-	}
-	{
-		{
-			s.Message = "string"
 		}
 	}
 }
@@ -2458,8 +2458,8 @@ func (s *OptBool) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
-	var elem CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
+func (s *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
+	var elem CancelExecutionOKExecutionWorkflowServicePrincipalId
 	{
 		elem.SetFake()
 	}

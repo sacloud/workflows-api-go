@@ -26,7 +26,7 @@ type ExecutionAPI interface {
 	Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error)
 	List(ctx context.Context, params v1.ListExecutionParams) (*v1.ListExecutionOK, error)
 	Read(ctx context.Context, workflowID, executionID string) (*v1.GetExecutionOKExecution, error)
-	Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionAcceptedExecution, error)
+	Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionOKExecution, error)
 	Delete(ctx context.Context, workflowID, executionID string) error
 	ListHistory(ctx context.Context, params v1.ListExecutionHistoryParams) (*v1.ListExecutionHistoryOK, error)
 }
@@ -124,7 +124,7 @@ func (op *executionOp) Read(ctx context.Context, workflowID, executionID string)
 	}
 }
 
-func (op *executionOp) Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionAcceptedExecution, error) {
+func (op *executionOp) Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionOKExecution, error) {
 	const methodName = "Execution.Cancel"
 
 	res, err := op.client.CancelExecution(ctx, v1.CancelExecutionParams{
@@ -136,7 +136,7 @@ func (op *executionOp) Cancel(ctx context.Context, workflowID, executionID strin
 	}
 
 	switch r := res.(type) {
-	case *v1.CancelExecutionAccepted:
+	case *v1.CancelExecutionOK:
 		return &r.Execution, nil
 	case *v1.CancelExecutionBadRequest:
 		return nil, NewAPIError(methodName, http.StatusBadRequest, errors.New(r.Message))
