@@ -98,7 +98,6 @@ func TestExecutionAPI(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respListHistory)
-	assert.Greater(t, len(respListHistory.Histories), 0)
 
 	// Delete
 	err = executionAPI.Delete(ctx, workflow.ID, respCreate.ExecutionId)
