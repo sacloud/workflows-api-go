@@ -59,8 +59,8 @@ func TestWorkflowAPI(t *testing.T) {
 	require.NotNil(t, respRead)
 	assert.Equal(t, "test-workflow", respRead.Name)
 	assert.Equal(t, v1.NewOptString(""), respRead.Description) // empty
-	assert.Equal(t, false, respRead.Publish)
-	assert.Equal(t, false, respRead.Logging)
+	assert.False(t, respRead.Publish)
+	assert.False(t, respRead.Logging)
 
 	// ListWorkflows
 	respList, err := workflowAPI.List(ctx, v1.ListWorkflowParams{})
@@ -71,8 +71,8 @@ func TestWorkflowAPI(t *testing.T) {
 			found = true
 			assert.Equal(t, "test-workflow", respRead.Name)
 			assert.Equal(t, v1.NewOptString(""), respRead.Description) // empty
-			assert.Equal(t, false, respRead.Publish)
-			assert.Equal(t, false, respRead.Logging)
+			assert.False(t, respRead.Publish)
+			assert.False(t, respRead.Logging)
 		}
 	}
 	assert.True(t, found, "Created Workflow not found in list")
@@ -88,8 +88,8 @@ func TestWorkflowAPI(t *testing.T) {
 	require.NotNil(t, respUpdate)
 	assert.Equal(t, "test-workflow-updated", respUpdate.Name)
 	assert.Equal(t, v1.NewOptString("test workflow updated"), respUpdate.Description)
-	assert.Equal(t, true, respUpdate.Publish)
-	assert.Equal(t, true, respUpdate.Logging)
+	assert.True(t, respUpdate.Publish)
+	assert.True(t, respUpdate.Logging)
 }
 
 const sampleRunbook = `
