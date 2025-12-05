@@ -6028,52 +6028,6 @@ func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Or(d CreateWorkflowC
 	return d
 }
 
-// NewOptCreateWorkflowReq returns new OptCreateWorkflowReq with value set to v.
-func NewOptCreateWorkflowReq(v CreateWorkflowReq) OptCreateWorkflowReq {
-	return OptCreateWorkflowReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateWorkflowReq is optional CreateWorkflowReq.
-type OptCreateWorkflowReq struct {
-	Value CreateWorkflowReq
-	Set   bool
-}
-
-// IsSet returns true if OptCreateWorkflowReq was set.
-func (o OptCreateWorkflowReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateWorkflowReq) Reset() {
-	var v CreateWorkflowReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateWorkflowReq) SetTo(v CreateWorkflowReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateWorkflowReq) Get() (v CreateWorkflowReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateWorkflowReq) Or(d CreateWorkflowReq) CreateWorkflowReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptCreateWorkflowReqServicePrincipalId returns new OptCreateWorkflowReqServicePrincipalId with value set to v.
 func NewOptCreateWorkflowReqServicePrincipalId(v CreateWorkflowReqServicePrincipalId) OptCreateWorkflowReqServicePrincipalId {
 	return OptCreateWorkflowReqServicePrincipalId{
@@ -6942,52 +6896,6 @@ func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Get() (v UpdateWorkflowOK
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Or(d UpdateWorkflowOKWorkflowServicePrincipalId) UpdateWorkflowOKWorkflowServicePrincipalId {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateWorkflowReq returns new OptUpdateWorkflowReq with value set to v.
-func NewOptUpdateWorkflowReq(v UpdateWorkflowReq) OptUpdateWorkflowReq {
-	return OptUpdateWorkflowReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateWorkflowReq is optional UpdateWorkflowReq.
-type OptUpdateWorkflowReq struct {
-	Value UpdateWorkflowReq
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateWorkflowReq was set.
-func (o OptUpdateWorkflowReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateWorkflowReq) Reset() {
-	var v UpdateWorkflowReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateWorkflowReq) SetTo(v UpdateWorkflowReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateWorkflowReq) Get() (v UpdateWorkflowReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateWorkflowReq) Or(d UpdateWorkflowReq) UpdateWorkflowReq {
 	if v, ok := o.Get(); ok {
 		return v
 	}
