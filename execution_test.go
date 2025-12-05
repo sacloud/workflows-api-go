@@ -54,9 +54,9 @@ func TestExecutionAPI(t *testing.T) {
 	executionAPI := workflows.NewExecutionOp(client)
 
 	// Create
-	respCreate, err := executionAPI.Create(ctx, workflow.ID, v1.CreateExecutionReq{
+	respCreate, err := executionAPI.Create(ctx, workflow.ID, v1.NewOptCreateExecutionReq(v1.CreateExecutionReq{
 		Args: v1.NewOptString(`{"maxNumber": 100000}`), // run longer so that it can be cancelled later
-	})
+	}))
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)

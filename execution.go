@@ -23,7 +23,7 @@ import (
 )
 
 type ExecutionAPI interface {
-	Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error)
+	Create(ctx context.Context, workflowID string, req v1.OptCreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error)
 	List(ctx context.Context, params v1.ListExecutionParams) (*v1.ListExecutionOK, error)
 	Read(ctx context.Context, workflowID, executionID string) (*v1.GetExecutionOKExecution, error)
 	Cancel(ctx context.Context, workflowID, executionID string) (*v1.CancelExecutionOKExecution, error)
@@ -41,10 +41,10 @@ func NewExecutionOp(client *v1.Client) ExecutionAPI {
 	return &executionOp{client: client}
 }
 
-func (op *executionOp) Create(ctx context.Context, workflowID string, req v1.CreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error) {
+func (op *executionOp) Create(ctx context.Context, workflowID string, req v1.OptCreateExecutionReq) (*v1.CreateExecutionCreatedExecution, error) {
 	const methodName = "Execution.Create"
 
-	res, err := op.client.CreateExecution(ctx, v1.NewOptCreateExecutionReq(req), v1.CreateExecutionParams{ID: workflowID})
+	res, err := op.client.CreateExecution(ctx, req, v1.CreateExecutionParams{ID: workflowID})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
 	}
