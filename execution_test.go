@@ -60,13 +60,14 @@ func TestExecutionAPI(t *testing.T) {
 	require.NoError(t, err)
 	require.NotNil(t, respCreate)
 	assert.Equal(t, workflow.ID, respCreate.Workflow.ID)
-	// TODO: add more asserts?
+	assert.Equal(t, `{"maxNumber": 100000}`, respCreate.Args)
 
 	// Read
 	respRead, err := executionAPI.Read(ctx, workflow.ID, respCreate.ExecutionId)
 	require.NoError(t, err)
 	require.NotNil(t, respRead)
 	assert.Equal(t, workflow.ID, respRead.Workflow.ID)
+	assert.Equal(t, respCreate.CreatedAt, respRead.CreatedAt)
 
 	// Cancel
 	respCancel, err := executionAPI.Cancel(ctx, workflow.ID, respCreate.ExecutionId)
@@ -97,6 +98,7 @@ func TestExecutionAPI(t *testing.T) {
 	})
 	require.NoError(t, err)
 	require.NotNil(t, respListHistory)
+	assert.Greater(t, len(respListHistory.Histories), 0)
 
 	// Delete
 	err = executionAPI.Delete(ctx, workflow.ID, respCreate.ExecutionId)
