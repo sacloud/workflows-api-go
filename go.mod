@@ -8,7 +8,7 @@ require (
 	github.com/go-faster/errors v0.7.1
 	github.com/go-faster/jx v1.2.0
 	github.com/ogen-go/ogen v1.17.0
-	github.com/sacloud/packages-go v0.0.11
+	github.com/sacloud/packages-go v0.0.12
 	github.com/sacloud/saclient-go v0.2.0
 	github.com/stretchr/testify v1.11.1
 )
