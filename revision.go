@@ -25,9 +25,9 @@ import (
 type RevisionAPI interface {
 	Create(ctx context.Context, workflowID string, req v1.CreateWorkflowRevisionReq) (*v1.CreateWorkflowRevisionCreatedRevision, error)
 	List(ctx context.Context, params v1.ListWorkflowRevisionsParams) (*v1.ListWorkflowRevisionsOK, error)
-	Read(ctx context.Context, workflowID string, revisionID int) (*v1.GetWorkflowRevisionsOKRevision, error)
-	UpdateAlias(ctx context.Context, workflowID string, revisionID int, req v1.UpdateWorkflowRevisionAliasReq) (*v1.UpdateWorkflowRevisionAliasOKRevision, error)
-	DeleteAlias(ctx context.Context, workflowID string, revisionID int) error
+	Read(ctx context.Context, workflowID string, revisionNumber int) (*v1.GetWorkflowRevisionsOKRevision, error)
+	UpdateAlias(ctx context.Context, workflowID string, revisionNumber int, req v1.UpdateWorkflowRevisionAliasReq) (*v1.UpdateWorkflowRevisionAliasOKRevision, error)
+	DeleteAlias(ctx context.Context, workflowID string, revisionNumber int) error
 }
 
 var _ RevisionAPI = (*revisionOp)(nil)
@@ -92,12 +92,12 @@ func (op *revisionOp) List(ctx context.Context, params v1.ListWorkflowRevisionsP
 	}
 }
 
-func (op *revisionOp) Read(ctx context.Context, workflowID string, revisionID int) (*v1.GetWorkflowRevisionsOKRevision, error) {
+func (op *revisionOp) Read(ctx context.Context, workflowID string, revisionNumber int) (*v1.GetWorkflowRevisionsOKRevision, error) {
 	const methodName = "Revision.Read"
 
 	res, err := op.client.GetWorkflowRevisions(ctx, v1.GetWorkflowRevisionsParams{
 		ID:         workflowID,
-		RevisionId: revisionID,
+		RevisionId: revisionNumber,
 	})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
@@ -121,12 +121,12 @@ func (op *revisionOp) Read(ctx context.Context, workflowID string, revisionID in
 	}
 }
 
-func (op *revisionOp) UpdateAlias(ctx context.Context, workflowID string, revisionID int, req v1.UpdateWorkflowRevisionAliasReq) (*v1.UpdateWorkflowRevisionAliasOKRevision, error) {
+func (op *revisionOp) UpdateAlias(ctx context.Context, workflowID string, revisionNumber int, req v1.UpdateWorkflowRevisionAliasReq) (*v1.UpdateWorkflowRevisionAliasOKRevision, error) {
 	const methodName = "Revision.UpdateAlias"
 
 	res, err := op.client.UpdateWorkflowRevisionAlias(ctx, &req, v1.UpdateWorkflowRevisionAliasParams{
 		ID:         workflowID,
-		RevisionId: revisionID,
+		RevisionId: revisionNumber,
 	})
 	if err != nil {
 		return nil, NewAPIError(methodName, 0, err)
@@ -150,12 +150,12 @@ func (op *revisionOp) UpdateAlias(ctx context.Context, workflowID string, revisi
 	}
 }
 
-func (op *revisionOp) DeleteAlias(ctx context.Context, workflowID string, revisionID int) error {
+func (op *revisionOp) DeleteAlias(ctx context.Context, workflowID string, revisionNumber int) error {
 	const methodName = "Revision.DeleteAlias"
 
 	res, err := op.client.DeleteWorkflowRevisionAlias(ctx, v1.DeleteWorkflowRevisionAliasParams{
 		ID:         workflowID,
-		RevisionId: revisionID,
+		RevisionId: revisionNumber,
 	})
 	if err != nil {
 		return NewAPIError(methodName, 0, err)
