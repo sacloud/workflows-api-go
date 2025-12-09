@@ -15,8 +15,8 @@ import (
 
 func decodeCancelExecutionResponse(resp *http.Response) (res CancelExecutionRes, _ error) {
 	switch resp.StatusCode {
-	case 202:
-		// Code 202.
+	case 200:
+		// Code 200.
 		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
 		if err != nil {
 			return res, errors.Wrap(err, "parse media type")
@@ -29,7 +29,7 @@ func decodeCancelExecutionResponse(resp *http.Response) (res CancelExecutionRes,
 			}
 			d := jx.DecodeBytes(buf)
 
-			var response CancelExecutionAccepted
+			var response CancelExecutionOK
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
@@ -404,6 +404,41 @@ func decodeCreateExecutionResponse(resp *http.Response) (res CreateExecutionRes,
 			d := jx.DecodeBytes(buf)
 
 			var response CreateExecutionNotFound
+			if err := func() error {
+				if err := response.Decode(d); err != nil {
+					return err
+				}
+				if err := d.Skip(); err != io.EOF {
+					return errors.New("unexpected trailing data")
+				}
+				return nil
+			}(); err != nil {
+				err = &ogenerrors.DecodeBodyError{
+					ContentType: ct,
+					Body:        buf,
+					Err:         err,
+				}
+				return res, err
+			}
+			return &response, nil
+		default:
+			return res, validate.InvalidContentType(ct)
+		}
+	case 409:
+		// Code 409.
+		ct, _, err := mime.ParseMediaType(resp.Header.Get("Content-Type"))
+		if err != nil {
+			return res, errors.Wrap(err, "parse media type")
+		}
+		switch {
+		case ct == "application/json":
+			buf, err := io.ReadAll(resp.Body)
+			if err != nil {
+				return res, err
+			}
+			d := jx.DecodeBytes(buf)
+
+			var response CreateExecutionConflict
 			if err := func() error {
 				if err := response.Decode(d); err != nil {
 					return err
