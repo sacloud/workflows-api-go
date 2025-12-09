@@ -4608,7 +4608,7 @@ func (s *CreateWorkflowRevisionCreatedRevision) Encode(e *jx.Encoder) {
 func (s *CreateWorkflowRevisionCreatedRevision) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("RevisionId")
-		e.Float64(s.RevisionId)
+		e.Int(s.RevisionId)
 	}
 	{
 		e.FieldStart("WorkflowId")
@@ -4655,8 +4655,8 @@ func (s *CreateWorkflowRevisionCreatedRevision) Decode(d *jx.Decoder) error {
 		case "RevisionId":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				v, err := d.Float64()
-				s.RevisionId = float64(v)
+				v, err := d.Int()
+				s.RevisionId = int(v)
 				if err != nil {
 					return err
 				}
@@ -7131,14 +7131,14 @@ func (s *DeleteWorkflowRevisionAliasOK) encodeFields(e *jx.Encoder) {
 		e.Bool(s.IsOk)
 	}
 	{
-		e.FieldStart("Workflow")
-		s.Workflow.Encode(e)
+		e.FieldStart("Revision")
+		s.Revision.Encode(e)
 	}
 }
 
 var jsonFieldsNameOfDeleteWorkflowRevisionAliasOK = [2]string{
 	0: "is_ok",
-	1: "Workflow",
+	1: "Revision",
 }
 
 // Decode decodes DeleteWorkflowRevisionAliasOK from json.
@@ -7162,15 +7162,15 @@ func (s *DeleteWorkflowRevisionAliasOK) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"is_ok\"")
 			}
-		case "Workflow":
+		case "Revision":
 			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
-				if err := s.Workflow.Decode(d); err != nil {
+				if err := s.Revision.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Workflow\"")
+				return errors.Wrap(err, "decode field \"Revision\"")
 			}
 		default:
 			return d.Skip()
@@ -7229,49 +7229,31 @@ func (s *DeleteWorkflowRevisionAliasOK) UnmarshalJSON(data []byte) error {
 }
 
 // Encode implements json.Marshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) Encode(e *jx.Encoder) {
+func (s *DeleteWorkflowRevisionAliasOKRevision) Encode(e *jx.Encoder) {
 	e.ObjStart()
 	s.encodeFields(e)
 	e.ObjEnd()
 }
 
 // encodeFields encodes fields.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) encodeFields(e *jx.Encoder) {
+func (s *DeleteWorkflowRevisionAliasOKRevision) encodeFields(e *jx.Encoder) {
 	{
-		e.FieldStart("Id")
-		e.Str(s.ID)
+		e.FieldStart("RevisionId")
+		e.Int(s.RevisionId)
 	}
 	{
-		e.FieldStart("Name")
-		e.Str(s.Name)
+		e.FieldStart("WorkflowId")
+		e.Str(s.WorkflowId)
 	}
 	{
-		if s.Description.Set {
-			e.FieldStart("Description")
-			s.Description.Encode(e)
+		if s.RevisionAlias.Set {
+			e.FieldStart("RevisionAlias")
+			s.RevisionAlias.Encode(e)
 		}
 	}
 	{
-		e.FieldStart("Publish")
-		e.Bool(s.Publish)
-	}
-	{
-		e.FieldStart("Logging")
-		e.Bool(s.Logging)
-	}
-	{
-		e.FieldStart("Tags")
-		e.ArrStart()
-		for _, elem := range s.Tags {
-			elem.Encode(e)
-		}
-		e.ArrEnd()
-	}
-	{
-		if s.ServicePrincipalId.Set {
-			e.FieldStart("ServicePrincipalId")
-			s.ServicePrincipalId.Encode(e)
-		}
+		e.FieldStart("Runbook")
+		e.Str(s.Runbook)
 	}
 	{
 		e.FieldStart("CreatedAt")
@@ -7283,115 +7265,72 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflow) encodeFields(e *jx.Encoder) {
 	}
 }
 
-var jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflow = [9]string{
-	0: "Id",
-	1: "Name",
-	2: "Description",
-	3: "Publish",
-	4: "Logging",
-	5: "Tags",
-	6: "ServicePrincipalId",
-	7: "CreatedAt",
-	8: "UpdatedAt",
+var jsonFieldsNameOfDeleteWorkflowRevisionAliasOKRevision = [6]string{
+	0: "RevisionId",
+	1: "WorkflowId",
+	2: "RevisionAlias",
+	3: "Runbook",
+	4: "CreatedAt",
+	5: "UpdatedAt",
 }
 
-// Decode decodes DeleteWorkflowRevisionAliasOKWorkflow from json.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) Decode(d *jx.Decoder) error {
+// Decode decodes DeleteWorkflowRevisionAliasOKRevision from json.
+func (s *DeleteWorkflowRevisionAliasOKRevision) Decode(d *jx.Decoder) error {
 	if s == nil {
-		return errors.New("invalid: unable to decode DeleteWorkflowRevisionAliasOKWorkflow to nil")
+		return errors.New("invalid: unable to decode DeleteWorkflowRevisionAliasOKRevision to nil")
 	}
-	var requiredBitSet [2]uint8
+	var requiredBitSet [1]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
-		case "Id":
+		case "RevisionId":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				v, err := d.Str()
-				s.ID = string(v)
+				v, err := d.Int()
+				s.RevisionId = int(v)
 				if err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Id\"")
+				return errors.Wrap(err, "decode field \"RevisionId\"")
 			}
-		case "Name":
+		case "WorkflowId":
 			requiredBitSet[0] |= 1 << 1
 			if err := func() error {
 				v, err := d.Str()
-				s.Name = string(v)
+				s.WorkflowId = string(v)
 				if err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Name\"")
+				return errors.Wrap(err, "decode field \"WorkflowId\"")
 			}
-		case "Description":
+		case "RevisionAlias":
 			if err := func() error {
-				s.Description.Reset()
-				if err := s.Description.Decode(d); err != nil {
+				s.RevisionAlias.Reset()
+				if err := s.RevisionAlias.Decode(d); err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Description\"")
+				return errors.Wrap(err, "decode field \"RevisionAlias\"")
 			}
-		case "Publish":
+		case "Runbook":
 			requiredBitSet[0] |= 1 << 3
 			if err := func() error {
-				v, err := d.Bool()
-				s.Publish = bool(v)
+				v, err := d.Str()
+				s.Runbook = string(v)
 				if err != nil {
 					return err
 				}
 				return nil
 			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Publish\"")
-			}
-		case "Logging":
-			requiredBitSet[0] |= 1 << 4
-			if err := func() error {
-				v, err := d.Bool()
-				s.Logging = bool(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Logging\"")
-			}
-		case "Tags":
-			requiredBitSet[0] |= 1 << 5
-			if err := func() error {
-				s.Tags = make([]DeleteWorkflowRevisionAliasOKWorkflowTagsItem, 0)
-				if err := d.Arr(func(d *jx.Decoder) error {
-					var elem DeleteWorkflowRevisionAliasOKWorkflowTagsItem
-					if err := elem.Decode(d); err != nil {
-						return err
-					}
-					s.Tags = append(s.Tags, elem)
-					return nil
-				}); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Tags\"")
-			}
-		case "ServicePrincipalId":
-			if err := func() error {
-				s.ServicePrincipalId.Reset()
-				if err := s.ServicePrincipalId.Decode(d); err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"ServicePrincipalId\"")
+				return errors.Wrap(err, "decode field \"Runbook\"")
 			}
 		case "CreatedAt":
-			requiredBitSet[0] |= 1 << 7
+			requiredBitSet[0] |= 1 << 4
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.CreatedAt = v
@@ -7403,7 +7342,7 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflow) Decode(d *jx.Decoder) error {
 				return errors.Wrap(err, "decode field \"CreatedAt\"")
 			}
 		case "UpdatedAt":
-			requiredBitSet[1] |= 1 << 0
+			requiredBitSet[0] |= 1 << 5
 			if err := func() error {
 				v, err := json.DecodeDateTime(d)
 				s.UpdatedAt = v
@@ -7419,159 +7358,12 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflow) Decode(d *jx.Decoder) error {
 		}
 		return nil
 	}); err != nil {
-		return errors.Wrap(err, "decode DeleteWorkflowRevisionAliasOKWorkflow")
-	}
-	// Validate required fields.
-	var failures []validate.FieldError
-	for i, mask := range [2]uint8{
-		0b10111011,
-		0b00000001,
-	} {
-		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
-			// Mask only required fields and check equality to mask using XOR.
-			//
-			// If XOR result is not zero, result is not equal to expected, so some fields are missed.
-			// Bits of fields which would be set are actually bits of missed fields.
-			missed := bits.OnesCount8(result)
-			for bitN := 0; bitN < missed; bitN++ {
-				bitIdx := bits.TrailingZeros8(result)
-				fieldIdx := i*8 + bitIdx
-				var name string
-				if fieldIdx < len(jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflow) {
-					name = jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflow[fieldIdx]
-				} else {
-					name = strconv.Itoa(fieldIdx)
-				}
-				failures = append(failures, validate.FieldError{
-					Name:  name,
-					Error: validate.ErrFieldRequired,
-				})
-				// Reset bit.
-				result &^= 1 << bitIdx
-			}
-		}
-	}
-	if len(failures) > 0 {
-		return &validate.Error{Fields: failures}
-	}
-
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId as json.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
-	switch s.Type {
-	case StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId:
-		e.Str(s.String)
-	case Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId:
-		e.Float64(s.Float64)
-	}
-}
-
-// Decode decodes DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId from json.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId to nil")
-	}
-	// Sum type type_discriminator.
-	switch t := d.Next(); t {
-	case jx.Number:
-		v, err := d.Float64()
-		s.Float64 = float64(v)
-		if err != nil {
-			return err
-		}
-		s.Type = Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	case jx.String:
-		v, err := d.Str()
-		s.String = string(v)
-		if err != nil {
-			return err
-		}
-		s.Type = StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	default:
-		return errors.Errorf("unexpected json type %q", t)
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode implements json.Marshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) Encode(e *jx.Encoder) {
-	e.ObjStart()
-	s.encodeFields(e)
-	e.ObjEnd()
-}
-
-// encodeFields encodes fields.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) encodeFields(e *jx.Encoder) {
-	{
-		e.FieldStart("Name")
-		e.Str(s.Name)
-	}
-}
-
-var jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflowTagsItem = [1]string{
-	0: "Name",
-}
-
-// Decode decodes DeleteWorkflowRevisionAliasOKWorkflowTagsItem from json.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) Decode(d *jx.Decoder) error {
-	if s == nil {
-		return errors.New("invalid: unable to decode DeleteWorkflowRevisionAliasOKWorkflowTagsItem to nil")
-	}
-	var requiredBitSet [1]uint8
-
-	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
-		switch string(k) {
-		case "Name":
-			requiredBitSet[0] |= 1 << 0
-			if err := func() error {
-				v, err := d.Str()
-				s.Name = string(v)
-				if err != nil {
-					return err
-				}
-				return nil
-			}(); err != nil {
-				return errors.Wrap(err, "decode field \"Name\"")
-			}
-		default:
-			return d.Skip()
-		}
-		return nil
-	}); err != nil {
-		return errors.Wrap(err, "decode DeleteWorkflowRevisionAliasOKWorkflowTagsItem")
+		return errors.Wrap(err, "decode DeleteWorkflowRevisionAliasOKRevision")
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
 	for i, mask := range [1]uint8{
-		0b00000001,
+		0b00111011,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -7583,8 +7375,8 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) Decode(d *jx.Decoder) er
 				bitIdx := bits.TrailingZeros8(result)
 				fieldIdx := i*8 + bitIdx
 				var name string
-				if fieldIdx < len(jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflowTagsItem) {
-					name = jsonFieldsNameOfDeleteWorkflowRevisionAliasOKWorkflowTagsItem[fieldIdx]
+				if fieldIdx < len(jsonFieldsNameOfDeleteWorkflowRevisionAliasOKRevision) {
+					name = jsonFieldsNameOfDeleteWorkflowRevisionAliasOKRevision[fieldIdx]
 				} else {
 					name = strconv.Itoa(fieldIdx)
 				}
@@ -7605,14 +7397,14 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) Decode(d *jx.Decoder) er
 }
 
 // MarshalJSON implements stdjson.Marshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) MarshalJSON() ([]byte, error) {
+func (s *DeleteWorkflowRevisionAliasOKRevision) MarshalJSON() ([]byte, error) {
 	e := jx.Encoder{}
 	s.Encode(&e)
 	return e.Bytes(), nil
 }
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) UnmarshalJSON(data []byte) error {
+func (s *DeleteWorkflowRevisionAliasOKRevision) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -10830,7 +10622,7 @@ func (s *GetWorkflowRevisionsOKRevision) Encode(e *jx.Encoder) {
 func (s *GetWorkflowRevisionsOKRevision) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("RevisionId")
-		e.Float64(s.RevisionId)
+		e.Int(s.RevisionId)
 	}
 	{
 		e.FieldStart("WorkflowId")
@@ -10877,8 +10669,8 @@ func (s *GetWorkflowRevisionsOKRevision) Decode(d *jx.Decoder) error {
 		case "RevisionId":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				v, err := d.Float64()
-				s.RevisionId = float64(v)
+				v, err := d.Int()
+				s.RevisionId = int(v)
 				if err != nil {
 					return err
 				}
@@ -15416,7 +15208,7 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) Encode(e *jx.Encoder) {
 func (s *ListWorkflowRevisionsOKRevisionsItem) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("RevisionId")
-		e.Float64(s.RevisionId)
+		e.Int(s.RevisionId)
 	}
 	{
 		e.FieldStart("WorkflowId")
@@ -15463,8 +15255,8 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) Decode(d *jx.Decoder) error {
 		case "RevisionId":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				v, err := d.Float64()
-				s.RevisionId = float64(v)
+				v, err := d.Int()
+				s.RevisionId = int(v)
 				if err != nil {
 					return err
 				}
@@ -16012,39 +15804,6 @@ func (s *OptCreateWorkflowReqServicePrincipalId) UnmarshalJSON(data []byte) erro
 	return s.Decode(d)
 }
 
-// Encode encodes CreateWorkflowRevisionReq as json.
-func (o OptCreateWorkflowRevisionReq) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes CreateWorkflowRevisionReq from json.
-func (o *OptCreateWorkflowRevisionReq) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptCreateWorkflowRevisionReq to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptCreateWorkflowRevisionReq) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptCreateWorkflowRevisionReq) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
 // Encode encodes time.Time as json.
 func (o OptDateTime) Encode(e *jx.Encoder, format func(*jx.Encoder, time.Time)) {
 	if !o.Set {
@@ -16078,39 +15837,6 @@ func (s OptDateTime) MarshalJSON() ([]byte, error) {
 func (s *OptDateTime) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d, json.DecodeDateTime)
-}
-
-// Encode encodes DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId as json.
-func (o OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId from json.
-func (o *OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
 }
 
 // Encode encodes float64 as json.
@@ -16344,39 +16070,6 @@ func (s OptUpdateWorkflowOKWorkflowServicePrincipalId) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptUpdateWorkflowOKWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes UpdateWorkflowRevisionAliasReq as json.
-func (o OptUpdateWorkflowRevisionAliasReq) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes UpdateWorkflowRevisionAliasReq from json.
-func (o *OptUpdateWorkflowRevisionAliasReq) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptUpdateWorkflowRevisionAliasReq to nil")
-	}
-	o.Set = true
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptUpdateWorkflowRevisionAliasReq) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptUpdateWorkflowRevisionAliasReq) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -18145,7 +17838,7 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) Encode(e *jx.Encoder) {
 func (s *UpdateWorkflowRevisionAliasOKRevision) encodeFields(e *jx.Encoder) {
 	{
 		e.FieldStart("RevisionId")
-		e.Float64(s.RevisionId)
+		e.Int(s.RevisionId)
 	}
 	{
 		e.FieldStart("WorkflowId")
@@ -18192,8 +17885,8 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) Decode(d *jx.Decoder) error {
 		case "RevisionId":
 			requiredBitSet[0] |= 1 << 0
 			if err := func() error {
-				v, err := d.Float64()
-				s.RevisionId = float64(v)
+				v, err := d.Int()
+				s.RevisionId = int(v)
 				if err != nil {
 					return err
 				}

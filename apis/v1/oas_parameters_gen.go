@@ -41,7 +41,7 @@ type DeleteWorkflowRevisionAliasParams struct {
 	// Workflow ID.
 	ID string
 	// Revision ID.
-	RevisionId float64
+	RevisionId int
 }
 
 // GetExecutionParams is parameters of getExecution operation.
@@ -63,7 +63,7 @@ type GetWorkflowRevisionsParams struct {
 	// Workflow ID.
 	ID string
 	// Revision ID.
-	RevisionId float64
+	RevisionId int
 }
 
 // ListExecutionParams is parameters of listExecution operation.
@@ -137,5 +137,5 @@ type UpdateWorkflowRevisionAliasParams struct {
 	// Workflow ID.
 	ID string
 	// Revision ID.
-	RevisionId float64
+	RevisionId int
 }

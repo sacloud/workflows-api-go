@@ -1947,7 +1947,7 @@ func TestDeleteWorkflowRevisionAliasOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"Revision\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"RevisionAlias\":\"sampleString\",\"RevisionId\":123,\"Runbook\":\"sampleString\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"WorkflowId\":\"sampleString\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1970,8 +1970,8 @@ func TestDeleteWorkflowRevisionAliasOK_Examples(t *testing.T) {
 		})
 	}
 }
-func TestDeleteWorkflowRevisionAliasOKWorkflow_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflow
+func TestDeleteWorkflowRevisionAliasOKRevision_EncodeDecode(t *testing.T) {
+	var typ DeleteWorkflowRevisionAliasOKRevision
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -1979,31 +1979,7 @@ func TestDeleteWorkflowRevisionAliasOKWorkflow_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflow
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteWorkflowRevisionAliasOKWorkflowTagsItem_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflowTagsItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflowTagsItem
+	var typ2 DeleteWorkflowRevisionAliasOKRevision
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestDeleteWorkflowRevisionAliasUnauthorized_EncodeDecode(t *testing.T) {
