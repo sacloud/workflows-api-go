@@ -51,10 +51,10 @@ github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRI
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/rogpeppe/go-internal v1.9.0 h1:73kH8U+JUqXU8lRuOHeVHaa/SZPifC7BkcraZVejAe8=
 github.com/rogpeppe/go-internal v1.9.0/go.mod h1:WtVeX8xhTBvf0smdhujwtBcq4Qrzq/fJaraNFVN+nFs=
-github.com/sacloud/packages-go v0.0.11 h1:hrRWLmfPM9w7GBs6xb5/ue6pEMl8t1UuDKyR/KfteHo=
-github.com/sacloud/packages-go v0.0.11/go.mod h1:XNF5MCTWcHo9NiqWnYctVbASSSZR3ZOmmQORIzcurJ8=
-github.com/sacloud/saclient-go v0.2.0 h1:Lt0HQdxFWCWj8pbdr3miqO8v51ANFyMlL5SjOPFhuE0=
-github.com/sacloud/saclient-go v0.2.0/go.mod h1:mnRmIWHqHwxTLRxlEyyT6sNi9M7xOhANS1WXdJG2CVk=
+github.com/sacloud/packages-go v0.0.12 h1:MKeZNN3FQn1heqUSRBrbZw89YusZA1n4kammjMFZYvQ=
+github.com/sacloud/packages-go v0.0.12/go.mod h1:XNF5MCTWcHo9NiqWnYctVbASSSZR3ZOmmQORIzcurJ8=
+github.com/sacloud/saclient-go v0.2.1 h1:Xt5h2NfzI3ZIyDX/R9HAAfkPNd2SH9FFxPd4HQmsCtg=
+github.com/sacloud/saclient-go v0.2.1/go.mod h1:1uyhSsW2OukufdpHT6rbDiqPpNONexu1G9f5oXIoIFE=
 github.com/segmentio/asm v1.2.1 h1:DTNbBqs57ioxAD4PrArqftgypG4/qNpXoJx8TVXxPR0=
 github.com/segmentio/asm v1.2.1/go.mod h1:BqMnlJP91P8d+4ibuonYZw9mfnzI9HfxselHZr5aAcs=
 github.com/shopspring/decimal v1.4.0 h1:bxl37RwXBklmTi0C79JfXCEBD1cqqHt0bbgBAGFp81k=
