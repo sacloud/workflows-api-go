@@ -30,14 +30,40 @@ func encodeCreateExecutionRequest(
 	return nil
 }
 
-func encodeCreateWorkflowRequest(
-	req *CreateWorkflowReq,
+func encodeCreateSubscriptionRequest(
+	req OptCreateSubscriptionReq,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
+	if !req.Set {
+		// Keep request with empty body if value is not set.
+		return nil
+	}
 	e := new(jx.Encoder)
 	{
-		req.Encode(e)
+		if req.Set {
+			req.Encode(e)
+		}
+	}
+	encoded := e.Bytes()
+	ht.SetBody(r, bytes.NewReader(encoded), contentType)
+	return nil
+}
+
+func encodeCreateWorkflowRequest(
+	req OptCreateWorkflowReq,
+	r *http.Request,
+) error {
+	const contentType = "application/json"
+	if !req.Set {
+		// Keep request with empty body if value is not set.
+		return nil
+	}
+	e := new(jx.Encoder)
+	{
+		if req.Set {
+			req.Encode(e)
+		}
 	}
 	encoded := e.Bytes()
 	ht.SetBody(r, bytes.NewReader(encoded), contentType)
@@ -45,13 +71,19 @@ func encodeCreateWorkflowRequest(
 }
 
 func encodeCreateWorkflowRevisionRequest(
-	req *CreateWorkflowRevisionReq,
+	req OptCreateWorkflowRevisionReq,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
+	if !req.Set {
+		// Keep request with empty body if value is not set.
+		return nil
+	}
 	e := new(jx.Encoder)
 	{
-		req.Encode(e)
+		if req.Set {
+			req.Encode(e)
+		}
 	}
 	encoded := e.Bytes()
 	ht.SetBody(r, bytes.NewReader(encoded), contentType)
@@ -59,13 +91,19 @@ func encodeCreateWorkflowRevisionRequest(
 }
 
 func encodeUpdateWorkflowRequest(
-	req *UpdateWorkflowReq,
+	req OptUpdateWorkflowReq,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
+	if !req.Set {
+		// Keep request with empty body if value is not set.
+		return nil
+	}
 	e := new(jx.Encoder)
 	{
-		req.Encode(e)
+		if req.Set {
+			req.Encode(e)
+		}
 	}
 	encoded := e.Bytes()
 	ht.SetBody(r, bytes.NewReader(encoded), contentType)
@@ -73,13 +111,19 @@ func encodeUpdateWorkflowRequest(
 }
 
 func encodeUpdateWorkflowRevisionAliasRequest(
-	req *UpdateWorkflowRevisionAliasReq,
+	req OptUpdateWorkflowRevisionAliasReq,
 	r *http.Request,
 ) error {
 	const contentType = "application/json"
+	if !req.Set {
+		// Keep request with empty body if value is not set.
+		return nil
+	}
 	e := new(jx.Encoder)
 	{
-		req.Encode(e)
+		if req.Set {
+			req.Encode(e)
+		}
 	}
 	encoded := e.Bytes()
 	ht.SetBody(r, bytes.NewReader(encoded), contentType)

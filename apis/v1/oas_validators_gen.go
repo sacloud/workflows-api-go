@@ -9,7 +9,7 @@ import (
 	"github.com/ogen-go/ogen/validate"
 )
 
-func (s *CancelExecutionOK) Validate() error {
+func (s *CancelExecutionAccepted) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -32,7 +32,7 @@ func (s *CancelExecutionOK) Validate() error {
 	return nil
 }
 
-func (s *CancelExecutionOKExecution) Validate() error {
+func (s *CancelExecutionAcceptedExecution) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -107,14 +107,25 @@ func (s *CancelExecutionOKExecution) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Revision)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Revision",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
-			MinLength:     0,
-			MinLengthSet:  false,
+			MinLength:     1,
+			MinLengthSet:  true,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
 			Hostname:      false,
-			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 			MinNumeric:    0,
 			MinNumericSet: false,
 			MaxNumeric:    0,
@@ -204,7 +215,7 @@ func (s *CancelExecutionOKExecution) Validate() error {
 	return nil
 }
 
-func (s CancelExecutionOKExecutionStatus) Validate() error {
+func (s CancelExecutionAcceptedExecutionStatus) Validate() error {
 	switch s {
 	case "Queued":
 		return nil
@@ -223,7 +234,7 @@ func (s CancelExecutionOKExecutionStatus) Validate() error {
 	}
 }
 
-func (s *CancelExecutionOKExecutionWorkflow) Validate() error {
+func (s *CancelExecutionAcceptedExecutionWorkflow) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -279,8 +290,8 @@ func (s *CancelExecutionOKExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -357,9 +368,9 @@ func (s *CancelExecutionOKExecutionWorkflow) Validate() error {
 	return nil
 }
 
-func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) Validate() error {
+func (s CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Validate() error {
 	switch s.Type {
-	case StringCancelExecutionOKExecutionWorkflowServicePrincipalId:
+	case StringCancelExecutionAcceptedExecutionWorkflowServicePrincipalId:
 		if err := (validate.String{
 			MinLength:     0,
 			MinLengthSet:  false,
@@ -376,7 +387,7 @@ func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) Validate() error {
 			return errors.Wrap(err, "string")
 		}
 		return nil
-	case Float64CancelExecutionOKExecutionWorkflowServicePrincipalId:
+	case Float64CancelExecutionAcceptedExecutionWorkflowServicePrincipalId:
 		if err := (validate.Float{}).Validate(float64(s.Float64)); err != nil {
 			return errors.Wrap(err, "float")
 		}
@@ -386,7 +397,7 @@ func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) Validate() error {
 	}
 }
 
-func (s *CancelExecutionOKExecutionWorkflowTagsItem) Validate() error {
+func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -519,14 +530,25 @@ func (s *CreateExecutionCreatedExecution) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Revision)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Revision",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
-			MinLength:     0,
-			MinLengthSet:  false,
+			MinLength:     1,
+			MinLengthSet:  true,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
 			Hostname:      false,
-			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 			MinNumeric:    0,
 			MinNumericSet: false,
 			MaxNumeric:    0,
@@ -691,8 +713,8 @@ func (s *CreateExecutionCreatedExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -840,6 +862,24 @@ func (s *CreateExecutionReq) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
+		if value, ok := s.RevisionId.Get(); ok {
+			if err := func() error {
+				if err := (validate.Float{}).Validate(float64(value)); err != nil {
+					return errors.Wrap(err, "float")
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "RevisionId",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
@@ -935,6 +975,39 @@ func (s *CreateExecutionReq) Validate() error {
 	return nil
 }
 
+func (s *CreateSubscriptionReq) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{
+			MinSet:        true,
+			Min:           1,
+			MaxSet:        false,
+			Max:           0,
+			MinExclusive:  false,
+			MaxExclusive:  false,
+			MultipleOfSet: false,
+			MultipleOf:    nil,
+			Pattern:       nil,
+		}).Validate(float64(s.PlanId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "PlanId",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
 func (s *CreateWorkflowCreated) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -1014,8 +1087,8 @@ func (s *CreateWorkflowCreatedWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -1388,6 +1461,17 @@ func (s *CreateWorkflowRevisionCreatedRevision) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.RevisionId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "RevisionId",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
 			MinLength:     1,
 			MinLengthSet:  true,
@@ -1414,13 +1498,13 @@ func (s *CreateWorkflowRevisionCreatedRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
 					Hostname:      false,
-					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 					MinNumeric:    0,
 					MinNumericSet: false,
 					MaxNumeric:    0,
@@ -1495,13 +1579,13 @@ func (s *DeleteWorkflowRevisionAliasOK) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
-		if err := s.Revision.Validate(); err != nil {
+		if err := s.Workflow.Validate(); err != nil {
 			return err
 		}
 		return nil
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
-			Name:  "Revision",
+			Name:  "Workflow",
 			Error: err,
 		})
 	}
@@ -1511,7 +1595,7 @@ func (s *DeleteWorkflowRevisionAliasOK) Validate() error {
 	return nil
 }
 
-func (s *DeleteWorkflowRevisionAliasOKRevision) Validate() error {
+func (s *DeleteWorkflowRevisionAliasOKWorkflow) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
 	}
@@ -1530,27 +1614,50 @@ func (s *DeleteWorkflowRevisionAliasOKRevision) Validate() error {
 			MinNumericSet: false,
 			MaxNumeric:    0,
 			MaxNumericSet: false,
-		}).Validate(string(s.WorkflowId)); err != nil {
+		}).Validate(string(s.ID)); err != nil {
 			return errors.Wrap(err, "string")
 		}
 		return nil
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
-			Name:  "WorkflowId",
+			Name:  "Id",
 			Error: err,
 		})
 	}
 	if err := func() error {
-		if value, ok := s.RevisionAlias.Get(); ok {
+		if err := (validate.String{
+			MinLength:     1,
+			MinLengthSet:  true,
+			MaxLength:     64,
+			MaxLengthSet:  true,
+			Email:         false,
+			Hostname:      false,
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
+			MinNumeric:    0,
+			MinNumericSet: false,
+			MaxNumeric:    0,
+			MaxNumericSet: false,
+		}).Validate(string(s.Name)); err != nil {
+			return errors.Wrap(err, "string")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Name",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
-					MaxLength:     64,
+					MinLength:     1,
+					MinLengthSet:  true,
+					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
 					Hostname:      false,
-					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+					Regex:         nil,
 					MinNumeric:    0,
 					MinNumericSet: false,
 					MaxNumeric:    0,
@@ -1566,7 +1673,117 @@ func (s *DeleteWorkflowRevisionAliasOKRevision) Validate() error {
 		return nil
 	}(); err != nil {
 		failures = append(failures, validate.FieldError{
-			Name:  "RevisionAlias",
+			Name:  "Description",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Tags == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Tags {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Tags",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.ServicePrincipalId.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ServicePrincipalId",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Validate() error {
+	switch s.Type {
+	case StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId:
+		if err := (validate.String{
+			MinLength:     0,
+			MinLengthSet:  false,
+			MaxLength:     0,
+			MaxLengthSet:  false,
+			Email:         false,
+			Hostname:      false,
+			Regex:         regexMap["^[0-9]{12}$"],
+			MinNumeric:    0,
+			MinNumericSet: false,
+			MaxNumeric:    0,
+			MaxNumericSet: false,
+		}).Validate(string(s.String)); err != nil {
+			return errors.Wrap(err, "string")
+		}
+		return nil
+	case Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId:
+		if err := (validate.Float{}).Validate(float64(s.Float64)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	default:
+		return errors.Errorf("invalid type %q", s.Type)
+	}
+}
+
+func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.String{
+			MinLength:     1,
+			MinLengthSet:  true,
+			MaxLength:     64,
+			MaxLengthSet:  true,
+			Email:         false,
+			Hostname:      false,
+			Regex:         nil,
+			MinNumeric:    0,
+			MinNumericSet: false,
+			MaxNumeric:    0,
+			MaxNumericSet: false,
+		}).Validate(string(s.Name)); err != nil {
+			return errors.Wrap(err, "string")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Name",
 			Error: err,
 		})
 	}
@@ -1674,14 +1891,25 @@ func (s *GetExecutionOKExecution) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Revision)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Revision",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
-			MinLength:     0,
-			MinLengthSet:  false,
+			MinLength:     1,
+			MinLengthSet:  true,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
 			Hostname:      false,
-			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 			MinNumeric:    0,
 			MinNumericSet: false,
 			MaxNumeric:    0,
@@ -1846,8 +2074,8 @@ func (s *GetExecutionOKExecutionWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -1988,6 +2216,111 @@ func (s *GetExecutionOKExecutionWorkflowTagsItem) Validate() error {
 	return nil
 }
 
+func (s *GetSubscriptionOK) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if value, ok := s.CurrentPlan.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "CurrentPlan",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if value, ok := s.MonthAppliedPlan.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "MonthAppliedPlan",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetSubscriptionOKCurrentPlan) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.PlanId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "planId",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *GetSubscriptionOKMonthAppliedPlan) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.PlanId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "planId",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.PlanGrade)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "planGrade",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
 func (s *GetWorkflowOK) Validate() error {
 	if s == nil {
 		return validate.ErrNilPointer
@@ -2067,8 +2400,8 @@ func (s *GetWorkflowOKWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -2239,6 +2572,17 @@ func (s *GetWorkflowRevisionsOKRevision) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.RevisionId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "RevisionId",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
 			MinLength:     1,
 			MinLengthSet:  true,
@@ -2265,13 +2609,13 @@ func (s *GetWorkflowRevisionsOKRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
 					Hostname:      false,
-					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 					MinNumeric:    0,
 					MinNumericSet: false,
 					MaxNumeric:    0,
@@ -2779,14 +3123,25 @@ func (s *ListExecutionOKExecutionsItem) Validate() error {
 		})
 	}
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Revision)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Revision",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
-			MinLength:     0,
-			MinLengthSet:  false,
+			MinLength:     1,
+			MinLengthSet:  true,
 			MaxLength:     64,
 			MaxLengthSet:  true,
 			Email:         false,
 			Hostname:      false,
-			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 			MinNumeric:    0,
 			MinNumericSet: false,
 			MaxNumeric:    0,
@@ -2951,8 +3306,8 @@ func (s *ListExecutionOKExecutionsItemWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -3102,6 +3457,135 @@ func (s ListExecutionOrder) Validate() error {
 	default:
 		return errors.Errorf("invalid value: %v", s)
 	}
+}
+
+func (s *ListPlansOK) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if s.Plans == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Plans {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Plans",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.TaxRate)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "TaxRate",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *ListPlansOKPlansItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.ID)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "id",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.Grade)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "grade",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.BasePrice)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "basePrice",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.IncludedSteps)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "includedSteps",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.OverageStepUnit)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "overageStepUnit",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.OveragePricePerUnit)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "overagePricePerUnit",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
 }
 
 func (s ListWorkflowNameMatchType) Validate() error {
@@ -3274,8 +3758,8 @@ func (s *ListWorkflowOKWorkflowsItem) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -3537,6 +4021,17 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.RevisionId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "RevisionId",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
 			MinLength:     1,
 			MinLengthSet:  true,
@@ -3563,13 +4058,13 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
 					Hostname:      false,
-					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 					MinNumeric:    0,
 					MinNumericSet: false,
 					MaxNumeric:    0,
@@ -3626,6 +4121,187 @@ func (s ListWorkflowSortBy) Validate() error {
 	case "updatedAt":
 		return nil
 	case "id":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
+func (s *ListWorkflowSuggestOK) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.Int{
+			MinSet:        true,
+			Min:           0,
+			MaxSet:        false,
+			Max:           0,
+			MinExclusive:  false,
+			MaxExclusive:  false,
+			MultipleOfSet: false,
+			MultipleOf:    0,
+			Pattern:       nil,
+		}).Validate(int64(s.Total)); err != nil {
+			return errors.Wrap(err, "int")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Total",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Int{
+			MinSet:        true,
+			Min:           0,
+			MaxSet:        false,
+			Max:           0,
+			MinExclusive:  false,
+			MaxExclusive:  false,
+			MultipleOfSet: false,
+			MultipleOf:    0,
+			Pattern:       nil,
+		}).Validate(int64(s.From)); err != nil {
+			return errors.Wrap(err, "int")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "From",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Int{
+			MinSet:        true,
+			Min:           0,
+			MaxSet:        false,
+			Max:           0,
+			MinExclusive:  false,
+			MaxExclusive:  false,
+			MultipleOfSet: false,
+			MultipleOf:    0,
+			Pattern:       nil,
+		}).Validate(int64(s.Count)); err != nil {
+			return errors.Wrap(err, "int")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Count",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if s.Suggests == nil {
+			return errors.New("nil is invalid value")
+		}
+		var failures []validate.FieldError
+		for i, elem := range s.Suggests {
+			if err := func() error {
+				if err := elem.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				failures = append(failures, validate.FieldError{
+					Name:  fmt.Sprintf("[%d]", i),
+					Error: err,
+				})
+			}
+		}
+		if len(failures) > 0 {
+			return &validate.Error{Fields: failures}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Suggests",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s *ListWorkflowSuggestOKSuggestsItem) Validate() error {
+	if s == nil {
+		return validate.ErrNilPointer
+	}
+
+	var failures []validate.FieldError
+	if err := func() error {
+		if err := (validate.String{
+			MinLength:     1,
+			MinLengthSet:  true,
+			MaxLength:     64,
+			MaxLengthSet:  true,
+			Email:         false,
+			Hostname:      false,
+			Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
+			MinNumeric:    0,
+			MinNumericSet: false,
+			MaxNumeric:    0,
+			MaxNumericSet: false,
+		}).Validate(string(s.Name)); err != nil {
+			return errors.Wrap(err, "string")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Name",
+			Error: err,
+		})
+	}
+	if err := func() error {
+		if err := (validate.Float{
+			MinSet:        true,
+			Min:           1,
+			MaxSet:        false,
+			Max:           0,
+			MinExclusive:  false,
+			MaxExclusive:  false,
+			MultipleOfSet: false,
+			MultipleOf:    nil,
+			Pattern:       nil,
+		}).Validate(float64(s.Count)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "Count",
+			Error: err,
+		})
+	}
+	if len(failures) > 0 {
+		return &validate.Error{Fields: failures}
+	}
+	return nil
+}
+
+func (s ListWorkflowSuggestOrder) Validate() error {
+	switch s {
+	case "asc":
+		return nil
+	case "desc":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
+}
+
+func (s ListWorkflowSuggestSortBy) Validate() error {
+	switch s {
+	case "name":
+		return nil
+	case "count":
 		return nil
 	default:
 		return errors.Errorf("invalid value: %v", s)
@@ -3711,8 +4387,8 @@ func (s *UpdateWorkflowOKWorkflow) Validate() error {
 		if value, ok := s.Description.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     1024,
 					MaxLengthSet:  true,
 					Email:         false,
@@ -4015,6 +4691,17 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) Validate() error {
 
 	var failures []validate.FieldError
 	if err := func() error {
+		if err := (validate.Float{}).Validate(float64(s.RevisionId)); err != nil {
+			return errors.Wrap(err, "float")
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "RevisionId",
+			Error: err,
+		})
+	}
+	if err := func() error {
 		if err := (validate.String{
 			MinLength:     1,
 			MinLengthSet:  true,
@@ -4041,13 +4728,13 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) Validate() error {
 		if value, ok := s.RevisionAlias.Get(); ok {
 			if err := func() error {
 				if err := (validate.String{
-					MinLength:     0,
-					MinLengthSet:  false,
+					MinLength:     1,
+					MinLengthSet:  true,
 					MaxLength:     64,
 					MaxLengthSet:  true,
 					Email:         false,
 					Hostname:      false,
-					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"],
+					Regex:         regexMap["^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"],
 					MinNumeric:    0,
 					MinNumericSet: false,
 					MaxNumeric:    0,

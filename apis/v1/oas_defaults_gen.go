@@ -35,6 +35,14 @@ func (s *ListExecutionOK) setDefaults() {
 }
 
 // setDefaults set default value of fields.
+func (s *ListPlansOK) setDefaults() {
+	{
+		val := float64(10)
+		s.TaxRate = val
+	}
+}
+
+// setDefaults set default value of fields.
 func (s *ListWorkflowOK) setDefaults() {
 	{
 		val := int(0)
@@ -52,6 +60,22 @@ func (s *ListWorkflowOK) setDefaults() {
 
 // setDefaults set default value of fields.
 func (s *ListWorkflowRevisionsOK) setDefaults() {
+	{
+		val := int(0)
+		s.Total = val
+	}
+	{
+		val := int(0)
+		s.From = val
+	}
+	{
+		val := int(0)
+		s.Count = val
+	}
+}
+
+// setDefaults set default value of fields.
+func (s *ListWorkflowSuggestOK) setDefaults() {
 	{
 		val := int(0)
 		s.Total = val

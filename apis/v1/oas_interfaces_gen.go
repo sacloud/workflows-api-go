@@ -9,6 +9,10 @@ type CreateExecutionRes interface {
 	createExecutionRes()
 }
 
+type CreateSubscriptionRes interface {
+	createSubscriptionRes()
+}
+
 type CreateWorkflowRes interface {
 	createWorkflowRes()
 }
@@ -21,6 +25,10 @@ type DeleteExecutionRes interface {
 	deleteExecutionRes()
 }
 
+type DeleteSubscriptionRes interface {
+	deleteSubscriptionRes()
+}
+
 type DeleteWorkflowRes interface {
 	deleteWorkflowRes()
 }
@@ -31,6 +39,10 @@ type DeleteWorkflowRevisionAliasRes interface {
 
 type GetExecutionRes interface {
 	getExecutionRes()
+}
+
+type GetSubscriptionRes interface {
+	getSubscriptionRes()
 }
 
 type GetWorkflowRes interface {
@@ -49,12 +61,20 @@ type ListExecutionRes interface {
 	listExecutionRes()
 }
 
+type ListPlansRes interface {
+	listPlansRes()
+}
+
 type ListWorkflowRes interface {
 	listWorkflowRes()
 }
 
 type ListWorkflowRevisionsRes interface {
 	listWorkflowRevisionsRes()
+}
+
+type ListWorkflowSuggestRes interface {
+	listWorkflowSuggestRes()
 }
 
 type UpdateWorkflowRes interface {

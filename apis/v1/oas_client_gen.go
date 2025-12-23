@@ -32,24 +32,36 @@ type Invoker interface {
 	//
 	// POST /workflows/{id}/executions
 	CreateExecution(ctx context.Context, request OptCreateExecutionReq, params CreateExecutionParams) (CreateExecutionRes, error)
+	// CreateSubscription invokes createSubscription operation.
+	//
+	// ワークフローの課金プランの設定をする.
+	//
+	// POST /subscriptions
+	CreateSubscription(ctx context.Context, request OptCreateSubscriptionReq) (CreateSubscriptionRes, error)
 	// CreateWorkflow invokes createWorkflow operation.
 	//
 	// ワークフローを作成する.
 	//
-	// POST /workflows/
-	CreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (CreateWorkflowRes, error)
+	// POST /workflows
+	CreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (CreateWorkflowRes, error)
 	// CreateWorkflowRevision invokes createWorkflowRevision operation.
 	//
 	// ワークフローのリビジョンを追加する.
 	//
 	// POST /workflows/{id}/revisions
-	CreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error)
+	CreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error)
 	// DeleteExecution invokes deleteExecution operation.
 	//
 	// ワークフローの実行を削除する.
 	//
 	// DELETE /workflows/{id}/executions/{executionId}
 	DeleteExecution(ctx context.Context, params DeleteExecutionParams) (DeleteExecutionRes, error)
+	// DeleteSubscription invokes deleteSubscription operation.
+	//
+	// ワークフローの課金プランの削除をする.
+	//
+	// DELETE /subscriptions
+	DeleteSubscription(ctx context.Context) (DeleteSubscriptionRes, error)
 	// DeleteWorkflow invokes deleteWorkflow operation.
 	//
 	// ワークフローを削除する.
@@ -68,6 +80,12 @@ type Invoker interface {
 	//
 	// GET /workflows/{id}/executions/{executionId}
 	GetExecution(ctx context.Context, params GetExecutionParams) (GetExecutionRes, error)
+	// GetSubscription invokes getSubscription operation.
+	//
+	// ワークフローの課金プランの取得をする.
+	//
+	// GET /subscriptions
+	GetSubscription(ctx context.Context) (GetSubscriptionRes, error)
 	// GetWorkflow invokes getWorkflow operation.
 	//
 	// ワークフローを取得する.
@@ -92,11 +110,17 @@ type Invoker interface {
 	//
 	// GET /workflows/{id}/executions/{executionId}/exec_history
 	ListExecutionHistory(ctx context.Context, params ListExecutionHistoryParams) (ListExecutionHistoryRes, error)
+	// ListPlans invokes listPlans operation.
+	//
+	// 現在契約可能な Workflows の料金プランの一覧を取得します。.
+	//
+	// GET /plans
+	ListPlans(ctx context.Context) (ListPlansRes, error)
 	// ListWorkflow invokes listWorkflow operation.
 	//
 	// ワークフローの一覧を取得する.
 	//
-	// GET /workflows/
+	// GET /workflows
 	ListWorkflow(ctx context.Context, params ListWorkflowParams) (ListWorkflowRes, error)
 	// ListWorkflowRevisions invokes listWorkflowRevisions operation.
 	//
@@ -104,18 +128,24 @@ type Invoker interface {
 	//
 	// GET /workflows/{id}/revisions
 	ListWorkflowRevisions(ctx context.Context, params ListWorkflowRevisionsParams) (ListWorkflowRevisionsRes, error)
+	// ListWorkflowSuggest invokes listWorkflowSuggest operation.
+	//
+	// ワークフローのサジェストを取得する.
+	//
+	// GET /workflows/suggest
+	ListWorkflowSuggest(ctx context.Context, params ListWorkflowSuggestParams) (ListWorkflowSuggestRes, error)
 	// UpdateWorkflow invokes updateWorkflow operation.
 	//
 	// ワークフローを更新する.
 	//
 	// PATCH /workflows/{id}
-	UpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error)
+	UpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error)
 	// UpdateWorkflowRevisionAlias invokes updateWorkflowRevisionAlias operation.
 	//
 	// ワークフローのリビジョンエイリアスを更新する.
 	//
 	// PUT /workflows/{id}/revisions/{revisionId}/revision_alias
-	UpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error)
+	UpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error)
 }
 
 // Client implements OAS client.
@@ -305,21 +335,28 @@ func (c *Client) sendCreateExecution(ctx context.Context, request OptCreateExecu
 	return result, nil
 }
 
-// CreateWorkflow invokes createWorkflow operation.
+// CreateSubscription invokes createSubscription operation.
 //
-// ワークフローを作成する.
+// ワークフローの課金プランの設定をする.
 //
-// POST /workflows/
-func (c *Client) CreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (CreateWorkflowRes, error) {
-	res, err := c.sendCreateWorkflow(ctx, request)
+// POST /subscriptions
+func (c *Client) CreateSubscription(ctx context.Context, request OptCreateSubscriptionReq) (CreateSubscriptionRes, error) {
+	res, err := c.sendCreateSubscription(ctx, request)
 	return res, err
 }
 
-func (c *Client) sendCreateWorkflow(ctx context.Context, request *CreateWorkflowReq) (res CreateWorkflowRes, err error) {
+func (c *Client) sendCreateSubscription(ctx context.Context, request OptCreateSubscriptionReq) (res CreateSubscriptionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
 		}
 		return nil
 	}(); err != nil {
@@ -328,7 +365,62 @@ func (c *Client) sendCreateWorkflow(ctx context.Context, request *CreateWorkflow
 
 	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
-	pathParts[0] = "/workflows/"
+	pathParts[0] = "/subscriptions"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "POST", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+	if err := encodeCreateSubscriptionRequest(request, r); err != nil {
+		return res, errors.Wrap(err, "encode request")
+	}
+
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	result, err := decodeCreateSubscriptionResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
+// CreateWorkflow invokes createWorkflow operation.
+//
+// ワークフローを作成する.
+//
+// POST /workflows
+func (c *Client) CreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (CreateWorkflowRes, error) {
+	res, err := c.sendCreateWorkflow(ctx, request)
+	return res, err
+}
+
+func (c *Client) sendCreateWorkflow(ctx context.Context, request OptCreateWorkflowReq) (res CreateWorkflowRes, err error) {
+	// Validate request before sending.
+	if err := func() error {
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		return res, errors.Wrap(err, "validate")
+	}
+
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/workflows"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	r, err := ht.NewRequest(ctx, "POST", u)
@@ -358,16 +450,23 @@ func (c *Client) sendCreateWorkflow(ctx context.Context, request *CreateWorkflow
 // ワークフローのリビジョンを追加する.
 //
 // POST /workflows/{id}/revisions
-func (c *Client) CreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error) {
+func (c *Client) CreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (CreateWorkflowRevisionRes, error) {
 	res, err := c.sendCreateWorkflowRevision(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendCreateWorkflowRevision(ctx context.Context, request *CreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (res CreateWorkflowRevisionRes, err error) {
+func (c *Client) sendCreateWorkflowRevision(ctx context.Context, request OptCreateWorkflowRevisionReq, params CreateWorkflowRevisionParams) (res CreateWorkflowRevisionRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
 		}
 		return nil
 	}(); err != nil {
@@ -493,6 +592,42 @@ func (c *Client) sendDeleteExecution(ctx context.Context, params DeleteExecution
 	return result, nil
 }
 
+// DeleteSubscription invokes deleteSubscription operation.
+//
+// ワークフローの課金プランの削除をする.
+//
+// DELETE /subscriptions
+func (c *Client) DeleteSubscription(ctx context.Context) (DeleteSubscriptionRes, error) {
+	res, err := c.sendDeleteSubscription(ctx)
+	return res, err
+}
+
+func (c *Client) sendDeleteSubscription(ctx context.Context) (res DeleteSubscriptionRes, err error) {
+
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/subscriptions"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "DELETE", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	result, err := decodeDeleteSubscriptionResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // DeleteWorkflow invokes deleteWorkflow operation.
 //
 // ワークフローを削除する.
@@ -589,7 +724,7 @@ func (c *Client) sendDeleteWorkflowRevisionAlias(ctx context.Context, params Del
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.IntToString(params.RevisionId))
+			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -694,6 +829,42 @@ func (c *Client) sendGetExecution(ctx context.Context, params GetExecutionParams
 	return result, nil
 }
 
+// GetSubscription invokes getSubscription operation.
+//
+// ワークフローの課金プランの取得をする.
+//
+// GET /subscriptions
+func (c *Client) GetSubscription(ctx context.Context) (GetSubscriptionRes, error) {
+	res, err := c.sendGetSubscription(ctx)
+	return res, err
+}
+
+func (c *Client) sendGetSubscription(ctx context.Context) (res GetSubscriptionRes, err error) {
+
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/subscriptions"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	result, err := decodeGetSubscriptionResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // GetWorkflow invokes getWorkflow operation.
 //
 // ワークフローを取得する.
@@ -790,7 +961,7 @@ func (c *Client) sendGetWorkflowRevisions(ctx context.Context, params GetWorkflo
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.IntToString(params.RevisionId))
+			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
@@ -1058,11 +1229,47 @@ func (c *Client) sendListExecutionHistory(ctx context.Context, params ListExecut
 	return result, nil
 }
 
+// ListPlans invokes listPlans operation.
+//
+// 現在契約可能な Workflows の料金プランの一覧を取得します。.
+//
+// GET /plans
+func (c *Client) ListPlans(ctx context.Context) (ListPlansRes, error) {
+	res, err := c.sendListPlans(ctx)
+	return res, err
+}
+
+func (c *Client) sendListPlans(ctx context.Context) (res ListPlansRes, err error) {
+
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/plans"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	result, err := decodeListPlansResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // ListWorkflow invokes listWorkflow operation.
 //
 // ワークフローの一覧を取得する.
 //
-// GET /workflows/
+// GET /workflows
 func (c *Client) ListWorkflow(ctx context.Context, params ListWorkflowParams) (ListWorkflowRes, error) {
 	res, err := c.sendListWorkflow(ctx, params)
 	return res, err
@@ -1072,7 +1279,7 @@ func (c *Client) sendListWorkflow(ctx context.Context, params ListWorkflowParams
 
 	u := uri.Clone(c.requestURL(ctx))
 	var pathParts [1]string
-	pathParts[0] = "/workflows/"
+	pathParts[0] = "/workflows"
 	uri.AddPathParts(u, pathParts[:]...)
 
 	q := uri.NewQueryEncoder()
@@ -1359,21 +1566,149 @@ func (c *Client) sendListWorkflowRevisions(ctx context.Context, params ListWorkf
 	return result, nil
 }
 
+// ListWorkflowSuggest invokes listWorkflowSuggest operation.
+//
+// ワークフローのサジェストを取得する.
+//
+// GET /workflows/suggest
+func (c *Client) ListWorkflowSuggest(ctx context.Context, params ListWorkflowSuggestParams) (ListWorkflowSuggestRes, error) {
+	res, err := c.sendListWorkflowSuggest(ctx, params)
+	return res, err
+}
+
+func (c *Client) sendListWorkflowSuggest(ctx context.Context, params ListWorkflowSuggestParams) (res ListWorkflowSuggestRes, err error) {
+
+	u := uri.Clone(c.requestURL(ctx))
+	var pathParts [1]string
+	pathParts[0] = "/workflows/suggest"
+	uri.AddPathParts(u, pathParts[:]...)
+
+	q := uri.NewQueryEncoder()
+	{
+		// Encode "Name" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "Name",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			return e.EncodeValue(conv.StringToString(params.Name))
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "Page" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "Page",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Page.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "PageLimit" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "PageLimit",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.PageLimit.Get(); ok {
+				return e.EncodeValue(conv.IntToString(val))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "SortBy" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "SortBy",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.SortBy.Get(); ok {
+				return e.EncodeValue(conv.StringToString(string(val)))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	{
+		// Encode "Order" parameter.
+		cfg := uri.QueryParameterEncodingConfig{
+			Name:    "Order",
+			Style:   uri.QueryStyleForm,
+			Explode: true,
+		}
+
+		if err := q.EncodeParam(cfg, func(e uri.Encoder) error {
+			if val, ok := params.Order.Get(); ok {
+				return e.EncodeValue(conv.StringToString(string(val)))
+			}
+			return nil
+		}); err != nil {
+			return res, errors.Wrap(err, "encode query")
+		}
+	}
+	u.RawQuery = q.Values().Encode()
+
+	r, err := ht.NewRequest(ctx, "GET", u)
+	if err != nil {
+		return res, errors.Wrap(err, "create request")
+	}
+
+	resp, err := c.cfg.Client.Do(r)
+	if err != nil {
+		return res, errors.Wrap(err, "do request")
+	}
+	defer resp.Body.Close()
+
+	result, err := decodeListWorkflowSuggestResponse(resp)
+	if err != nil {
+		return res, errors.Wrap(err, "decode response")
+	}
+
+	return result, nil
+}
+
 // UpdateWorkflow invokes updateWorkflow operation.
 //
 // ワークフローを更新する.
 //
 // PATCH /workflows/{id}
-func (c *Client) UpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error) {
+func (c *Client) UpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (UpdateWorkflowRes, error) {
 	res, err := c.sendUpdateWorkflow(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendUpdateWorkflow(ctx context.Context, request *UpdateWorkflowReq, params UpdateWorkflowParams) (res UpdateWorkflowRes, err error) {
+func (c *Client) sendUpdateWorkflow(ctx context.Context, request OptUpdateWorkflowReq, params UpdateWorkflowParams) (res UpdateWorkflowRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
 		}
 		return nil
 	}(); err != nil {
@@ -1430,16 +1765,23 @@ func (c *Client) sendUpdateWorkflow(ctx context.Context, request *UpdateWorkflow
 // ワークフローのリビジョンエイリアスを更新する.
 //
 // PUT /workflows/{id}/revisions/{revisionId}/revision_alias
-func (c *Client) UpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error) {
+func (c *Client) UpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (UpdateWorkflowRevisionAliasRes, error) {
 	res, err := c.sendUpdateWorkflowRevisionAlias(ctx, request, params)
 	return res, err
 }
 
-func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request *UpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (res UpdateWorkflowRevisionAliasRes, err error) {
+func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request OptUpdateWorkflowRevisionAliasReq, params UpdateWorkflowRevisionAliasParams) (res UpdateWorkflowRevisionAliasRes, err error) {
 	// Validate request before sending.
 	if err := func() error {
-		if err := request.Validate(); err != nil {
-			return err
+		if value, ok := request.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
 		}
 		return nil
 	}(); err != nil {
@@ -1476,7 +1818,7 @@ func (c *Client) sendUpdateWorkflowRevisionAlias(ctx context.Context, request *U
 			Explode: false,
 		})
 		if err := func() error {
-			return e.EncodeValue(conv.IntToString(params.RevisionId))
+			return e.EncodeValue(conv.Float64ToString(params.RevisionId))
 		}(); err != nil {
 			return res, errors.Wrap(err, "encode path")
 		}
