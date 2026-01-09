@@ -8,6 +8,42 @@ import (
 	"github.com/go-faster/errors"
 )
 
+type ApiKeyAuth struct {
+	Username string
+	Password string
+	Roles    []string
+}
+
+// GetUsername returns the value of Username.
+func (s *ApiKeyAuth) GetUsername() string {
+	return s.Username
+}
+
+// GetPassword returns the value of Password.
+func (s *ApiKeyAuth) GetPassword() string {
+	return s.Password
+}
+
+// GetRoles returns the value of Roles.
+func (s *ApiKeyAuth) GetRoles() []string {
+	return s.Roles
+}
+
+// SetUsername sets the value of Username.
+func (s *ApiKeyAuth) SetUsername(val string) {
+	s.Username = val
+}
+
+// SetPassword sets the value of Password.
+func (s *ApiKeyAuth) SetPassword(val string) {
+	s.Password = val
+}
+
+// SetRoles sets the value of Roles.
+func (s *ApiKeyAuth) SetRoles(val []string) {
+	s.Roles = val
+}
+
 type CancelExecutionAccepted struct {
 	IsOk      bool                             `json:"is_ok"`
 	Execution CancelExecutionAcceptedExecution `json:"Execution"`
@@ -40,7 +76,7 @@ type CancelExecutionAcceptedExecution struct {
 	Name              string                                   `json:"Name"`
 	Workflow          CancelExecutionAcceptedExecutionWorkflow `json:"Workflow"`
 	Status            CancelExecutionAcceptedExecutionStatus   `json:"Status"`
-	Revision          float64                                  `json:"Revision"`
+	Revision          int                                      `json:"Revision"`
 	RevisionAlias     string                                   `json:"RevisionAlias"`
 	Args              string                                   `json:"Args"`
 	Result            string                                   `json:"Result"`
@@ -75,7 +111,7 @@ func (s *CancelExecutionAcceptedExecution) GetStatus() CancelExecutionAcceptedEx
 }
 
 // GetRevision returns the value of Revision.
-func (s *CancelExecutionAcceptedExecution) GetRevision() float64 {
+func (s *CancelExecutionAcceptedExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -155,7 +191,7 @@ func (s *CancelExecutionAcceptedExecution) SetStatus(val CancelExecutionAccepted
 }
 
 // SetRevision sets the value of Revision.
-func (s *CancelExecutionAcceptedExecution) SetRevision(val float64) {
+func (s *CancelExecutionAcceptedExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -494,6 +530,33 @@ func (s *CancelExecutionBadRequest) SetMessage(val string) {
 
 func (*CancelExecutionBadRequest) cancelExecutionRes() {}
 
+type CancelExecutionConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *CancelExecutionConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *CancelExecutionConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *CancelExecutionConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *CancelExecutionConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*CancelExecutionConflict) cancelExecutionRes() {}
+
 type CancelExecutionForbidden struct {
 	IsOk    bool   `json:"is_ok"`
 	Message string `json:"Message"`
@@ -575,6 +638,465 @@ func (s *CancelExecutionNotFound) SetMessage(val string) {
 
 func (*CancelExecutionNotFound) cancelExecutionRes() {}
 
+type CancelExecutionOK struct {
+	IsOk      bool                       `json:"is_ok"`
+	Execution CancelExecutionOKExecution `json:"Execution"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *CancelExecutionOK) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetExecution returns the value of Execution.
+func (s *CancelExecutionOK) GetExecution() CancelExecutionOKExecution {
+	return s.Execution
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *CancelExecutionOK) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetExecution sets the value of Execution.
+func (s *CancelExecutionOK) SetExecution(val CancelExecutionOKExecution) {
+	s.Execution = val
+}
+
+func (*CancelExecutionOK) cancelExecutionRes() {}
+
+type CancelExecutionOKExecution struct {
+	ExecutionId       string                             `json:"ExecutionId"`
+	Name              string                             `json:"Name"`
+	Workflow          CancelExecutionOKExecutionWorkflow `json:"Workflow"`
+	Status            CancelExecutionOKExecutionStatus   `json:"Status"`
+	Revision          int                                `json:"Revision"`
+	RevisionAlias     string                             `json:"RevisionAlias"`
+	Args              string                             `json:"Args"`
+	Result            string                             `json:"Result"`
+	Error             string                             `json:"Error"`
+	CreatedAt         time.Time                          `json:"CreatedAt"`
+	UpdatedAt         time.Time                          `json:"UpdatedAt"`
+	RunAt             OptDateTime                        `json:"RunAt"`
+	FailedAt          OptDateTime                        `json:"FailedAt"`
+	SucceededAt       OptDateTime                        `json:"SucceededAt"`
+	CancelRequestedAt OptDateTime                        `json:"CancelRequestedAt"`
+	CanceledAt        OptDateTime                        `json:"CanceledAt"`
+}
+
+// GetExecutionId returns the value of ExecutionId.
+func (s *CancelExecutionOKExecution) GetExecutionId() string {
+	return s.ExecutionId
+}
+
+// GetName returns the value of Name.
+func (s *CancelExecutionOKExecution) GetName() string {
+	return s.Name
+}
+
+// GetWorkflow returns the value of Workflow.
+func (s *CancelExecutionOKExecution) GetWorkflow() CancelExecutionOKExecutionWorkflow {
+	return s.Workflow
+}
+
+// GetStatus returns the value of Status.
+func (s *CancelExecutionOKExecution) GetStatus() CancelExecutionOKExecutionStatus {
+	return s.Status
+}
+
+// GetRevision returns the value of Revision.
+func (s *CancelExecutionOKExecution) GetRevision() int {
+	return s.Revision
+}
+
+// GetRevisionAlias returns the value of RevisionAlias.
+func (s *CancelExecutionOKExecution) GetRevisionAlias() string {
+	return s.RevisionAlias
+}
+
+// GetArgs returns the value of Args.
+func (s *CancelExecutionOKExecution) GetArgs() string {
+	return s.Args
+}
+
+// GetResult returns the value of Result.
+func (s *CancelExecutionOKExecution) GetResult() string {
+	return s.Result
+}
+
+// GetError returns the value of Error.
+func (s *CancelExecutionOKExecution) GetError() string {
+	return s.Error
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CancelExecutionOKExecution) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CancelExecutionOKExecution) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// GetRunAt returns the value of RunAt.
+func (s *CancelExecutionOKExecution) GetRunAt() OptDateTime {
+	return s.RunAt
+}
+
+// GetFailedAt returns the value of FailedAt.
+func (s *CancelExecutionOKExecution) GetFailedAt() OptDateTime {
+	return s.FailedAt
+}
+
+// GetSucceededAt returns the value of SucceededAt.
+func (s *CancelExecutionOKExecution) GetSucceededAt() OptDateTime {
+	return s.SucceededAt
+}
+
+// GetCancelRequestedAt returns the value of CancelRequestedAt.
+func (s *CancelExecutionOKExecution) GetCancelRequestedAt() OptDateTime {
+	return s.CancelRequestedAt
+}
+
+// GetCanceledAt returns the value of CanceledAt.
+func (s *CancelExecutionOKExecution) GetCanceledAt() OptDateTime {
+	return s.CanceledAt
+}
+
+// SetExecutionId sets the value of ExecutionId.
+func (s *CancelExecutionOKExecution) SetExecutionId(val string) {
+	s.ExecutionId = val
+}
+
+// SetName sets the value of Name.
+func (s *CancelExecutionOKExecution) SetName(val string) {
+	s.Name = val
+}
+
+// SetWorkflow sets the value of Workflow.
+func (s *CancelExecutionOKExecution) SetWorkflow(val CancelExecutionOKExecutionWorkflow) {
+	s.Workflow = val
+}
+
+// SetStatus sets the value of Status.
+func (s *CancelExecutionOKExecution) SetStatus(val CancelExecutionOKExecutionStatus) {
+	s.Status = val
+}
+
+// SetRevision sets the value of Revision.
+func (s *CancelExecutionOKExecution) SetRevision(val int) {
+	s.Revision = val
+}
+
+// SetRevisionAlias sets the value of RevisionAlias.
+func (s *CancelExecutionOKExecution) SetRevisionAlias(val string) {
+	s.RevisionAlias = val
+}
+
+// SetArgs sets the value of Args.
+func (s *CancelExecutionOKExecution) SetArgs(val string) {
+	s.Args = val
+}
+
+// SetResult sets the value of Result.
+func (s *CancelExecutionOKExecution) SetResult(val string) {
+	s.Result = val
+}
+
+// SetError sets the value of Error.
+func (s *CancelExecutionOKExecution) SetError(val string) {
+	s.Error = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CancelExecutionOKExecution) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CancelExecutionOKExecution) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// SetRunAt sets the value of RunAt.
+func (s *CancelExecutionOKExecution) SetRunAt(val OptDateTime) {
+	s.RunAt = val
+}
+
+// SetFailedAt sets the value of FailedAt.
+func (s *CancelExecutionOKExecution) SetFailedAt(val OptDateTime) {
+	s.FailedAt = val
+}
+
+// SetSucceededAt sets the value of SucceededAt.
+func (s *CancelExecutionOKExecution) SetSucceededAt(val OptDateTime) {
+	s.SucceededAt = val
+}
+
+// SetCancelRequestedAt sets the value of CancelRequestedAt.
+func (s *CancelExecutionOKExecution) SetCancelRequestedAt(val OptDateTime) {
+	s.CancelRequestedAt = val
+}
+
+// SetCanceledAt sets the value of CanceledAt.
+func (s *CancelExecutionOKExecution) SetCanceledAt(val OptDateTime) {
+	s.CanceledAt = val
+}
+
+type CancelExecutionOKExecutionStatus string
+
+const (
+	CancelExecutionOKExecutionStatusQueued    CancelExecutionOKExecutionStatus = "Queued"
+	CancelExecutionOKExecutionStatusRunning   CancelExecutionOKExecutionStatus = "Running"
+	CancelExecutionOKExecutionStatusSucceeded CancelExecutionOKExecutionStatus = "Succeeded"
+	CancelExecutionOKExecutionStatusFailed    CancelExecutionOKExecutionStatus = "Failed"
+	CancelExecutionOKExecutionStatusCanceling CancelExecutionOKExecutionStatus = "Canceling"
+	CancelExecutionOKExecutionStatusCanceled  CancelExecutionOKExecutionStatus = "Canceled"
+)
+
+// AllValues returns all CancelExecutionOKExecutionStatus values.
+func (CancelExecutionOKExecutionStatus) AllValues() []CancelExecutionOKExecutionStatus {
+	return []CancelExecutionOKExecutionStatus{
+		CancelExecutionOKExecutionStatusQueued,
+		CancelExecutionOKExecutionStatusRunning,
+		CancelExecutionOKExecutionStatusSucceeded,
+		CancelExecutionOKExecutionStatusFailed,
+		CancelExecutionOKExecutionStatusCanceling,
+		CancelExecutionOKExecutionStatusCanceled,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CancelExecutionOKExecutionStatus) MarshalText() ([]byte, error) {
+	switch s {
+	case CancelExecutionOKExecutionStatusQueued:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionStatusRunning:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionStatusSucceeded:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionStatusFailed:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionStatusCanceling:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionStatusCanceled:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CancelExecutionOKExecutionStatus) UnmarshalText(data []byte) error {
+	switch CancelExecutionOKExecutionStatus(data) {
+	case CancelExecutionOKExecutionStatusQueued:
+		*s = CancelExecutionOKExecutionStatusQueued
+		return nil
+	case CancelExecutionOKExecutionStatusRunning:
+		*s = CancelExecutionOKExecutionStatusRunning
+		return nil
+	case CancelExecutionOKExecutionStatusSucceeded:
+		*s = CancelExecutionOKExecutionStatusSucceeded
+		return nil
+	case CancelExecutionOKExecutionStatusFailed:
+		*s = CancelExecutionOKExecutionStatusFailed
+		return nil
+	case CancelExecutionOKExecutionStatusCanceling:
+		*s = CancelExecutionOKExecutionStatusCanceling
+		return nil
+	case CancelExecutionOKExecutionStatusCanceled:
+		*s = CancelExecutionOKExecutionStatusCanceled
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
+}
+
+type CancelExecutionOKExecutionWorkflow struct {
+	ID                 string                                                  `json:"Id"`
+	Name               string                                                  `json:"Name"`
+	Description        OptString                                               `json:"Description"`
+	Publish            bool                                                    `json:"Publish"`
+	Logging            bool                                                    `json:"Logging"`
+	Tags               []CancelExecutionOKExecutionWorkflowTagsItem            `json:"Tags"`
+	ServicePrincipalId OptCancelExecutionOKExecutionWorkflowServicePrincipalId `json:"ServicePrincipalId"`
+	CreatedAt          time.Time                                               `json:"CreatedAt"`
+	UpdatedAt          time.Time                                               `json:"UpdatedAt"`
+}
+
+// GetID returns the value of ID.
+func (s *CancelExecutionOKExecutionWorkflow) GetID() string {
+	return s.ID
+}
+
+// GetName returns the value of Name.
+func (s *CancelExecutionOKExecutionWorkflow) GetName() string {
+	return s.Name
+}
+
+// GetDescription returns the value of Description.
+func (s *CancelExecutionOKExecutionWorkflow) GetDescription() OptString {
+	return s.Description
+}
+
+// GetPublish returns the value of Publish.
+func (s *CancelExecutionOKExecutionWorkflow) GetPublish() bool {
+	return s.Publish
+}
+
+// GetLogging returns the value of Logging.
+func (s *CancelExecutionOKExecutionWorkflow) GetLogging() bool {
+	return s.Logging
+}
+
+// GetTags returns the value of Tags.
+func (s *CancelExecutionOKExecutionWorkflow) GetTags() []CancelExecutionOKExecutionWorkflowTagsItem {
+	return s.Tags
+}
+
+// GetServicePrincipalId returns the value of ServicePrincipalId.
+func (s *CancelExecutionOKExecutionWorkflow) GetServicePrincipalId() OptCancelExecutionOKExecutionWorkflowServicePrincipalId {
+	return s.ServicePrincipalId
+}
+
+// GetCreatedAt returns the value of CreatedAt.
+func (s *CancelExecutionOKExecutionWorkflow) GetCreatedAt() time.Time {
+	return s.CreatedAt
+}
+
+// GetUpdatedAt returns the value of UpdatedAt.
+func (s *CancelExecutionOKExecutionWorkflow) GetUpdatedAt() time.Time {
+	return s.UpdatedAt
+}
+
+// SetID sets the value of ID.
+func (s *CancelExecutionOKExecutionWorkflow) SetID(val string) {
+	s.ID = val
+}
+
+// SetName sets the value of Name.
+func (s *CancelExecutionOKExecutionWorkflow) SetName(val string) {
+	s.Name = val
+}
+
+// SetDescription sets the value of Description.
+func (s *CancelExecutionOKExecutionWorkflow) SetDescription(val OptString) {
+	s.Description = val
+}
+
+// SetPublish sets the value of Publish.
+func (s *CancelExecutionOKExecutionWorkflow) SetPublish(val bool) {
+	s.Publish = val
+}
+
+// SetLogging sets the value of Logging.
+func (s *CancelExecutionOKExecutionWorkflow) SetLogging(val bool) {
+	s.Logging = val
+}
+
+// SetTags sets the value of Tags.
+func (s *CancelExecutionOKExecutionWorkflow) SetTags(val []CancelExecutionOKExecutionWorkflowTagsItem) {
+	s.Tags = val
+}
+
+// SetServicePrincipalId sets the value of ServicePrincipalId.
+func (s *CancelExecutionOKExecutionWorkflow) SetServicePrincipalId(val OptCancelExecutionOKExecutionWorkflowServicePrincipalId) {
+	s.ServicePrincipalId = val
+}
+
+// SetCreatedAt sets the value of CreatedAt.
+func (s *CancelExecutionOKExecutionWorkflow) SetCreatedAt(val time.Time) {
+	s.CreatedAt = val
+}
+
+// SetUpdatedAt sets the value of UpdatedAt.
+func (s *CancelExecutionOKExecutionWorkflow) SetUpdatedAt(val time.Time) {
+	s.UpdatedAt = val
+}
+
+// CancelExecutionOKExecutionWorkflowServicePrincipalId represents sum type.
+type CancelExecutionOKExecutionWorkflowServicePrincipalId struct {
+	Type    CancelExecutionOKExecutionWorkflowServicePrincipalIdType // switch on this field
+	String  string
+	Float64 float64
+}
+
+// CancelExecutionOKExecutionWorkflowServicePrincipalIdType is oneOf type of CancelExecutionOKExecutionWorkflowServicePrincipalId.
+type CancelExecutionOKExecutionWorkflowServicePrincipalIdType string
+
+// Possible values for CancelExecutionOKExecutionWorkflowServicePrincipalIdType.
+const (
+	StringCancelExecutionOKExecutionWorkflowServicePrincipalId  CancelExecutionOKExecutionWorkflowServicePrincipalIdType = "string"
+	Float64CancelExecutionOKExecutionWorkflowServicePrincipalId CancelExecutionOKExecutionWorkflowServicePrincipalIdType = "float64"
+)
+
+// IsString reports whether CancelExecutionOKExecutionWorkflowServicePrincipalId is string.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) IsString() bool {
+	return s.Type == StringCancelExecutionOKExecutionWorkflowServicePrincipalId
+}
+
+// IsFloat64 reports whether CancelExecutionOKExecutionWorkflowServicePrincipalId is float64.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) IsFloat64() bool {
+	return s.Type == Float64CancelExecutionOKExecutionWorkflowServicePrincipalId
+}
+
+// SetString sets CancelExecutionOKExecutionWorkflowServicePrincipalId to string.
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) SetString(v string) {
+	s.Type = StringCancelExecutionOKExecutionWorkflowServicePrincipalId
+	s.String = v
+}
+
+// GetString returns string and true boolean if CancelExecutionOKExecutionWorkflowServicePrincipalId is string.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) GetString() (v string, ok bool) {
+	if !s.IsString() {
+		return v, false
+	}
+	return s.String, true
+}
+
+// NewStringCancelExecutionOKExecutionWorkflowServicePrincipalId returns new CancelExecutionOKExecutionWorkflowServicePrincipalId from string.
+func NewStringCancelExecutionOKExecutionWorkflowServicePrincipalId(v string) CancelExecutionOKExecutionWorkflowServicePrincipalId {
+	var s CancelExecutionOKExecutionWorkflowServicePrincipalId
+	s.SetString(v)
+	return s
+}
+
+// SetFloat64 sets CancelExecutionOKExecutionWorkflowServicePrincipalId to float64.
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) SetFloat64(v float64) {
+	s.Type = Float64CancelExecutionOKExecutionWorkflowServicePrincipalId
+	s.Float64 = v
+}
+
+// GetFloat64 returns float64 and true boolean if CancelExecutionOKExecutionWorkflowServicePrincipalId is float64.
+func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) GetFloat64() (v float64, ok bool) {
+	if !s.IsFloat64() {
+		return v, false
+	}
+	return s.Float64, true
+}
+
+// NewFloat64CancelExecutionOKExecutionWorkflowServicePrincipalId returns new CancelExecutionOKExecutionWorkflowServicePrincipalId from float64.
+func NewFloat64CancelExecutionOKExecutionWorkflowServicePrincipalId(v float64) CancelExecutionOKExecutionWorkflowServicePrincipalId {
+	var s CancelExecutionOKExecutionWorkflowServicePrincipalId
+	s.SetFloat64(v)
+	return s
+}
+
+type CancelExecutionOKExecutionWorkflowTagsItem struct {
+	Name string `json:"Name"`
+}
+
+// GetName returns the value of Name.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) GetName() string {
+	return s.Name
+}
+
+// SetName sets the value of Name.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) SetName(val string) {
+	s.Name = val
+}
+
 type CancelExecutionUnauthorized struct {
 	IsOk    bool   `json:"is_ok"`
 	Message string `json:"Message"`
@@ -629,6 +1151,33 @@ func (s *CreateExecutionBadRequest) SetMessage(val string) {
 
 func (*CreateExecutionBadRequest) createExecutionRes() {}
 
+type CreateExecutionConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *CreateExecutionConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *CreateExecutionConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *CreateExecutionConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *CreateExecutionConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*CreateExecutionConflict) createExecutionRes() {}
+
 type CreateExecutionCreated struct {
 	IsOk      bool                            `json:"is_ok"`
 	Execution CreateExecutionCreatedExecution `json:"Execution"`
@@ -661,7 +1210,7 @@ type CreateExecutionCreatedExecution struct {
 	Name              string                                  `json:"Name"`
 	Workflow          CreateExecutionCreatedExecutionWorkflow `json:"Workflow"`
 	Status            CreateExecutionCreatedExecutionStatus   `json:"Status"`
-	Revision          float64                                 `json:"Revision"`
+	Revision          int                                     `json:"Revision"`
 	RevisionAlias     string                                  `json:"RevisionAlias"`
 	Args              string                                  `json:"Args"`
 	Result            string                                  `json:"Result"`
@@ -696,7 +1245,7 @@ func (s *CreateExecutionCreatedExecution) GetStatus() CreateExecutionCreatedExec
 }
 
 // GetRevision returns the value of Revision.
-func (s *CreateExecutionCreatedExecution) GetRevision() float64 {
+func (s *CreateExecutionCreatedExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -776,7 +1325,7 @@ func (s *CreateExecutionCreatedExecution) SetStatus(val CreateExecutionCreatedEx
 }
 
 // SetRevision sets the value of Revision.
-func (s *CreateExecutionCreatedExecution) SetRevision(val float64) {
+func (s *CreateExecutionCreatedExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -1170,14 +1719,14 @@ func (s *CreateExecutionNotFound) SetMessage(val string) {
 func (*CreateExecutionNotFound) createExecutionRes() {}
 
 type CreateExecutionReq struct {
-	RevisionId    OptFloat64 `json:"RevisionId"`
-	RevisionAlias OptString  `json:"RevisionAlias"`
-	Args          OptString  `json:"Args"`
-	Name          OptString  `json:"Name"`
+	RevisionId    OptInt    `json:"RevisionId"`
+	RevisionAlias OptString `json:"RevisionAlias"`
+	Args          OptString `json:"Args"`
+	Name          OptString `json:"Name"`
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *CreateExecutionReq) GetRevisionId() OptFloat64 {
+func (s *CreateExecutionReq) GetRevisionId() OptInt {
 	return s.RevisionId
 }
 
@@ -1197,7 +1746,7 @@ func (s *CreateExecutionReq) GetName() OptString {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *CreateExecutionReq) SetRevisionId(val OptFloat64) {
+func (s *CreateExecutionReq) SetRevisionId(val OptInt) {
 	s.RevisionId = val
 }
 
@@ -1916,6 +2465,33 @@ func (s *CreateWorkflowRevisionBadRequest) SetMessage(val string) {
 
 func (*CreateWorkflowRevisionBadRequest) createWorkflowRevisionRes() {}
 
+type CreateWorkflowRevisionConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *CreateWorkflowRevisionConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *CreateWorkflowRevisionConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *CreateWorkflowRevisionConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *CreateWorkflowRevisionConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*CreateWorkflowRevisionConflict) createWorkflowRevisionRes() {}
+
 type CreateWorkflowRevisionCreated struct {
 	IsOk     bool                                  `json:"is_ok"`
 	Revision CreateWorkflowRevisionCreatedRevision `json:"Revision"`
@@ -1944,7 +2520,7 @@ func (s *CreateWorkflowRevisionCreated) SetRevision(val CreateWorkflowRevisionCr
 func (*CreateWorkflowRevisionCreated) createWorkflowRevisionRes() {}
 
 type CreateWorkflowRevisionCreatedRevision struct {
-	RevisionId    float64   `json:"RevisionId"`
+	RevisionId    int       `json:"RevisionId"`
 	WorkflowId    string    `json:"WorkflowId"`
 	RevisionAlias OptString `json:"RevisionAlias"`
 	Runbook       string    `json:"Runbook"`
@@ -1953,7 +2529,7 @@ type CreateWorkflowRevisionCreatedRevision struct {
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *CreateWorkflowRevisionCreatedRevision) GetRevisionId() float64 {
+func (s *CreateWorkflowRevisionCreatedRevision) GetRevisionId() int {
 	return s.RevisionId
 }
 
@@ -1983,7 +2559,7 @@ func (s *CreateWorkflowRevisionCreatedRevision) GetUpdatedAt() time.Time {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *CreateWorkflowRevisionCreatedRevision) SetRevisionId(val float64) {
+func (s *CreateWorkflowRevisionCreatedRevision) SetRevisionId(val int) {
 	s.RevisionId = val
 }
 
@@ -2198,6 +2774,33 @@ func (s *DeleteExecutionBadRequest) SetMessage(val string) {
 }
 
 func (*DeleteExecutionBadRequest) deleteExecutionRes() {}
+
+type DeleteExecutionConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *DeleteExecutionConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *DeleteExecutionConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *DeleteExecutionConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *DeleteExecutionConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*DeleteExecutionConflict) deleteExecutionRes() {}
 
 type DeleteExecutionForbidden struct {
 	IsOk    bool   `json:"is_ok"`
@@ -2490,6 +3093,33 @@ func (s *DeleteWorkflowBadRequest) SetMessage(val string) {
 
 func (*DeleteWorkflowBadRequest) deleteWorkflowRes() {}
 
+type DeleteWorkflowConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *DeleteWorkflowConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *DeleteWorkflowConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *DeleteWorkflowConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *DeleteWorkflowConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*DeleteWorkflowConflict) deleteWorkflowRes() {}
+
 type DeleteWorkflowForbidden struct {
 	IsOk    bool   `json:"is_ok"`
 	Message string `json:"Message"`
@@ -2697,7 +3327,7 @@ func (*DeleteWorkflowRevisionAliasNotFound) deleteWorkflowRevisionAliasRes() {}
 
 type DeleteWorkflowRevisionAliasOK struct {
 	IsOk     bool                                  `json:"is_ok"`
-	Workflow DeleteWorkflowRevisionAliasOKWorkflow `json:"Workflow"`
+	Revision DeleteWorkflowRevisionAliasOKRevision `json:"Revision"`
 }
 
 // GetIsOk returns the value of IsOk.
@@ -2705,9 +3335,9 @@ func (s *DeleteWorkflowRevisionAliasOK) GetIsOk() bool {
 	return s.IsOk
 }
 
-// GetWorkflow returns the value of Workflow.
-func (s *DeleteWorkflowRevisionAliasOK) GetWorkflow() DeleteWorkflowRevisionAliasOKWorkflow {
-	return s.Workflow
+// GetRevision returns the value of Revision.
+func (s *DeleteWorkflowRevisionAliasOK) GetRevision() DeleteWorkflowRevisionAliasOKRevision {
+	return s.Revision
 }
 
 // SetIsOk sets the value of IsOk.
@@ -2715,195 +3345,80 @@ func (s *DeleteWorkflowRevisionAliasOK) SetIsOk(val bool) {
 	s.IsOk = val
 }
 
-// SetWorkflow sets the value of Workflow.
-func (s *DeleteWorkflowRevisionAliasOK) SetWorkflow(val DeleteWorkflowRevisionAliasOKWorkflow) {
-	s.Workflow = val
+// SetRevision sets the value of Revision.
+func (s *DeleteWorkflowRevisionAliasOK) SetRevision(val DeleteWorkflowRevisionAliasOKRevision) {
+	s.Revision = val
 }
 
 func (*DeleteWorkflowRevisionAliasOK) deleteWorkflowRevisionAliasRes() {}
 
-type DeleteWorkflowRevisionAliasOKWorkflow struct {
-	ID                 string                                                     `json:"Id"`
-	Name               string                                                     `json:"Name"`
-	Description        OptString                                                  `json:"Description"`
-	Publish            bool                                                       `json:"Publish"`
-	Logging            bool                                                       `json:"Logging"`
-	Tags               []DeleteWorkflowRevisionAliasOKWorkflowTagsItem            `json:"Tags"`
-	ServicePrincipalId OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId `json:"ServicePrincipalId"`
-	CreatedAt          time.Time                                                  `json:"CreatedAt"`
-	UpdatedAt          time.Time                                                  `json:"UpdatedAt"`
+type DeleteWorkflowRevisionAliasOKRevision struct {
+	RevisionId    int       `json:"RevisionId"`
+	WorkflowId    string    `json:"WorkflowId"`
+	RevisionAlias OptString `json:"RevisionAlias"`
+	Runbook       string    `json:"Runbook"`
+	CreatedAt     time.Time `json:"CreatedAt"`
+	UpdatedAt     time.Time `json:"UpdatedAt"`
 }
 
-// GetID returns the value of ID.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetID() string {
-	return s.ID
+// GetRevisionId returns the value of RevisionId.
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetRevisionId() int {
+	return s.RevisionId
 }
 
-// GetName returns the value of Name.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetName() string {
-	return s.Name
+// GetWorkflowId returns the value of WorkflowId.
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetWorkflowId() string {
+	return s.WorkflowId
 }
 
-// GetDescription returns the value of Description.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetDescription() OptString {
-	return s.Description
+// GetRevisionAlias returns the value of RevisionAlias.
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetRevisionAlias() OptString {
+	return s.RevisionAlias
 }
 
-// GetPublish returns the value of Publish.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetPublish() bool {
-	return s.Publish
-}
-
-// GetLogging returns the value of Logging.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetLogging() bool {
-	return s.Logging
-}
-
-// GetTags returns the value of Tags.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetTags() []DeleteWorkflowRevisionAliasOKWorkflowTagsItem {
-	return s.Tags
-}
-
-// GetServicePrincipalId returns the value of ServicePrincipalId.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetServicePrincipalId() OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId {
-	return s.ServicePrincipalId
+// GetRunbook returns the value of Runbook.
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetRunbook() string {
+	return s.Runbook
 }
 
 // GetCreatedAt returns the value of CreatedAt.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetCreatedAt() time.Time {
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetCreatedAt() time.Time {
 	return s.CreatedAt
 }
 
 // GetUpdatedAt returns the value of UpdatedAt.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) GetUpdatedAt() time.Time {
+func (s *DeleteWorkflowRevisionAliasOKRevision) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
-// SetID sets the value of ID.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetID(val string) {
-	s.ID = val
+// SetRevisionId sets the value of RevisionId.
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetRevisionId(val int) {
+	s.RevisionId = val
 }
 
-// SetName sets the value of Name.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetName(val string) {
-	s.Name = val
+// SetWorkflowId sets the value of WorkflowId.
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetWorkflowId(val string) {
+	s.WorkflowId = val
 }
 
-// SetDescription sets the value of Description.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetDescription(val OptString) {
-	s.Description = val
+// SetRevisionAlias sets the value of RevisionAlias.
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetRevisionAlias(val OptString) {
+	s.RevisionAlias = val
 }
 
-// SetPublish sets the value of Publish.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetPublish(val bool) {
-	s.Publish = val
-}
-
-// SetLogging sets the value of Logging.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetLogging(val bool) {
-	s.Logging = val
-}
-
-// SetTags sets the value of Tags.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetTags(val []DeleteWorkflowRevisionAliasOKWorkflowTagsItem) {
-	s.Tags = val
-}
-
-// SetServicePrincipalId sets the value of ServicePrincipalId.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetServicePrincipalId(val OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) {
-	s.ServicePrincipalId = val
+// SetRunbook sets the value of Runbook.
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetRunbook(val string) {
+	s.Runbook = val
 }
 
 // SetCreatedAt sets the value of CreatedAt.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetCreatedAt(val time.Time) {
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetCreatedAt(val time.Time) {
 	s.CreatedAt = val
 }
 
 // SetUpdatedAt sets the value of UpdatedAt.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetUpdatedAt(val time.Time) {
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
-}
-
-// DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId represents sum type.
-type DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId struct {
-	Type    DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType // switch on this field
-	String  string
-	Float64 float64
-}
-
-// DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType is oneOf type of DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId.
-type DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType string
-
-// Possible values for DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType.
-const (
-	StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId  DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType = "string"
-	Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalIdType = "float64"
-)
-
-// IsString reports whether DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId is string.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) IsString() bool {
-	return s.Type == StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-}
-
-// IsFloat64 reports whether DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId is float64.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) IsFloat64() bool {
-	return s.Type == Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-}
-
-// SetString sets DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId to string.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) SetString(v string) {
-	s.Type = StringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	s.String = v
-}
-
-// GetString returns string and true boolean if DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId is string.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) GetString() (v string, ok bool) {
-	if !s.IsString() {
-		return v, false
-	}
-	return s.String, true
-}
-
-// NewStringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId returns new DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId from string.
-func NewStringDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId(v string) DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId {
-	var s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	s.SetString(v)
-	return s
-}
-
-// SetFloat64 sets DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId to float64.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) SetFloat64(v float64) {
-	s.Type = Float64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	s.Float64 = v
-}
-
-// GetFloat64 returns float64 and true boolean if DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId is float64.
-func (s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) GetFloat64() (v float64, ok bool) {
-	if !s.IsFloat64() {
-		return v, false
-	}
-	return s.Float64, true
-}
-
-// NewFloat64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId returns new DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId from float64.
-func NewFloat64DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId(v float64) DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId {
-	var s DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	s.SetFloat64(v)
-	return s
-}
-
-type DeleteWorkflowRevisionAliasOKWorkflowTagsItem struct {
-	Name string `json:"Name"`
-}
-
-// GetName returns the value of Name.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) GetName() string {
-	return s.Name
-}
-
-// SetName sets the value of Name.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) SetName(val string) {
-	s.Name = val
 }
 
 type DeleteWorkflowRevisionAliasUnauthorized struct {
@@ -3100,7 +3615,7 @@ type GetExecutionOKExecution struct {
 	Name              string                          `json:"Name"`
 	Workflow          GetExecutionOKExecutionWorkflow `json:"Workflow"`
 	Status            GetExecutionOKExecutionStatus   `json:"Status"`
-	Revision          float64                         `json:"Revision"`
+	Revision          int                             `json:"Revision"`
 	RevisionAlias     string                          `json:"RevisionAlias"`
 	Args              string                          `json:"Args"`
 	Result            string                          `json:"Result"`
@@ -3135,7 +3650,7 @@ func (s *GetExecutionOKExecution) GetStatus() GetExecutionOKExecutionStatus {
 }
 
 // GetRevision returns the value of Revision.
-func (s *GetExecutionOKExecution) GetRevision() float64 {
+func (s *GetExecutionOKExecution) GetRevision() int {
 	return s.Revision
 }
 
@@ -3215,7 +3730,7 @@ func (s *GetExecutionOKExecution) SetStatus(val GetExecutionOKExecutionStatus) {
 }
 
 // SetRevision sets the value of Revision.
-func (s *GetExecutionOKExecution) SetRevision(val float64) {
+func (s *GetExecutionOKExecution) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -4397,7 +4912,7 @@ func (s *GetWorkflowRevisionsOK) SetRevision(val GetWorkflowRevisionsOKRevision)
 func (*GetWorkflowRevisionsOK) getWorkflowRevisionsRes() {}
 
 type GetWorkflowRevisionsOKRevision struct {
-	RevisionId    float64   `json:"RevisionId"`
+	RevisionId    int       `json:"RevisionId"`
 	WorkflowId    string    `json:"WorkflowId"`
 	RevisionAlias OptString `json:"RevisionAlias"`
 	Runbook       string    `json:"Runbook"`
@@ -4406,7 +4921,7 @@ type GetWorkflowRevisionsOKRevision struct {
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *GetWorkflowRevisionsOKRevision) GetRevisionId() float64 {
+func (s *GetWorkflowRevisionsOKRevision) GetRevisionId() int {
 	return s.RevisionId
 }
 
@@ -4436,7 +4951,7 @@ func (s *GetWorkflowRevisionsOKRevision) GetUpdatedAt() time.Time {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *GetWorkflowRevisionsOKRevision) SetRevisionId(val float64) {
+func (s *GetWorkflowRevisionsOKRevision) SetRevisionId(val int) {
 	s.RevisionId = val
 }
 
@@ -5123,7 +5638,7 @@ type ListExecutionOKExecutionsItem struct {
 	Name              string                                `json:"Name"`
 	Workflow          ListExecutionOKExecutionsItemWorkflow `json:"Workflow"`
 	Status            ListExecutionOKExecutionsItemStatus   `json:"Status"`
-	Revision          float64                               `json:"Revision"`
+	Revision          int                                   `json:"Revision"`
 	RevisionAlias     string                                `json:"RevisionAlias"`
 	Args              string                                `json:"Args"`
 	Result            string                                `json:"Result"`
@@ -5158,7 +5673,7 @@ func (s *ListExecutionOKExecutionsItem) GetStatus() ListExecutionOKExecutionsIte
 }
 
 // GetRevision returns the value of Revision.
-func (s *ListExecutionOKExecutionsItem) GetRevision() float64 {
+func (s *ListExecutionOKExecutionsItem) GetRevision() int {
 	return s.Revision
 }
 
@@ -5238,7 +5753,7 @@ func (s *ListExecutionOKExecutionsItem) SetStatus(val ListExecutionOKExecutionsI
 }
 
 // SetRevision sets the value of Revision.
-func (s *ListExecutionOKExecutionsItem) SetRevision(val float64) {
+func (s *ListExecutionOKExecutionsItem) SetRevision(val int) {
 	s.Revision = val
 }
 
@@ -6485,7 +7000,7 @@ func (s *ListWorkflowRevisionsOK) SetRevisions(val []ListWorkflowRevisionsOKRevi
 func (*ListWorkflowRevisionsOK) listWorkflowRevisionsRes() {}
 
 type ListWorkflowRevisionsOKRevisionsItem struct {
-	RevisionId    float64   `json:"RevisionId"`
+	RevisionId    int       `json:"RevisionId"`
 	WorkflowId    string    `json:"WorkflowId"`
 	RevisionAlias OptString `json:"RevisionAlias"`
 	Runbook       string    `json:"Runbook"`
@@ -6494,7 +7009,7 @@ type ListWorkflowRevisionsOKRevisionsItem struct {
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *ListWorkflowRevisionsOKRevisionsItem) GetRevisionId() float64 {
+func (s *ListWorkflowRevisionsOKRevisionsItem) GetRevisionId() int {
 	return s.RevisionId
 }
 
@@ -6524,7 +7039,7 @@ func (s *ListWorkflowRevisionsOKRevisionsItem) GetUpdatedAt() time.Time {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *ListWorkflowRevisionsOKRevisionsItem) SetRevisionId(val float64) {
+func (s *ListWorkflowRevisionsOKRevisionsItem) SetRevisionId(val int) {
 	s.RevisionId = val
 }
 
@@ -7183,6 +7698,52 @@ func (o OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Or(d Canc
 	return d
 }
 
+// NewOptCancelExecutionOKExecutionWorkflowServicePrincipalId returns new OptCancelExecutionOKExecutionWorkflowServicePrincipalId with value set to v.
+func NewOptCancelExecutionOKExecutionWorkflowServicePrincipalId(v CancelExecutionOKExecutionWorkflowServicePrincipalId) OptCancelExecutionOKExecutionWorkflowServicePrincipalId {
+	return OptCancelExecutionOKExecutionWorkflowServicePrincipalId{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCancelExecutionOKExecutionWorkflowServicePrincipalId is optional CancelExecutionOKExecutionWorkflowServicePrincipalId.
+type OptCancelExecutionOKExecutionWorkflowServicePrincipalId struct {
+	Value CancelExecutionOKExecutionWorkflowServicePrincipalId
+	Set   bool
+}
+
+// IsSet returns true if OptCancelExecutionOKExecutionWorkflowServicePrincipalId was set.
+func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Reset() {
+	var v CancelExecutionOKExecutionWorkflowServicePrincipalId
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) SetTo(v CancelExecutionOKExecutionWorkflowServicePrincipalId) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Get() (v CancelExecutionOKExecutionWorkflowServicePrincipalId, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Or(d CancelExecutionOKExecutionWorkflowServicePrincipalId) CancelExecutionOKExecutionWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCreateExecutionCreatedExecutionWorkflowServicePrincipalId returns new OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId with value set to v.
 func NewOptCreateExecutionCreatedExecutionWorkflowServicePrincipalId(v CreateExecutionCreatedExecutionWorkflowServicePrincipalId) OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId {
 	return OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId{
@@ -7367,52 +7928,6 @@ func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Or(d CreateWorkflowC
 	return d
 }
 
-// NewOptCreateWorkflowReq returns new OptCreateWorkflowReq with value set to v.
-func NewOptCreateWorkflowReq(v CreateWorkflowReq) OptCreateWorkflowReq {
-	return OptCreateWorkflowReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateWorkflowReq is optional CreateWorkflowReq.
-type OptCreateWorkflowReq struct {
-	Value CreateWorkflowReq
-	Set   bool
-}
-
-// IsSet returns true if OptCreateWorkflowReq was set.
-func (o OptCreateWorkflowReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateWorkflowReq) Reset() {
-	var v CreateWorkflowReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateWorkflowReq) SetTo(v CreateWorkflowReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateWorkflowReq) Get() (v CreateWorkflowReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateWorkflowReq) Or(d CreateWorkflowReq) CreateWorkflowReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptCreateWorkflowReqServicePrincipalId returns new OptCreateWorkflowReqServicePrincipalId with value set to v.
 func NewOptCreateWorkflowReqServicePrincipalId(v CreateWorkflowReqServicePrincipalId) OptCreateWorkflowReqServicePrincipalId {
 	return OptCreateWorkflowReqServicePrincipalId{
@@ -7459,52 +7974,6 @@ func (o OptCreateWorkflowReqServicePrincipalId) Or(d CreateWorkflowReqServicePri
 	return d
 }
 
-// NewOptCreateWorkflowRevisionReq returns new OptCreateWorkflowRevisionReq with value set to v.
-func NewOptCreateWorkflowRevisionReq(v CreateWorkflowRevisionReq) OptCreateWorkflowRevisionReq {
-	return OptCreateWorkflowRevisionReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateWorkflowRevisionReq is optional CreateWorkflowRevisionReq.
-type OptCreateWorkflowRevisionReq struct {
-	Value CreateWorkflowRevisionReq
-	Set   bool
-}
-
-// IsSet returns true if OptCreateWorkflowRevisionReq was set.
-func (o OptCreateWorkflowRevisionReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateWorkflowRevisionReq) Reset() {
-	var v CreateWorkflowRevisionReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateWorkflowRevisionReq) SetTo(v CreateWorkflowRevisionReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateWorkflowRevisionReq) Get() (v CreateWorkflowRevisionReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateWorkflowRevisionReq) Or(d CreateWorkflowRevisionReq) CreateWorkflowRevisionReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptDateTime returns new OptDateTime with value set to v.
 func NewOptDateTime(v time.Time) OptDateTime {
 	return OptDateTime{
@@ -7545,98 +8014,6 @@ func (o OptDateTime) Get() (v time.Time, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptDateTime) Or(d time.Time) time.Time {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId returns new OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId with value set to v.
-func NewOptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId(v DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId {
-	return OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId is optional DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId.
-type OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId struct {
-	Value DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	Set   bool
-}
-
-// IsSet returns true if OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId was set.
-func (o OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Reset() {
-	var v DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) SetTo(v DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Get() (v DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) Or(d DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptFloat64 returns new OptFloat64 with value set to v.
-func NewOptFloat64(v float64) OptFloat64 {
-	return OptFloat64{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptFloat64 is optional float64.
-type OptFloat64 struct {
-	Value float64
-	Set   bool
-}
-
-// IsSet returns true if OptFloat64 was set.
-func (o OptFloat64) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptFloat64) Reset() {
-	var v float64
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptFloat64) SetTo(v float64) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptFloat64) Get() (v float64, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptFloat64) Or(d float64) float64 {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8471,98 +8848,6 @@ func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Or(d UpdateWorkflowOKWork
 	return d
 }
 
-// NewOptUpdateWorkflowReq returns new OptUpdateWorkflowReq with value set to v.
-func NewOptUpdateWorkflowReq(v UpdateWorkflowReq) OptUpdateWorkflowReq {
-	return OptUpdateWorkflowReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateWorkflowReq is optional UpdateWorkflowReq.
-type OptUpdateWorkflowReq struct {
-	Value UpdateWorkflowReq
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateWorkflowReq was set.
-func (o OptUpdateWorkflowReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateWorkflowReq) Reset() {
-	var v UpdateWorkflowReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateWorkflowReq) SetTo(v UpdateWorkflowReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateWorkflowReq) Get() (v UpdateWorkflowReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateWorkflowReq) Or(d UpdateWorkflowReq) UpdateWorkflowReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptUpdateWorkflowRevisionAliasReq returns new OptUpdateWorkflowRevisionAliasReq with value set to v.
-func NewOptUpdateWorkflowRevisionAliasReq(v UpdateWorkflowRevisionAliasReq) OptUpdateWorkflowRevisionAliasReq {
-	return OptUpdateWorkflowRevisionAliasReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptUpdateWorkflowRevisionAliasReq is optional UpdateWorkflowRevisionAliasReq.
-type OptUpdateWorkflowRevisionAliasReq struct {
-	Value UpdateWorkflowRevisionAliasReq
-	Set   bool
-}
-
-// IsSet returns true if OptUpdateWorkflowRevisionAliasReq was set.
-func (o OptUpdateWorkflowRevisionAliasReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptUpdateWorkflowRevisionAliasReq) Reset() {
-	var v UpdateWorkflowRevisionAliasReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptUpdateWorkflowRevisionAliasReq) SetTo(v UpdateWorkflowRevisionAliasReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptUpdateWorkflowRevisionAliasReq) Get() (v UpdateWorkflowRevisionAliasReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptUpdateWorkflowRevisionAliasReq) Or(d UpdateWorkflowRevisionAliasReq) UpdateWorkflowRevisionAliasReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 type UpdateWorkflowBadRequest struct {
 	IsOk    bool   `json:"is_ok"`
 	Message string `json:"Message"`
@@ -8981,6 +9266,33 @@ func (s *UpdateWorkflowRevisionAliasBadRequest) SetMessage(val string) {
 
 func (*UpdateWorkflowRevisionAliasBadRequest) updateWorkflowRevisionAliasRes() {}
 
+type UpdateWorkflowRevisionAliasConflict struct {
+	IsOk    bool   `json:"is_ok"`
+	Message string `json:"Message"`
+}
+
+// GetIsOk returns the value of IsOk.
+func (s *UpdateWorkflowRevisionAliasConflict) GetIsOk() bool {
+	return s.IsOk
+}
+
+// GetMessage returns the value of Message.
+func (s *UpdateWorkflowRevisionAliasConflict) GetMessage() string {
+	return s.Message
+}
+
+// SetIsOk sets the value of IsOk.
+func (s *UpdateWorkflowRevisionAliasConflict) SetIsOk(val bool) {
+	s.IsOk = val
+}
+
+// SetMessage sets the value of Message.
+func (s *UpdateWorkflowRevisionAliasConflict) SetMessage(val string) {
+	s.Message = val
+}
+
+func (*UpdateWorkflowRevisionAliasConflict) updateWorkflowRevisionAliasRes() {}
+
 type UpdateWorkflowRevisionAliasForbidden struct {
 	IsOk    bool   `json:"is_ok"`
 	Message string `json:"Message"`
@@ -9090,7 +9402,7 @@ func (s *UpdateWorkflowRevisionAliasOK) SetRevision(val UpdateWorkflowRevisionAl
 func (*UpdateWorkflowRevisionAliasOK) updateWorkflowRevisionAliasRes() {}
 
 type UpdateWorkflowRevisionAliasOKRevision struct {
-	RevisionId    float64   `json:"RevisionId"`
+	RevisionId    int       `json:"RevisionId"`
 	WorkflowId    string    `json:"WorkflowId"`
 	RevisionAlias OptString `json:"RevisionAlias"`
 	Runbook       string    `json:"Runbook"`
@@ -9099,7 +9411,7 @@ type UpdateWorkflowRevisionAliasOKRevision struct {
 }
 
 // GetRevisionId returns the value of RevisionId.
-func (s *UpdateWorkflowRevisionAliasOKRevision) GetRevisionId() float64 {
+func (s *UpdateWorkflowRevisionAliasOKRevision) GetRevisionId() int {
 	return s.RevisionId
 }
 
@@ -9129,7 +9441,7 @@ func (s *UpdateWorkflowRevisionAliasOKRevision) GetUpdatedAt() time.Time {
 }
 
 // SetRevisionId sets the value of RevisionId.
-func (s *UpdateWorkflowRevisionAliasOKRevision) SetRevisionId(val float64) {
+func (s *UpdateWorkflowRevisionAliasOKRevision) SetRevisionId(val int) {
 	s.RevisionId = val
 }
 

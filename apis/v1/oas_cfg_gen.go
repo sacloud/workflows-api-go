@@ -11,6 +11,7 @@ import (
 
 var regexMap = map[string]ogenregex.Regexp{
 	"^[0-9]{12}$": ogenregex.MustCompile("^[0-9]{12}$"),
+	"^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$": ogenregex.MustCompile("^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]*$"),
 	"^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$": ogenregex.MustCompile("^[a-zA-Z0-9_\\-ーぁ-んァ-ヶ一-龠]+$"),
 }
 

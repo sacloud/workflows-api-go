@@ -157,6 +157,47 @@ func TestCancelExecutionBadRequest_Examples(t *testing.T) {
 		})
 	}
 }
+func TestCancelExecutionConflict_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestCancelExecutionConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ CancelExecutionConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 CancelExecutionConflict
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
 func TestCancelExecutionForbidden_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionForbidden
 	typ.SetFake()
@@ -280,6 +321,107 @@ func TestCancelExecutionNotFound_Examples(t *testing.T) {
 		})
 	}
 }
+func TestCancelExecutionOK_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOK
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOK
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestCancelExecutionOK_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ CancelExecutionOK
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 CancelExecutionOK
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
+func TestCancelExecutionOKExecution_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecution
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecution
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionStatus_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionStatus
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionStatus
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflow_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflow
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflow
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflowServicePrincipalId
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflowServicePrincipalId
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCancelExecutionOKExecutionWorkflowTagsItem_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflowTagsItem
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflowTagsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCancelExecutionUnauthorized_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionUnauthorized
 	typ.SetFake()
@@ -358,6 +500,47 @@ func TestCreateExecutionBadRequest_Examples(t *testing.T) {
 			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
 
 			var typ2 CreateExecutionBadRequest
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
+func TestCreateExecutionConflict_EncodeDecode(t *testing.T) {
+	var typ CreateExecutionConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateExecutionConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestCreateExecutionConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ CreateExecutionConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 CreateExecutionConflict
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}
@@ -1261,6 +1444,47 @@ func TestCreateWorkflowRevisionBadRequest_Examples(t *testing.T) {
 		})
 	}
 }
+func TestCreateWorkflowRevisionConflict_EncodeDecode(t *testing.T) {
+	var typ CreateWorkflowRevisionConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateWorkflowRevisionConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestCreateWorkflowRevisionConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ CreateWorkflowRevisionConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 CreateWorkflowRevisionConflict
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
 func TestCreateWorkflowRevisionCreated_EncodeDecode(t *testing.T) {
 	var typ CreateWorkflowRevisionCreated
 	typ.SetFake()
@@ -1597,6 +1821,47 @@ func TestDeleteExecutionBadRequest_Examples(t *testing.T) {
 			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
 
 			var typ2 DeleteExecutionBadRequest
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
+func TestDeleteExecutionConflict_EncodeDecode(t *testing.T) {
+	var typ DeleteExecutionConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 DeleteExecutionConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestDeleteExecutionConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ DeleteExecutionConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 DeleteExecutionConflict
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}
@@ -2052,6 +2317,47 @@ func TestDeleteWorkflowBadRequest_Examples(t *testing.T) {
 		})
 	}
 }
+func TestDeleteWorkflowConflict_EncodeDecode(t *testing.T) {
+	var typ DeleteWorkflowConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 DeleteWorkflowConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestDeleteWorkflowConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ DeleteWorkflowConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 DeleteWorkflowConflict
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
 func TestDeleteWorkflowForbidden_EncodeDecode(t *testing.T) {
 	var typ DeleteWorkflowForbidden
 	typ.SetFake()
@@ -2398,7 +2704,7 @@ func TestDeleteWorkflowRevisionAliasOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"Revision\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"RevisionAlias\":\"sampleString\",\"RevisionId\":123,\"Runbook\":\"sampleString\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"WorkflowId\":\"sampleString\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2421,8 +2727,8 @@ func TestDeleteWorkflowRevisionAliasOK_Examples(t *testing.T) {
 		})
 	}
 }
-func TestDeleteWorkflowRevisionAliasOKWorkflow_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflow
+func TestDeleteWorkflowRevisionAliasOKRevision_EncodeDecode(t *testing.T) {
+	var typ DeleteWorkflowRevisionAliasOKRevision
 	typ.SetFake()
 
 	e := jx.Encoder{}
@@ -2430,31 +2736,7 @@ func TestDeleteWorkflowRevisionAliasOKWorkflow_EncodeDecode(t *testing.T) {
 	data := e.Bytes()
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflow
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
-}
-func TestDeleteWorkflowRevisionAliasOKWorkflowTagsItem_EncodeDecode(t *testing.T) {
-	var typ DeleteWorkflowRevisionAliasOKWorkflowTagsItem
-	typ.SetFake()
-
-	e := jx.Encoder{}
-	typ.Encode(&e)
-	data := e.Bytes()
-	require.True(t, std.Valid(data), "Encoded: %s", data)
-
-	var typ2 DeleteWorkflowRevisionAliasOKWorkflowTagsItem
+	var typ2 DeleteWorkflowRevisionAliasOKRevision
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestDeleteWorkflowRevisionAliasUnauthorized_EncodeDecode(t *testing.T) {
@@ -5618,6 +5900,47 @@ func TestUpdateWorkflowRevisionAliasBadRequest_Examples(t *testing.T) {
 			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
 
 			var typ2 UpdateWorkflowRevisionAliasBadRequest
+			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
+		})
+	}
+}
+func TestUpdateWorkflowRevisionAliasConflict_EncodeDecode(t *testing.T) {
+	var typ UpdateWorkflowRevisionAliasConflict
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateWorkflowRevisionAliasConflict
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+
+func TestUpdateWorkflowRevisionAliasConflict_Examples(t *testing.T) {
+
+	for i, tc := range []struct {
+		Input string
+	}{
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+	} {
+		tc := tc
+		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
+			var typ UpdateWorkflowRevisionAliasConflict
+
+			if err := typ.Decode(jx.DecodeStr(tc.Input)); err != nil {
+				if validateErr, ok := errors.Into[*validate.Error](err); ok {
+					t.Skipf("Validation error: %v", validateErr)
+					return
+				}
+				require.NoErrorf(t, err, "Input: %s", tc.Input)
+			}
+
+			e := jx.Encoder{}
+			typ.Encode(&e)
+			require.True(t, std.Valid(e.Bytes()), "Encoded: %s", e.Bytes())
+
+			var typ2 UpdateWorkflowRevisionAliasConflict
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}

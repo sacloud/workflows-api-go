@@ -44,7 +44,7 @@ func (s *CancelExecutionAcceptedExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -199,6 +199,20 @@ func (s *CancelExecutionBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CancelExecutionConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CancelExecutionForbidden) SetFake() {
 	{
 		{
@@ -241,6 +255,184 @@ func (s *CancelExecutionNotFound) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CancelExecutionOK) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Execution.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecution) SetFake() {
+	{
+		{
+			s.ExecutionId = "string"
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Workflow.SetFake()
+		}
+	}
+	{
+		{
+			s.Status.SetFake()
+		}
+	}
+	{
+		{
+			s.Revision = int(0)
+		}
+	}
+	{
+		{
+			s.RevisionAlias = "string"
+		}
+	}
+	{
+		{
+			s.Args = "string"
+		}
+	}
+	{
+		{
+			s.Result = "string"
+		}
+	}
+	{
+		{
+			s.Error = "string"
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.RunAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FailedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SucceededAt.SetFake()
+		}
+	}
+	{
+		{
+			s.CancelRequestedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.CanceledAt.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecutionStatus) SetFake() {
+	*s = CancelExecutionOKExecutionStatusQueued
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecutionWorkflow) SetFake() {
+	{
+		{
+			s.ID = "string"
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Publish = true
+		}
+	}
+	{
+		{
+			s.Logging = true
+		}
+	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem CancelExecutionOKExecutionWorkflowTagsItem
+				{
+					elem.SetFake()
+				}
+				s.Tags = append(s.Tags, elem)
+			}
+		}
+	}
+	{
+		{
+			s.ServicePrincipalId.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
+	var variant string
+
+	{
+		variant = "string"
+	}
+	s.SetString(variant)
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecutionWorkflowTagsItem) SetFake() {
+	{
+		{
+			s.Name = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CancelExecutionUnauthorized) SetFake() {
 	{
 		{
@@ -256,6 +448,20 @@ func (s *CancelExecutionUnauthorized) SetFake() {
 
 // SetFake set fake values.
 func (s *CreateExecutionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateExecutionConflict) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -306,7 +512,7 @@ func (s *CreateExecutionCreatedExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -835,6 +1041,20 @@ func (s *CreateWorkflowRevisionBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CreateWorkflowRevisionConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CreateWorkflowRevisionCreated) SetFake() {
 	{
 		{
@@ -852,7 +1072,7 @@ func (s *CreateWorkflowRevisionCreated) SetFake() {
 func (s *CreateWorkflowRevisionCreatedRevision) SetFake() {
 	{
 		{
-			s.RevisionId = float64(0)
+			s.RevisionId = int(0)
 		}
 	}
 	{
@@ -968,6 +1188,20 @@ func (s *CreateWorkflowUnauthorized) SetFake() {
 
 // SetFake set fake values.
 func (s *DeleteExecutionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteExecutionConflict) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -1130,6 +1364,20 @@ func (s *DeleteWorkflowBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *DeleteWorkflowConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *DeleteWorkflowForbidden) SetFake() {
 	{
 		{
@@ -1245,53 +1493,31 @@ func (s *DeleteWorkflowRevisionAliasOK) SetFake() {
 	}
 	{
 		{
-			s.Workflow.SetFake()
+			s.Revision.SetFake()
 		}
 	}
 }
 
 // SetFake set fake values.
-func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetFake() {
+func (s *DeleteWorkflowRevisionAliasOKRevision) SetFake() {
 	{
 		{
-			s.ID = "string"
+			s.RevisionId = int(0)
 		}
 	}
 	{
 		{
-			s.Name = "string"
+			s.WorkflowId = "string"
 		}
 	}
 	{
 		{
-			s.Description.SetFake()
+			s.RevisionAlias.SetFake()
 		}
 	}
 	{
 		{
-			s.Publish = true
-		}
-	}
-	{
-		{
-			s.Logging = true
-		}
-	}
-	{
-		{
-			s.Tags = nil
-			for i := 0; i < 0; i++ {
-				var elem DeleteWorkflowRevisionAliasOKWorkflowTagsItem
-				{
-					elem.SetFake()
-				}
-				s.Tags = append(s.Tags, elem)
-			}
-		}
-	}
-	{
-		{
-			s.ServicePrincipalId.SetFake()
+			s.Runbook = "string"
 		}
 	}
 	{
@@ -1302,25 +1528,6 @@ func (s *DeleteWorkflowRevisionAliasOKWorkflow) SetFake() {
 	{
 		{
 			s.UpdatedAt = time.Now()
-		}
-	}
-}
-
-// SetFake set fake values.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) SetFake() {
-	var variant string
-
-	{
-		variant = "string"
-	}
-	s.SetString(variant)
-}
-
-// SetFake set fake values.
-func (s *DeleteWorkflowRevisionAliasOKWorkflowTagsItem) SetFake() {
-	{
-		{
-			s.Name = "string"
 		}
 	}
 }
@@ -1447,7 +1654,7 @@ func (s *GetExecutionOKExecution) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -2012,7 +2219,7 @@ func (s *GetWorkflowRevisionsOK) SetFake() {
 func (s *GetWorkflowRevisionsOKRevision) SetFake() {
 	{
 		{
-			s.RevisionId = float64(0)
+			s.RevisionId = int(0)
 		}
 	}
 	{
@@ -2341,7 +2548,7 @@ func (s *ListExecutionOKExecutionsItem) SetFake() {
 	}
 	{
 		{
-			s.Revision = float64(0)
+			s.Revision = int(0)
 		}
 	}
 	{
@@ -2898,7 +3105,7 @@ func (s *ListWorkflowRevisionsOK) SetFake() {
 func (s *ListWorkflowRevisionsOKRevisionsItem) SetFake() {
 	{
 		{
-			s.RevisionId = float64(0)
+			s.RevisionId = int(0)
 		}
 	}
 	{
@@ -3100,6 +3307,15 @@ func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake(
 }
 
 // SetFake set fake values.
+func (s *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
+	var elem CancelExecutionOKExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem CreateExecutionCreatedExecutionWorkflowServicePrincipalId
 	{
@@ -3136,26 +3352,8 @@ func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCreateWorkflowReq) SetFake() {
-	var elem CreateWorkflowReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptCreateWorkflowReqServicePrincipalId) SetFake() {
 	var elem CreateWorkflowReqServicePrincipalId
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptCreateWorkflowRevisionReq) SetFake() {
-	var elem CreateWorkflowRevisionReq
 	{
 		elem.SetFake()
 	}
@@ -3167,24 +3365,6 @@ func (s *OptDateTime) SetFake() {
 	var elem time.Time
 	{
 		elem = time.Now()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptDeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId) SetFake() {
-	var elem DeleteWorkflowRevisionAliasOKWorkflowServicePrincipalId
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptFloat64) SetFake() {
-	var elem float64
-	{
-		elem = float64(0)
 	}
 	s.SetTo(elem)
 }
@@ -3226,6 +3406,15 @@ func (s *OptGetWorkflowOKWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptInt) SetFake() {
+	var elem int
+	{
+		elem = int(0)
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptListExecutionOKExecutionsItemWorkflowServicePrincipalId) SetFake() {
 	var elem ListExecutionOKExecutionsItemWorkflowServicePrincipalId
 	{
@@ -3255,24 +3444,6 @@ func (s *OptString) SetFake() {
 // SetFake set fake values.
 func (s *OptUpdateWorkflowOKWorkflowServicePrincipalId) SetFake() {
 	var elem UpdateWorkflowOKWorkflowServicePrincipalId
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptUpdateWorkflowReq) SetFake() {
-	var elem UpdateWorkflowReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptUpdateWorkflowRevisionAliasReq) SetFake() {
-	var elem UpdateWorkflowRevisionAliasReq
 	{
 		elem.SetFake()
 	}
@@ -3484,6 +3655,20 @@ func (s *UpdateWorkflowRevisionAliasBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *UpdateWorkflowRevisionAliasConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *UpdateWorkflowRevisionAliasForbidden) SetFake() {
 	{
 		{
@@ -3543,7 +3728,7 @@ func (s *UpdateWorkflowRevisionAliasOK) SetFake() {
 func (s *UpdateWorkflowRevisionAliasOKRevision) SetFake() {
 	{
 		{
-			s.RevisionId = float64(0)
+			s.RevisionId = int(0)
 		}
 	}
 	{
