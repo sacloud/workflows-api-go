@@ -12645,19 +12645,39 @@ func (s *GetSubscriptionOKMonthAppliedPlan) encodeFields(e *jx.Encoder) {
 		e.FieldStart("planGrade")
 		e.Float64(s.PlanGrade)
 	}
+	{
+		e.FieldStart("basePrice")
+		e.Float64(s.BasePrice)
+	}
+	{
+		e.FieldStart("includedSteps")
+		e.Float64(s.IncludedSteps)
+	}
+	{
+		e.FieldStart("overageStepUnit")
+		e.Float64(s.OverageStepUnit)
+	}
+	{
+		e.FieldStart("overagePricePerUnit")
+		e.Float64(s.OveragePricePerUnit)
+	}
 }
 
-var jsonFieldsNameOfGetSubscriptionOKMonthAppliedPlan = [10]string{
-	0: "id",
-	1: "accountId",
-	2: "contractId",
-	3: "planId",
-	4: "activateFrom",
-	5: "activateUntil",
-	6: "createdAt",
-	7: "updatedAt",
-	8: "planName",
-	9: "planGrade",
+var jsonFieldsNameOfGetSubscriptionOKMonthAppliedPlan = [14]string{
+	0:  "id",
+	1:  "accountId",
+	2:  "contractId",
+	3:  "planId",
+	4:  "activateFrom",
+	5:  "activateUntil",
+	6:  "createdAt",
+	7:  "updatedAt",
+	8:  "planName",
+	9:  "planGrade",
+	10: "basePrice",
+	11: "includedSteps",
+	12: "overageStepUnit",
+	13: "overagePricePerUnit",
 }
 
 // Decode decodes GetSubscriptionOKMonthAppliedPlan from json.
@@ -12787,6 +12807,54 @@ func (s *GetSubscriptionOKMonthAppliedPlan) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"planGrade\"")
 			}
+		case "basePrice":
+			requiredBitSet[1] |= 1 << 2
+			if err := func() error {
+				v, err := d.Float64()
+				s.BasePrice = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"basePrice\"")
+			}
+		case "includedSteps":
+			requiredBitSet[1] |= 1 << 3
+			if err := func() error {
+				v, err := d.Float64()
+				s.IncludedSteps = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"includedSteps\"")
+			}
+		case "overageStepUnit":
+			requiredBitSet[1] |= 1 << 4
+			if err := func() error {
+				v, err := d.Float64()
+				s.OverageStepUnit = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"overageStepUnit\"")
+			}
+		case "overagePricePerUnit":
+			requiredBitSet[1] |= 1 << 5
+			if err := func() error {
+				v, err := d.Float64()
+				s.OveragePricePerUnit = float64(v)
+				if err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"overagePricePerUnit\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -12798,7 +12866,7 @@ func (s *GetSubscriptionOKMonthAppliedPlan) Decode(d *jx.Decoder) error {
 	var failures []validate.FieldError
 	for i, mask := range [2]uint8{
 		0b11111111,
-		0b00000011,
+		0b00111111,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.

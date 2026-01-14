@@ -3309,7 +3309,7 @@ func TestGetSubscriptionOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"CurrentPlan\":{\"accountId\":\"sampleString\",\"activateFrom\":\"2020-01-01T00:00:00Z\",\"contractId\":\"sampleString\",\"createdAt\":\"2020-01-01T00:00:00Z\",\"id\":\"sampleString\",\"planId\":123,\"planName\":\"sampleString\",\"updatedAt\":\"2020-01-01T00:00:00Z\"},\"MonthAppliedPlan\":{\"accountId\":\"sampleString\",\"activateFrom\":\"2020-01-01T00:00:00Z\",\"contractId\":\"sampleString\",\"createdAt\":\"2020-01-01T00:00:00Z\",\"id\":\"sampleString\",\"planGrade\":123,\"planId\":123,\"planName\":\"sampleString\",\"updatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"CurrentPlan\":{\"accountId\":\"sampleString\",\"activateFrom\":\"2020-01-01T00:00:00Z\",\"contractId\":\"sampleString\",\"createdAt\":\"2020-01-01T00:00:00Z\",\"id\":\"sampleString\",\"planId\":123,\"planName\":\"sampleString\",\"updatedAt\":\"2020-01-01T00:00:00Z\"},\"MonthAppliedPlan\":{\"accountId\":\"sampleString\",\"activateFrom\":\"2020-01-01T00:00:00Z\",\"basePrice\":123,\"contractId\":\"sampleString\",\"createdAt\":\"2020-01-01T00:00:00Z\",\"id\":\"sampleString\",\"includedSteps\":123,\"overagePricePerUnit\":123,\"overageStepUnit\":123,\"planGrade\":123,\"planId\":123,\"planName\":\"sampleString\",\"updatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {

@@ -4318,16 +4318,20 @@ func (s *GetSubscriptionOKCurrentPlan) SetPlanName(val string) {
 }
 
 type GetSubscriptionOKMonthAppliedPlan struct {
-	ID            string      `json:"id"`
-	AccountId     string      `json:"accountId"`
-	ContractId    string      `json:"contractId"`
-	PlanId        float64     `json:"planId"`
-	ActivateFrom  time.Time   `json:"activateFrom"`
-	ActivateUntil NilDateTime `json:"activateUntil"`
-	CreatedAt     time.Time   `json:"createdAt"`
-	UpdatedAt     time.Time   `json:"updatedAt"`
-	PlanName      string      `json:"planName"`
-	PlanGrade     float64     `json:"planGrade"`
+	ID                  string      `json:"id"`
+	AccountId           string      `json:"accountId"`
+	ContractId          string      `json:"contractId"`
+	PlanId              float64     `json:"planId"`
+	ActivateFrom        time.Time   `json:"activateFrom"`
+	ActivateUntil       NilDateTime `json:"activateUntil"`
+	CreatedAt           time.Time   `json:"createdAt"`
+	UpdatedAt           time.Time   `json:"updatedAt"`
+	PlanName            string      `json:"planName"`
+	PlanGrade           float64     `json:"planGrade"`
+	BasePrice           float64     `json:"basePrice"`
+	IncludedSteps       float64     `json:"includedSteps"`
+	OverageStepUnit     float64     `json:"overageStepUnit"`
+	OveragePricePerUnit float64     `json:"overagePricePerUnit"`
 }
 
 // GetID returns the value of ID.
@@ -4380,6 +4384,26 @@ func (s *GetSubscriptionOKMonthAppliedPlan) GetPlanGrade() float64 {
 	return s.PlanGrade
 }
 
+// GetBasePrice returns the value of BasePrice.
+func (s *GetSubscriptionOKMonthAppliedPlan) GetBasePrice() float64 {
+	return s.BasePrice
+}
+
+// GetIncludedSteps returns the value of IncludedSteps.
+func (s *GetSubscriptionOKMonthAppliedPlan) GetIncludedSteps() float64 {
+	return s.IncludedSteps
+}
+
+// GetOverageStepUnit returns the value of OverageStepUnit.
+func (s *GetSubscriptionOKMonthAppliedPlan) GetOverageStepUnit() float64 {
+	return s.OverageStepUnit
+}
+
+// GetOveragePricePerUnit returns the value of OveragePricePerUnit.
+func (s *GetSubscriptionOKMonthAppliedPlan) GetOveragePricePerUnit() float64 {
+	return s.OveragePricePerUnit
+}
+
 // SetID sets the value of ID.
 func (s *GetSubscriptionOKMonthAppliedPlan) SetID(val string) {
 	s.ID = val
@@ -4428,6 +4452,26 @@ func (s *GetSubscriptionOKMonthAppliedPlan) SetPlanName(val string) {
 // SetPlanGrade sets the value of PlanGrade.
 func (s *GetSubscriptionOKMonthAppliedPlan) SetPlanGrade(val float64) {
 	s.PlanGrade = val
+}
+
+// SetBasePrice sets the value of BasePrice.
+func (s *GetSubscriptionOKMonthAppliedPlan) SetBasePrice(val float64) {
+	s.BasePrice = val
+}
+
+// SetIncludedSteps sets the value of IncludedSteps.
+func (s *GetSubscriptionOKMonthAppliedPlan) SetIncludedSteps(val float64) {
+	s.IncludedSteps = val
+}
+
+// SetOverageStepUnit sets the value of OverageStepUnit.
+func (s *GetSubscriptionOKMonthAppliedPlan) SetOverageStepUnit(val float64) {
+	s.OverageStepUnit = val
+}
+
+// SetOveragePricePerUnit sets the value of OveragePricePerUnit.
+func (s *GetSubscriptionOKMonthAppliedPlan) SetOveragePricePerUnit(val float64) {
+	s.OveragePricePerUnit = val
 }
 
 type GetSubscriptionUnauthorized struct {

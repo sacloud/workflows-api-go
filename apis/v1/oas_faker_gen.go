@@ -1984,6 +1984,26 @@ func (s *GetSubscriptionOKMonthAppliedPlan) SetFake() {
 			s.PlanGrade = float64(0)
 		}
 	}
+	{
+		{
+			s.BasePrice = float64(0)
+		}
+	}
+	{
+		{
+			s.IncludedSteps = float64(0)
+		}
+	}
+	{
+		{
+			s.OverageStepUnit = float64(0)
+		}
+	}
+	{
+		{
+			s.OveragePricePerUnit = float64(0)
+		}
+	}
 }
 
 // SetFake set fake values.
