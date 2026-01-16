@@ -126,6 +126,20 @@ type ListWorkflowRevisionsParams struct {
 	ID string
 }
 
+// ListWorkflowSuggestParams is parameters of listWorkflowSuggest operation.
+type ListWorkflowSuggestParams struct {
+	// ワークフロー名の絞り込み.
+	Name string
+	// ページ番号.
+	Page OptInt `json:",omitempty,omitzero"`
+	// 1ページあたりのリソースの取得数.
+	PageLimit OptInt `json:",omitempty,omitzero"`
+	// サジェストのソートに利用するプロパティ.
+	SortBy OptListWorkflowSuggestSortBy `json:",omitempty,omitzero"`
+	// ソートの順序.
+	Order OptListWorkflowSuggestOrder `json:",omitempty,omitzero"`
+}
+
 // UpdateWorkflowParams is parameters of updateWorkflow operation.
 type UpdateWorkflowParams struct {
 	// Workflow ID.

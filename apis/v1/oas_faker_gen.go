@@ -7,7 +7,199 @@ import (
 )
 
 // SetFake set fake values.
+func (s *CancelExecutionAccepted) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Execution.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecution) SetFake() {
+	{
+		{
+			s.ExecutionId = "string"
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Workflow.SetFake()
+		}
+	}
+	{
+		{
+			s.Status.SetFake()
+		}
+	}
+	{
+		{
+			s.Revision = int(0)
+		}
+	}
+	{
+		{
+			s.RevisionAlias = "string"
+		}
+	}
+	{
+		{
+			s.Args = "string"
+		}
+	}
+	{
+		{
+			s.Result = "string"
+		}
+	}
+	{
+		{
+			s.Error = "string"
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.RunAt.SetFake()
+		}
+	}
+	{
+		{
+			s.FailedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.SucceededAt.SetFake()
+		}
+	}
+	{
+		{
+			s.CancelRequestedAt.SetFake()
+		}
+	}
+	{
+		{
+			s.CanceledAt.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecutionStatus) SetFake() {
+	*s = CancelExecutionAcceptedExecutionStatusQueued
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecutionWorkflow) SetFake() {
+	{
+		{
+			s.ID = "string"
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Description.SetFake()
+		}
+	}
+	{
+		{
+			s.Publish = true
+		}
+	}
+	{
+		{
+			s.Logging = true
+		}
+	}
+	{
+		{
+			s.Tags = nil
+			for i := 0; i < 0; i++ {
+				var elem CancelExecutionAcceptedExecutionWorkflowTagsItem
+				{
+					elem.SetFake()
+				}
+				s.Tags = append(s.Tags, elem)
+			}
+		}
+	}
+	{
+		{
+			s.ServicePrincipalId.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
+	var variant string
+
+	{
+		variant = "string"
+	}
+	s.SetString(variant)
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecutionWorkflowTagsItem) SetFake() {
+	{
+		{
+			s.Name = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CancelExecutionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionConflict) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -541,6 +733,85 @@ func (s *CreateExecutionUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CreateSubscriptionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionReq) SetFake() {
+	{
+		{
+			s.PlanId = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateSubscriptionUnauthorized) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CreateWorkflowBadRequest) SetFake() {
 	{
 		{
@@ -770,6 +1041,20 @@ func (s *CreateWorkflowRevisionBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *CreateWorkflowRevisionConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *CreateWorkflowRevisionCreated) SetFake() {
 	{
 		{
@@ -916,6 +1201,20 @@ func (s *DeleteExecutionBadRequest) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *DeleteExecutionConflict) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *DeleteExecutionForbidden) SetFake() {
 	{
 		{
@@ -981,7 +1280,91 @@ func (s *DeleteExecutionUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *DeleteSubscriptionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteSubscriptionForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteSubscriptionInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteSubscriptionNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteSubscriptionUnauthorized) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *DeleteWorkflowBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *DeleteWorkflowConflict) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -1413,6 +1796,218 @@ func (s *GetExecutionOKExecutionWorkflowTagsItem) SetFake() {
 
 // SetFake set fake values.
 func (s *GetExecutionUnauthorized) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionOK) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.CurrentPlan.SetFake()
+		}
+	}
+	{
+		{
+			s.MonthAppliedPlan.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionOKCurrentPlan) SetFake() {
+	{
+		{
+			s.ID = "string"
+		}
+	}
+	{
+		{
+			s.AccountId = "string"
+		}
+	}
+	{
+		{
+			s.ContractId = "string"
+		}
+	}
+	{
+		{
+			s.PlanId = float64(0)
+		}
+	}
+	{
+		{
+			s.ActivateFrom = time.Now()
+		}
+	}
+	{
+		{
+			s.ActivateUntil.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.PlanName = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionOKMonthAppliedPlan) SetFake() {
+	{
+		{
+			s.ID = "string"
+		}
+	}
+	{
+		{
+			s.AccountId = "string"
+		}
+	}
+	{
+		{
+			s.ContractId = "string"
+		}
+	}
+	{
+		{
+			s.PlanId = float64(0)
+		}
+	}
+	{
+		{
+			s.ActivateFrom = time.Now()
+		}
+	}
+	{
+		{
+			s.ActivateUntil.SetFake()
+		}
+	}
+	{
+		{
+			s.CreatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.UpdatedAt = time.Now()
+		}
+	}
+	{
+		{
+			s.PlanName = "string"
+		}
+	}
+	{
+		{
+			s.PlanGrade = float64(0)
+		}
+	}
+	{
+		{
+			s.BasePrice = float64(0)
+		}
+	}
+	{
+		{
+			s.IncludedSteps = float64(0)
+		}
+	}
+	{
+		{
+			s.OverageStepUnit = float64(0)
+		}
+	}
+	{
+		{
+			s.OveragePricePerUnit = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetSubscriptionUnauthorized) SetFake() {
 	{
 		{
 			s.IsOk = true
@@ -2128,6 +2723,146 @@ func (s *ListExecutionUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *ListPlansBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansOK) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Plans = nil
+			for i := 0; i < 0; i++ {
+				var elem ListPlansOKPlansItem
+				{
+					elem.SetFake()
+				}
+				s.Plans = append(s.Plans, elem)
+			}
+		}
+	}
+	{
+		{
+			s.TaxRate = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansOKPlansItem) SetFake() {
+	{
+		{
+			s.ID = float64(0)
+		}
+	}
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Grade = float64(0)
+		}
+	}
+	{
+		{
+			s.ServiceClassPath = "string"
+		}
+	}
+	{
+		{
+			s.BasePrice = float64(0)
+		}
+	}
+	{
+		{
+			s.IncludedSteps = float64(0)
+		}
+	}
+	{
+		{
+			s.OverageStepUnit = float64(0)
+		}
+	}
+	{
+		{
+			s.OveragePricePerUnit = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListPlansUnauthorized) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *ListWorkflowBadRequest) SetFake() {
 	{
 		{
@@ -2435,6 +3170,126 @@ func (s *ListWorkflowRevisionsUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *ListWorkflowSuggestBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestForbidden) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestInternalServerError) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestNotFound) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestOK) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Total = int(0)
+		}
+	}
+	{
+		{
+			s.From = int(0)
+		}
+	}
+	{
+		{
+			s.Count = int(0)
+		}
+	}
+	{
+		{
+			s.Suggests = nil
+			for i := 0; i < 0; i++ {
+				var elem ListWorkflowSuggestOKSuggestsItem
+				{
+					elem.SetFake()
+				}
+				s.Suggests = append(s.Suggests, elem)
+			}
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestOKSuggestsItem) SetFake() {
+	{
+		{
+			s.Name = "string"
+		}
+	}
+	{
+		{
+			s.Count = float64(0)
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowSuggestUnauthorized) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
 func (s *ListWorkflowUnauthorized) SetFake() {
 	{
 		{
@@ -2449,10 +3304,24 @@ func (s *ListWorkflowUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *NilDateTime) SetFake() {
+	s.Null = true
+}
+
+// SetFake set fake values.
 func (s *OptBool) SetFake() {
 	var elem bool
 	{
 		elem = true
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
+	var elem CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
 	}
 	s.SetTo(elem)
 }
@@ -2478,6 +3347,15 @@ func (s *OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId) SetFake()
 // SetFake set fake values.
 func (s *OptCreateExecutionReq) SetFake() {
 	var elem CreateExecutionReq
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptCreateSubscriptionReq) SetFake() {
+	var elem CreateSubscriptionReq
 	{
 		elem.SetFake()
 	}
@@ -2514,6 +3392,24 @@ func (s *OptDateTime) SetFake() {
 // SetFake set fake values.
 func (s *OptGetExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem GetExecutionOKExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptGetSubscriptionOKCurrentPlan) SetFake() {
+	var elem GetSubscriptionOKCurrentPlan
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptGetSubscriptionOKMonthAppliedPlan) SetFake() {
+	var elem GetSubscriptionOKMonthAppliedPlan
 	{
 		elem.SetFake()
 	}
@@ -2766,6 +3662,20 @@ func (s *UpdateWorkflowReqTagsItem) SetFake() {
 
 // SetFake set fake values.
 func (s *UpdateWorkflowRevisionAliasBadRequest) SetFake() {
+	{
+		{
+			s.IsOk = true
+		}
+	}
+	{
+		{
+			s.Message = "string"
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateWorkflowRevisionAliasConflict) SetFake() {
 	{
 		{
 			s.IsOk = true

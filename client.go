@@ -15,6 +15,7 @@
 package workflows
 
 import (
+	"context"
 	"fmt"
 	"runtime"
 
@@ -33,6 +34,14 @@ var UserAgent = fmt.Sprintf(
 	runtime.GOARCH,
 )
 
+// voidSecuritySource is a placeholder to satisfy the SecuritySource interface.
+// saclientにて処理するためここにはロジック不要だが何か渡さないといけないので空の構造体を用意する
+type voidSecuritySource struct{}
+
+func (voidSecuritySource) ApiKeyAuth(context.Context, v1.OperationName) (v1.ApiKeyAuth, error) {
+	return v1.ApiKeyAuth{}, nil
+}
+
 // NewClient creates a new workflows API client with default settings
 func NewClient(client saclient.ClientAPI) (*v1.Client, error) {
 	return NewClientWithAPIRootURL(client, DefaultAPIRootURL)
@@ -40,5 +49,14 @@ func NewClient(client saclient.ClientAPI) (*v1.Client, error) {
 
 // NewClientWithAPIRootURL creates a new workflows API client with a custom API root URL
 func NewClientWithAPIRootURL(client saclient.ClientAPI, apiRootURL string) (*v1.Client, error) {
-	return v1.NewClient(apiRootURL, v1.WithClient(client))
+	if dupable, ok := client.(saclient.ClientOptionAPI); !ok {
+		return nil, NewError("client does not implement saclient.ClientOptionAPI", nil)
+	} else if augmented, err := dupable.DupWith(
+		saclient.WithUserAgent(UserAgent),
+		saclient.WithForceAutomaticAuthentication(),
+	); err != nil {
+		return nil, err
+	} else {
+		return v1.NewClient(apiRootURL, voidSecuritySource{}, v1.WithClient(augmented))
+	}
 }
