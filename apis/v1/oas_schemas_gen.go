@@ -7880,52 +7880,6 @@ func (o OptCreateExecutionReq) Or(d CreateExecutionReq) CreateExecutionReq {
 	return d
 }
 
-// NewOptCreateSubscriptionReq returns new OptCreateSubscriptionReq with value set to v.
-func NewOptCreateSubscriptionReq(v CreateSubscriptionReq) OptCreateSubscriptionReq {
-	return OptCreateSubscriptionReq{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptCreateSubscriptionReq is optional CreateSubscriptionReq.
-type OptCreateSubscriptionReq struct {
-	Value CreateSubscriptionReq
-	Set   bool
-}
-
-// IsSet returns true if OptCreateSubscriptionReq was set.
-func (o OptCreateSubscriptionReq) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptCreateSubscriptionReq) Reset() {
-	var v CreateSubscriptionReq
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptCreateSubscriptionReq) SetTo(v CreateSubscriptionReq) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptCreateSubscriptionReq) Get() (v CreateSubscriptionReq, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptCreateSubscriptionReq) Or(d CreateSubscriptionReq) CreateSubscriptionReq {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptCreateWorkflowCreatedWorkflowServicePrincipalId returns new OptCreateWorkflowCreatedWorkflowServicePrincipalId with value set to v.
 func NewOptCreateWorkflowCreatedWorkflowServicePrincipalId(v CreateWorkflowCreatedWorkflowServicePrincipalId) OptCreateWorkflowCreatedWorkflowServicePrincipalId {
 	return OptCreateWorkflowCreatedWorkflowServicePrincipalId{

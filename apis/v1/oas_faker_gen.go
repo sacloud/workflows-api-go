@@ -3354,15 +3354,6 @@ func (s *OptCreateExecutionReq) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptCreateSubscriptionReq) SetFake() {
-	var elem CreateSubscriptionReq
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 	var elem CreateWorkflowCreatedWorkflowServicePrincipalId
 	{
