@@ -3390,15 +3390,6 @@ func (s *OptGetExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *OptGetSubscriptionOKCurrentPlan) SetFake() {
-	var elem GetSubscriptionOKCurrentPlan
-	{
-		elem.SetFake()
-	}
-	s.SetTo(elem)
-}
-
-// SetFake set fake values.
 func (s *OptGetSubscriptionOKMonthAppliedPlan) SetFake() {
 	var elem GetSubscriptionOKMonthAppliedPlan
 	{
@@ -3441,6 +3432,12 @@ func (s *OptListWorkflowOKWorkflowsItemServicePrincipalId) SetFake() {
 		elem.SetFake()
 	}
 	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptNilGetSubscriptionOKCurrentPlan) SetFake() {
+	s.Null = true
+	s.Set = true
 }
 
 // SetFake set fake values.

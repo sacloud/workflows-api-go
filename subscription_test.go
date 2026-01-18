@@ -20,6 +20,8 @@ import (
 	"github.com/sacloud/packages-go/testutil"
 	"github.com/sacloud/saclient-go"
 	"github.com/sacloud/workflows-api-go"
+	v1 "github.com/sacloud/workflows-api-go/apis/v1"
+	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
 
@@ -42,7 +44,24 @@ func TestSubscriptionAPI(t *testing.T) {
 	// Read
 	respRead, err := subscriptionAPI.Read(ctx)
 	require.NoError(t, err)
-	require.NotNil(t, respRead) // TODO: must be nil at first?
+	require.NotNil(t, respRead)
+	assert.Equal(t, true, respRead.CurrentPlan.IsNull())
 
-	// TODO: add tests for Create and Delete
+	// Create
+	err = subscriptionAPI.Create(ctx, v1.CreateSubscriptionReq{PlanId: respListPlans.Plans[0].ID})
+	require.NoError(t, err)
+	// check current plan changed after creation
+	respReadAfterCreate, err := subscriptionAPI.Read(ctx)
+	require.NoError(t, err)
+	require.NotNil(t, respReadAfterCreate)
+	assert.Equal(t, respListPlans.Plans[0].ID, respReadAfterCreate.CurrentPlan.Value.PlanId)
+
+	// Delete
+	err = subscriptionAPI.Delete(ctx)
+	require.NoError(t, err)
+	// check current plan changed after deletion
+	respReadAfterDelete, err := subscriptionAPI.Read(ctx)
+	require.NoError(t, err)
+	require.NotNil(t, respReadAfterDelete)
+	assert.Equal(t, true, respReadAfterDelete.CurrentPlan.IsNull())
 }

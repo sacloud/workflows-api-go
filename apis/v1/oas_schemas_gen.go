@@ -4179,7 +4179,7 @@ func (*GetSubscriptionNotFound) getSubscriptionRes() {}
 
 type GetSubscriptionOK struct {
 	IsOk             bool                                 `json:"is_ok"`
-	CurrentPlan      OptGetSubscriptionOKCurrentPlan      `json:"CurrentPlan"`
+	CurrentPlan      OptNilGetSubscriptionOKCurrentPlan   `json:"CurrentPlan"`
 	MonthAppliedPlan OptGetSubscriptionOKMonthAppliedPlan `json:"MonthAppliedPlan"`
 }
 
@@ -4189,7 +4189,7 @@ func (s *GetSubscriptionOK) GetIsOk() bool {
 }
 
 // GetCurrentPlan returns the value of CurrentPlan.
-func (s *GetSubscriptionOK) GetCurrentPlan() OptGetSubscriptionOKCurrentPlan {
+func (s *GetSubscriptionOK) GetCurrentPlan() OptNilGetSubscriptionOKCurrentPlan {
 	return s.CurrentPlan
 }
 
@@ -4204,7 +4204,7 @@ func (s *GetSubscriptionOK) SetIsOk(val bool) {
 }
 
 // SetCurrentPlan sets the value of CurrentPlan.
-func (s *GetSubscriptionOK) SetCurrentPlan(val OptGetSubscriptionOKCurrentPlan) {
+func (s *GetSubscriptionOK) SetCurrentPlan(val OptNilGetSubscriptionOKCurrentPlan) {
 	s.CurrentPlan = val
 }
 
@@ -8064,52 +8064,6 @@ func (o OptGetExecutionOKExecutionWorkflowServicePrincipalId) Or(d GetExecutionO
 	return d
 }
 
-// NewOptGetSubscriptionOKCurrentPlan returns new OptGetSubscriptionOKCurrentPlan with value set to v.
-func NewOptGetSubscriptionOKCurrentPlan(v GetSubscriptionOKCurrentPlan) OptGetSubscriptionOKCurrentPlan {
-	return OptGetSubscriptionOKCurrentPlan{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptGetSubscriptionOKCurrentPlan is optional GetSubscriptionOKCurrentPlan.
-type OptGetSubscriptionOKCurrentPlan struct {
-	Value GetSubscriptionOKCurrentPlan
-	Set   bool
-}
-
-// IsSet returns true if OptGetSubscriptionOKCurrentPlan was set.
-func (o OptGetSubscriptionOKCurrentPlan) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptGetSubscriptionOKCurrentPlan) Reset() {
-	var v GetSubscriptionOKCurrentPlan
-	o.Value = v
-	o.Set = false
-}
-
-// SetTo sets value to v.
-func (o *OptGetSubscriptionOKCurrentPlan) SetTo(v GetSubscriptionOKCurrentPlan) {
-	o.Set = true
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptGetSubscriptionOKCurrentPlan) Get() (v GetSubscriptionOKCurrentPlan, ok bool) {
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptGetSubscriptionOKCurrentPlan) Or(d GetSubscriptionOKCurrentPlan) GetSubscriptionOKCurrentPlan {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptGetSubscriptionOKMonthAppliedPlan returns new OptGetSubscriptionOKMonthAppliedPlan with value set to v.
 func NewOptGetSubscriptionOKMonthAppliedPlan(v GetSubscriptionOKMonthAppliedPlan) OptGetSubscriptionOKMonthAppliedPlan {
 	return OptGetSubscriptionOKMonthAppliedPlan{
@@ -8748,6 +8702,69 @@ func (o OptListWorkflowSuggestSortBy) Get() (v ListWorkflowSuggestSortBy, ok boo
 
 // Or returns value if set, or given parameter if does not.
 func (o OptListWorkflowSuggestSortBy) Or(d ListWorkflowSuggestSortBy) ListWorkflowSuggestSortBy {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptNilGetSubscriptionOKCurrentPlan returns new OptNilGetSubscriptionOKCurrentPlan with value set to v.
+func NewOptNilGetSubscriptionOKCurrentPlan(v GetSubscriptionOKCurrentPlan) OptNilGetSubscriptionOKCurrentPlan {
+	return OptNilGetSubscriptionOKCurrentPlan{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptNilGetSubscriptionOKCurrentPlan is optional nullable GetSubscriptionOKCurrentPlan.
+type OptNilGetSubscriptionOKCurrentPlan struct {
+	Value GetSubscriptionOKCurrentPlan
+	Set   bool
+	Null  bool
+}
+
+// IsSet returns true if OptNilGetSubscriptionOKCurrentPlan was set.
+func (o OptNilGetSubscriptionOKCurrentPlan) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptNilGetSubscriptionOKCurrentPlan) Reset() {
+	var v GetSubscriptionOKCurrentPlan
+	o.Value = v
+	o.Set = false
+	o.Null = false
+}
+
+// SetTo sets value to v.
+func (o *OptNilGetSubscriptionOKCurrentPlan) SetTo(v GetSubscriptionOKCurrentPlan) {
+	o.Set = true
+	o.Null = false
+	o.Value = v
+}
+
+// IsNull returns true if value is Null.
+func (o OptNilGetSubscriptionOKCurrentPlan) IsNull() bool { return o.Null }
+
+// SetToNull sets value to null.
+func (o *OptNilGetSubscriptionOKCurrentPlan) SetToNull() {
+	o.Set = true
+	o.Null = true
+	var v GetSubscriptionOKCurrentPlan
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptNilGetSubscriptionOKCurrentPlan) Get() (v GetSubscriptionOKCurrentPlan, ok bool) {
+	if o.Null {
+		return v, false
+	}
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptNilGetSubscriptionOKCurrentPlan) Or(d GetSubscriptionOKCurrentPlan) GetSubscriptionOKCurrentPlan {
 	if v, ok := o.Get(); ok {
 		return v
 	}
