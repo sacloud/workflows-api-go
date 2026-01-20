@@ -115,7 +115,7 @@ func (op *workflowOp) ListSuggest(ctx context.Context, params v1.ListWorkflowSug
 	case *v1.ListWorkflowSuggestInternalServerError:
 		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
 	default:
-		return nil, NewAPIError(methodName, 0, err)
+		return nil, NewAPIError(methodName, 0, errors.New("unknown error"))
 	}
 }
 
