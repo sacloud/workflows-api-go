@@ -25,6 +25,7 @@ import (
 type WorkflowAPI interface {
 	Create(ctx context.Context, request v1.CreateWorkflowReq) (*v1.CreateWorkflowCreatedWorkflow, error)
 	List(ctx context.Context, parameter v1.ListWorkflowParams) (*v1.ListWorkflowOK, error)
+	ListSuggest(ctx context.Context, parameter v1.ListWorkflowSuggestParams) (*v1.ListWorkflowSuggestOK, error)
 	Read(ctx context.Context, id string) (*v1.GetWorkflowOKWorkflow, error)
 	Update(ctx context.Context, id string, request v1.UpdateWorkflowReq) (*v1.UpdateWorkflowOKWorkflow, error)
 	Delete(ctx context.Context, id string) error
@@ -89,6 +90,32 @@ func (op *workflowOp) List(ctx context.Context, params v1.ListWorkflowParams) (*
 		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
 	default:
 		return nil, NewAPIError(methodName, 0, err)
+	}
+}
+
+func (op *workflowOp) ListSuggest(ctx context.Context, params v1.ListWorkflowSuggestParams) (*v1.ListWorkflowSuggestOK, error) {
+	const methodName = "Workflow.ListSuggest"
+
+	res, err := op.client.ListWorkflowSuggest(ctx, params)
+	if err != nil {
+		return nil, NewAPIError(methodName, 0, err)
+	}
+
+	switch r := res.(type) {
+	case *v1.ListWorkflowSuggestOK:
+		return r, nil
+	case *v1.ListWorkflowSuggestBadRequest:
+		return nil, NewAPIError(methodName, http.StatusBadRequest, errors.New(r.Message))
+	case *v1.ListWorkflowSuggestUnauthorized:
+		return nil, NewAPIError(methodName, http.StatusUnauthorized, errors.New(r.Message))
+	case *v1.ListWorkflowSuggestForbidden:
+		return nil, NewAPIError(methodName, http.StatusForbidden, errors.New(r.Message))
+	case *v1.ListWorkflowSuggestNotFound:
+		return nil, NewAPIError(methodName, http.StatusNotFound, errors.New(r.Message))
+	case *v1.ListWorkflowSuggestInternalServerError:
+		return nil, NewAPIError(methodName, http.StatusInternalServerError, errors.New(r.Message))
+	default:
+		return nil, NewAPIError(methodName, 0, errors.New("unknown error"))
 	}
 }
 

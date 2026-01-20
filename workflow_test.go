@@ -69,13 +69,25 @@ func TestWorkflowAPI(t *testing.T) {
 	for _, workflow := range respList.Workflows {
 		if workflow.ID == respCreate.ID {
 			found = true
-			assert.Equal(t, "test-workflow", respRead.Name)
-			assert.Equal(t, v1.NewOptString(""), respRead.Description) // empty
-			assert.False(t, respRead.Publish)
-			assert.False(t, respRead.Logging)
+			assert.Equal(t, "test-workflow", workflow.Name)
+			assert.Equal(t, v1.NewOptString(""), workflow.Description) // empty
+			assert.False(t, workflow.Publish)
+			assert.False(t, workflow.Logging)
 		}
 	}
 	assert.True(t, found, "Created Workflow not found in list")
+
+	// ListWorkflowSuggest
+	respListSuggest, err := workflowAPI.ListSuggest(ctx, v1.ListWorkflowSuggestParams{Name: "test-workflow"})
+	require.NoError(t, err)
+	found = false
+	for _, workflow := range respListSuggest.Suggests {
+		if workflow.Name == respCreate.Name {
+			found = true
+			assert.Equal(t, "test-workflow", workflow.Name)
+		}
+	}
+	assert.True(t, found, "Created Workflow not found in suggest list")
 
 	// UpdateWorkflow
 	respUpdate, err := workflowAPI.Update(ctx, respCreate.ID, v1.UpdateWorkflowReq{
