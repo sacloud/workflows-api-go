@@ -29,18 +29,18 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	ctx := context.Background()
-
-	var theClient saclient.Client
-	client, err := workflows.NewClient(&theClient)
-	if err != nil {
-		log.Fatalf("Error in TestMain. create saclient failed: %v", err)
-	}
-	subscriptionAPI := workflows.NewSubscriptionOp(client)
-
 	// NOTE: 課金プランが設定されていないと多くのAPIが402を返すため、E2Eテストの前に設定しておく。
 	isE2ETest := os.Getenv("SAKURACLOUD_ACCESS_TOKEN") != "" && os.Getenv("SAKURACLOUD_ACCESS_TOKEN_SECRET") != ""
 	if isE2ETest {
+		ctx := context.Background()
+
+		var theClient saclient.Client
+		client, err := workflows.NewClient(&theClient)
+		if err != nil {
+			log.Fatalf("Error in TestMain. create saclient failed: %v", err)
+		}
+		subscriptionAPI := workflows.NewSubscriptionOp(client)
+
 		respListPlans, err := subscriptionAPI.ListPlans(ctx)
 		if err != nil {
 			log.Fatalf("Error in TestMain. list plans failed: %v", err)
@@ -55,14 +55,6 @@ func TestMain(m *testing.M) {
 	}
 
 	exitCode := m.Run()
-
-	if isE2ETest {
-		// テスト前のプラン未設定の状態に戻す。
-		if err := subscriptionAPI.Delete(ctx); err != nil {
-			log.Printf("Error in TestMain. delete Plan failed: %v", err)
-		}
-	}
-
 	os.Exit(exitCode)
 }
 
