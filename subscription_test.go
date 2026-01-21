@@ -29,7 +29,6 @@ import (
 )
 
 func TestMain(m *testing.M) {
-	// NOTE: 課金プランが設定されていないと多くのAPIが402を返すため、E2Eテストの前に設定しておく。
 	ctx := context.Background()
 
 	var theClient saclient.Client
@@ -39,23 +38,29 @@ func TestMain(m *testing.M) {
 	}
 	subscriptionAPI := workflows.NewSubscriptionOp(client)
 
-	respListPlans, err := subscriptionAPI.ListPlans(ctx)
-	if err != nil {
-		log.Fatalf("Error in TestMain. list plans failed: %v", err)
-	}
-	if respListPlans == nil || len(respListPlans.Plans) == 0 {
-		log.Fatalf("Error in TestMain. list plans returned empty list: %v", err)
-	}
+	// NOTE: 課金プランが設定されていないと多くのAPIが402を返すため、E2Eテストの前に設定しておく。
+	isE2ETest := os.Getenv("SAKURACLOUD_ACCESS_TOKEN") != "" && os.Getenv("SAKURACLOUD_ACCESS_TOKEN_SECRET") != ""
+	if isE2ETest {
+		respListPlans, err := subscriptionAPI.ListPlans(ctx)
+		if err != nil {
+			log.Fatalf("Error in TestMain. list plans failed: %v", err)
+		}
+		if respListPlans == nil || len(respListPlans.Plans) == 0 {
+			log.Fatalf("Error in TestMain. list plans returned empty list: %v", err)
+		}
 
-	if err := subscriptionAPI.Create(ctx, v1.CreateSubscriptionReq{PlanId: respListPlans.Plans[0].ID}); err != nil {
-		log.Fatalf("Error in TestMain. set Plan failed: %v", err)
+		if err := subscriptionAPI.Create(ctx, v1.CreateSubscriptionReq{PlanId: respListPlans.Plans[0].ID}); err != nil {
+			log.Fatalf("Error in TestMain. set Plan failed: %v", err)
+		}
 	}
 
 	exitCode := m.Run()
 
-	// テスト前のプラン未設定の状態に戻す。
-	if err := subscriptionAPI.Delete(ctx); err != nil {
-		log.Printf("Error in TestMain. delete Plan failed: %v", err)
+	if isE2ETest {
+		// テスト前のプラン未設定の状態に戻す。
+		if err := subscriptionAPI.Delete(ctx); err != nil {
+			log.Printf("Error in TestMain. delete Plan failed: %v", err)
+		}
 	}
 
 	os.Exit(exitCode)
