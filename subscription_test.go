@@ -30,7 +30,7 @@ import (
 
 func TestMain(m *testing.M) {
 	// NOTE: 課金プランが設定されていないと多くのAPIが402を返すため、E2Eテストの前に設定しておく。
-	isE2ETest := os.Getenv("SAKURACLOUD_ACCESS_TOKEN") != "" && os.Getenv("SAKURACLOUD_ACCESS_TOKEN_SECRET") != ""
+	isE2ETest := os.Getenv("SAKURA_ACCESS_TOKEN") != "" && os.Getenv("SAKURA_ACCESS_TOKEN_SECRET") != ""
 	if isE2ETest {
 		ctx := context.Background()
 
@@ -59,7 +59,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestSubscriptionAPI(t *testing.T) {
-	testutil.PreCheckEnvsFunc("SAKURACLOUD_ACCESS_TOKEN", "SAKURACLOUD_ACCESS_TOKEN_SECRET")(t)
+	testutil.PreCheckEnvsFunc("SAKURA_ACCESS_TOKEN", "SAKURA_ACCESS_TOKEN_SECRET")(t)
 
 	ctx := t.Context()
 
