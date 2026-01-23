@@ -1,5 +1,17 @@
 # Changelog
 
+## [v0.2.0](https://github.com/sacloud/workflows-api-go/compare/v0.1.0...v0.2.0) - 2026-01-23
+- OpenAPI specの更新に追従 by @a2not in https://github.com/sacloud/workflows-api-go/pull/22
+- feat(workflow): ListWorkflowSuggest APIの実装 by @a2not in https://github.com/sacloud/workflows-api-go/pull/27
+- ci: bump Songmu/tagpr from 1.9.0 to 1.10.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/20
+- ci: bump actions/checkout from 6.0.0 to 6.0.1 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/16
+- feat(subscription): Subscription APIの実装 by @a2not in https://github.com/sacloud/workflows-api-go/pull/28
+- `SAKURA_` で始まる環境変数をテストに利用する by @a2not in https://github.com/sacloud/workflows-api-go/pull/33
+- ci: bump actions/setup-go from 6.1.0 to 6.2.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/29
+- go: bump github.com/sacloud/saclient-go from 0.2.6 to 0.2.7 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/31
+- ci: bump actions/checkout from 6.0.1 to 6.0.2 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/32
+- go: bump github.com/ogen-go/ogen from 1.17.0 to 1.18.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/17
+
 ## [v0.1.0](https://github.com/sacloud/workflows-api-go/commits/v0.1.0) - 2025-12-09
 - Initialize the repository from go-template into Workflows by @a2not in https://github.com/sacloud/workflows-api-go/pull/7
 - ci: bump Songmu/tagpr from 1.8.4 to 1.9.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/4
