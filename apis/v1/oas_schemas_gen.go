@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/go-faster/errors"
+	"github.com/go-faster/jx"
 )
 
 type ApiKeyAuth struct {
@@ -4179,7 +4180,7 @@ func (*GetSubscriptionNotFound) getSubscriptionRes() {}
 
 type GetSubscriptionOK struct {
 	IsOk             bool                                 `json:"is_ok"`
-	CurrentPlan      OptNilGetSubscriptionOKCurrentPlan   `json:"CurrentPlan"`
+	CurrentPlan      OptGetSubscriptionOKCurrentPlan      `json:"CurrentPlan"`
 	MonthAppliedPlan OptGetSubscriptionOKMonthAppliedPlan `json:"MonthAppliedPlan"`
 }
 
@@ -4189,7 +4190,7 @@ func (s *GetSubscriptionOK) GetIsOk() bool {
 }
 
 // GetCurrentPlan returns the value of CurrentPlan.
-func (s *GetSubscriptionOK) GetCurrentPlan() OptNilGetSubscriptionOKCurrentPlan {
+func (s *GetSubscriptionOK) GetCurrentPlan() OptGetSubscriptionOKCurrentPlan {
 	return s.CurrentPlan
 }
 
@@ -4204,7 +4205,7 @@ func (s *GetSubscriptionOK) SetIsOk(val bool) {
 }
 
 // SetCurrentPlan sets the value of CurrentPlan.
-func (s *GetSubscriptionOK) SetCurrentPlan(val OptNilGetSubscriptionOKCurrentPlan) {
+func (s *GetSubscriptionOK) SetCurrentPlan(val OptGetSubscriptionOKCurrentPlan) {
 	s.CurrentPlan = val
 }
 
@@ -4216,15 +4217,15 @@ func (s *GetSubscriptionOK) SetMonthAppliedPlan(val OptGetSubscriptionOKMonthApp
 func (*GetSubscriptionOK) getSubscriptionRes() {}
 
 type GetSubscriptionOKCurrentPlan struct {
-	ID            string      `json:"id"`
-	AccountId     string      `json:"accountId"`
-	ContractId    string      `json:"contractId"`
-	PlanId        float64     `json:"planId"`
-	ActivateFrom  time.Time   `json:"activateFrom"`
-	ActivateUntil NilDateTime `json:"activateUntil"`
-	CreatedAt     time.Time   `json:"createdAt"`
-	UpdatedAt     time.Time   `json:"updatedAt"`
-	PlanName      string      `json:"planName"`
+	ID            string    `json:"id"`
+	AccountId     string    `json:"accountId"`
+	ContractId    string    `json:"contractId"`
+	PlanId        float64   `json:"planId"`
+	ActivateFrom  time.Time `json:"activateFrom"`
+	ActivateUntil jx.Raw    `json:"activateUntil"`
+	CreatedAt     time.Time `json:"createdAt"`
+	UpdatedAt     time.Time `json:"updatedAt"`
+	PlanName      string    `json:"planName"`
 }
 
 // GetID returns the value of ID.
@@ -4253,7 +4254,7 @@ func (s *GetSubscriptionOKCurrentPlan) GetActivateFrom() time.Time {
 }
 
 // GetActivateUntil returns the value of ActivateUntil.
-func (s *GetSubscriptionOKCurrentPlan) GetActivateUntil() NilDateTime {
+func (s *GetSubscriptionOKCurrentPlan) GetActivateUntil() jx.Raw {
 	return s.ActivateUntil
 }
 
@@ -4298,7 +4299,7 @@ func (s *GetSubscriptionOKCurrentPlan) SetActivateFrom(val time.Time) {
 }
 
 // SetActivateUntil sets the value of ActivateUntil.
-func (s *GetSubscriptionOKCurrentPlan) SetActivateUntil(val NilDateTime) {
+func (s *GetSubscriptionOKCurrentPlan) SetActivateUntil(val jx.Raw) {
 	s.ActivateUntil = val
 }
 
@@ -4318,20 +4319,20 @@ func (s *GetSubscriptionOKCurrentPlan) SetPlanName(val string) {
 }
 
 type GetSubscriptionOKMonthAppliedPlan struct {
-	ID                  string      `json:"id"`
-	AccountId           string      `json:"accountId"`
-	ContractId          string      `json:"contractId"`
-	PlanId              float64     `json:"planId"`
-	ActivateFrom        time.Time   `json:"activateFrom"`
-	ActivateUntil       NilDateTime `json:"activateUntil"`
-	CreatedAt           time.Time   `json:"createdAt"`
-	UpdatedAt           time.Time   `json:"updatedAt"`
-	PlanName            string      `json:"planName"`
-	PlanGrade           float64     `json:"planGrade"`
-	BasePrice           float64     `json:"basePrice"`
-	IncludedSteps       float64     `json:"includedSteps"`
-	OverageStepUnit     float64     `json:"overageStepUnit"`
-	OveragePricePerUnit float64     `json:"overagePricePerUnit"`
+	ID                  string    `json:"id"`
+	AccountId           string    `json:"accountId"`
+	ContractId          string    `json:"contractId"`
+	PlanId              float64   `json:"planId"`
+	ActivateFrom        time.Time `json:"activateFrom"`
+	ActivateUntil       jx.Raw    `json:"activateUntil"`
+	CreatedAt           time.Time `json:"createdAt"`
+	UpdatedAt           time.Time `json:"updatedAt"`
+	PlanName            string    `json:"planName"`
+	PlanGrade           float64   `json:"planGrade"`
+	BasePrice           float64   `json:"basePrice"`
+	IncludedSteps       float64   `json:"includedSteps"`
+	OverageStepUnit     float64   `json:"overageStepUnit"`
+	OveragePricePerUnit float64   `json:"overagePricePerUnit"`
 }
 
 // GetID returns the value of ID.
@@ -4360,7 +4361,7 @@ func (s *GetSubscriptionOKMonthAppliedPlan) GetActivateFrom() time.Time {
 }
 
 // GetActivateUntil returns the value of ActivateUntil.
-func (s *GetSubscriptionOKMonthAppliedPlan) GetActivateUntil() NilDateTime {
+func (s *GetSubscriptionOKMonthAppliedPlan) GetActivateUntil() jx.Raw {
 	return s.ActivateUntil
 }
 
@@ -4430,7 +4431,7 @@ func (s *GetSubscriptionOKMonthAppliedPlan) SetActivateFrom(val time.Time) {
 }
 
 // SetActivateUntil sets the value of ActivateUntil.
-func (s *GetSubscriptionOKMonthAppliedPlan) SetActivateUntil(val NilDateTime) {
+func (s *GetSubscriptionOKMonthAppliedPlan) SetActivateUntil(val jx.Raw) {
 	s.ActivateUntil = val
 }
 
@@ -7605,51 +7606,6 @@ func (s *ListWorkflowUnauthorized) SetMessage(val string) {
 
 func (*ListWorkflowUnauthorized) listWorkflowRes() {}
 
-// NewNilDateTime returns new NilDateTime with value set to v.
-func NewNilDateTime(v time.Time) NilDateTime {
-	return NilDateTime{
-		Value: v,
-	}
-}
-
-// NilDateTime is nullable time.Time.
-type NilDateTime struct {
-	Value time.Time
-	Null  bool
-}
-
-// SetTo sets value to v.
-func (o *NilDateTime) SetTo(v time.Time) {
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o NilDateTime) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *NilDateTime) SetToNull() {
-	o.Null = true
-	var v time.Time
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o NilDateTime) Get() (v time.Time, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o NilDateTime) Or(d time.Time) time.Time {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
 // NewOptBool returns new OptBool with value set to v.
 func NewOptBool(v bool) OptBool {
 	return OptBool{
@@ -7880,6 +7836,52 @@ func (o OptCreateExecutionReq) Or(d CreateExecutionReq) CreateExecutionReq {
 	return d
 }
 
+// NewOptCreateSubscriptionReq returns new OptCreateSubscriptionReq with value set to v.
+func NewOptCreateSubscriptionReq(v CreateSubscriptionReq) OptCreateSubscriptionReq {
+	return OptCreateSubscriptionReq{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateSubscriptionReq is optional CreateSubscriptionReq.
+type OptCreateSubscriptionReq struct {
+	Value CreateSubscriptionReq
+	Set   bool
+}
+
+// IsSet returns true if OptCreateSubscriptionReq was set.
+func (o OptCreateSubscriptionReq) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateSubscriptionReq) Reset() {
+	var v CreateSubscriptionReq
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateSubscriptionReq) SetTo(v CreateSubscriptionReq) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateSubscriptionReq) Get() (v CreateSubscriptionReq, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateSubscriptionReq) Or(d CreateSubscriptionReq) CreateSubscriptionReq {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCreateWorkflowCreatedWorkflowServicePrincipalId returns new OptCreateWorkflowCreatedWorkflowServicePrincipalId with value set to v.
 func NewOptCreateWorkflowCreatedWorkflowServicePrincipalId(v CreateWorkflowCreatedWorkflowServicePrincipalId) OptCreateWorkflowCreatedWorkflowServicePrincipalId {
 	return OptCreateWorkflowCreatedWorkflowServicePrincipalId{
@@ -8058,6 +8060,52 @@ func (o OptGetExecutionOKExecutionWorkflowServicePrincipalId) Get() (v GetExecut
 
 // Or returns value if set, or given parameter if does not.
 func (o OptGetExecutionOKExecutionWorkflowServicePrincipalId) Or(d GetExecutionOKExecutionWorkflowServicePrincipalId) GetExecutionOKExecutionWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetSubscriptionOKCurrentPlan returns new OptGetSubscriptionOKCurrentPlan with value set to v.
+func NewOptGetSubscriptionOKCurrentPlan(v GetSubscriptionOKCurrentPlan) OptGetSubscriptionOKCurrentPlan {
+	return OptGetSubscriptionOKCurrentPlan{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetSubscriptionOKCurrentPlan is optional GetSubscriptionOKCurrentPlan.
+type OptGetSubscriptionOKCurrentPlan struct {
+	Value GetSubscriptionOKCurrentPlan
+	Set   bool
+}
+
+// IsSet returns true if OptGetSubscriptionOKCurrentPlan was set.
+func (o OptGetSubscriptionOKCurrentPlan) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetSubscriptionOKCurrentPlan) Reset() {
+	var v GetSubscriptionOKCurrentPlan
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetSubscriptionOKCurrentPlan) SetTo(v GetSubscriptionOKCurrentPlan) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetSubscriptionOKCurrentPlan) Get() (v GetSubscriptionOKCurrentPlan, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetSubscriptionOKCurrentPlan) Or(d GetSubscriptionOKCurrentPlan) GetSubscriptionOKCurrentPlan {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8702,69 +8750,6 @@ func (o OptListWorkflowSuggestSortBy) Get() (v ListWorkflowSuggestSortBy, ok boo
 
 // Or returns value if set, or given parameter if does not.
 func (o OptListWorkflowSuggestSortBy) Or(d ListWorkflowSuggestSortBy) ListWorkflowSuggestSortBy {
-	if v, ok := o.Get(); ok {
-		return v
-	}
-	return d
-}
-
-// NewOptNilGetSubscriptionOKCurrentPlan returns new OptNilGetSubscriptionOKCurrentPlan with value set to v.
-func NewOptNilGetSubscriptionOKCurrentPlan(v GetSubscriptionOKCurrentPlan) OptNilGetSubscriptionOKCurrentPlan {
-	return OptNilGetSubscriptionOKCurrentPlan{
-		Value: v,
-		Set:   true,
-	}
-}
-
-// OptNilGetSubscriptionOKCurrentPlan is optional nullable GetSubscriptionOKCurrentPlan.
-type OptNilGetSubscriptionOKCurrentPlan struct {
-	Value GetSubscriptionOKCurrentPlan
-	Set   bool
-	Null  bool
-}
-
-// IsSet returns true if OptNilGetSubscriptionOKCurrentPlan was set.
-func (o OptNilGetSubscriptionOKCurrentPlan) IsSet() bool { return o.Set }
-
-// Reset unsets value.
-func (o *OptNilGetSubscriptionOKCurrentPlan) Reset() {
-	var v GetSubscriptionOKCurrentPlan
-	o.Value = v
-	o.Set = false
-	o.Null = false
-}
-
-// SetTo sets value to v.
-func (o *OptNilGetSubscriptionOKCurrentPlan) SetTo(v GetSubscriptionOKCurrentPlan) {
-	o.Set = true
-	o.Null = false
-	o.Value = v
-}
-
-// IsNull returns true if value is Null.
-func (o OptNilGetSubscriptionOKCurrentPlan) IsNull() bool { return o.Null }
-
-// SetToNull sets value to null.
-func (o *OptNilGetSubscriptionOKCurrentPlan) SetToNull() {
-	o.Set = true
-	o.Null = true
-	var v GetSubscriptionOKCurrentPlan
-	o.Value = v
-}
-
-// Get returns value and boolean that denotes whether value was set.
-func (o OptNilGetSubscriptionOKCurrentPlan) Get() (v GetSubscriptionOKCurrentPlan, ok bool) {
-	if o.Null {
-		return v, false
-	}
-	if !o.Set {
-		return v, false
-	}
-	return o.Value, true
-}
-
-// Or returns value if set, or given parameter if does not.
-func (o OptNilGetSubscriptionOKCurrentPlan) Or(d GetSubscriptionOKCurrentPlan) GetSubscriptionOKCurrentPlan {
 	if v, ok := o.Get(); ok {
 		return v
 	}
