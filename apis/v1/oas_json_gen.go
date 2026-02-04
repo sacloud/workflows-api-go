@@ -12395,8 +12395,10 @@ func (s *GetSubscriptionOKCurrentPlan) encodeFields(e *jx.Encoder) {
 		json.EncodeDateTime(e, s.ActivateFrom)
 	}
 	{
-		e.FieldStart("activateUntil")
-		s.ActivateUntil.Encode(e, json.EncodeDateTime)
+		if len(s.ActivateUntil) != 0 {
+			e.FieldStart("activateUntil")
+			e.Raw(s.ActivateUntil)
+		}
 	}
 	{
 		e.FieldStart("createdAt")
@@ -12496,7 +12498,9 @@ func (s *GetSubscriptionOKCurrentPlan) Decode(d *jx.Decoder) error {
 		case "activateUntil":
 			requiredBitSet[0] |= 1 << 5
 			if err := func() error {
-				if err := s.ActivateUntil.Decode(d, json.DecodeDateTime); err != nil {
+				v, err := d.RawAppend(nil)
+				s.ActivateUntil = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -12626,8 +12630,10 @@ func (s *GetSubscriptionOKMonthAppliedPlan) encodeFields(e *jx.Encoder) {
 		json.EncodeDateTime(e, s.ActivateFrom)
 	}
 	{
-		e.FieldStart("activateUntil")
-		s.ActivateUntil.Encode(e, json.EncodeDateTime)
+		if len(s.ActivateUntil) != 0 {
+			e.FieldStart("activateUntil")
+			e.Raw(s.ActivateUntil)
+		}
 	}
 	{
 		e.FieldStart("createdAt")
@@ -12752,7 +12758,9 @@ func (s *GetSubscriptionOKMonthAppliedPlan) Decode(d *jx.Decoder) error {
 		case "activateUntil":
 			requiredBitSet[0] |= 1 << 5
 			if err := func() error {
-				if err := s.ActivateUntil.Decode(d, json.DecodeDateTime); err != nil {
+				v, err := d.RawAppend(nil)
+				s.ActivateUntil = jx.Raw(v)
+				if err != nil {
 					return err
 				}
 				return nil
@@ -21307,52 +21315,6 @@ func (s *ListWorkflowUnauthorized) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
-// Encode encodes time.Time as json.
-func (o NilDateTime) Encode(e *jx.Encoder, format func(*jx.Encoder, time.Time)) {
-	if o.Null {
-		e.Null()
-		return
-	}
-	format(e, o.Value)
-}
-
-// Decode decodes time.Time from json.
-func (o *NilDateTime) Decode(d *jx.Decoder, format func(*jx.Decoder) (time.Time, error)) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode NilDateTime to nil")
-	}
-	if d.Next() == jx.Null {
-		if err := d.Null(); err != nil {
-			return err
-		}
-
-		var v time.Time
-		o.Value = v
-		o.Null = true
-		return nil
-	}
-	o.Null = false
-	v, err := format(d)
-	if err != nil {
-		return err
-	}
-	o.Value = v
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s NilDateTime) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e, json.EncodeDateTime)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *NilDateTime) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d, json.DecodeDateTime)
-}
-
 // Encode encodes bool as json.
 func (o OptBool) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21520,6 +21482,39 @@ func (s *OptCreateExecutionReq) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes CreateSubscriptionReq as json.
+func (o OptCreateSubscriptionReq) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes CreateSubscriptionReq from json.
+func (o *OptCreateSubscriptionReq) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCreateSubscriptionReq to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCreateSubscriptionReq) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCreateSubscriptionReq) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes CreateWorkflowCreatedWorkflowServicePrincipalId as json.
 func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21650,6 +21645,39 @@ func (s OptGetExecutionOKExecutionWorkflowServicePrincipalId) MarshalJSON() ([]b
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptGetExecutionOKExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetSubscriptionOKCurrentPlan as json.
+func (o OptGetSubscriptionOKCurrentPlan) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	o.Value.Encode(e)
+}
+
+// Decode decodes GetSubscriptionOKCurrentPlan from json.
+func (o *OptGetSubscriptionOKCurrentPlan) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptGetSubscriptionOKCurrentPlan to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptGetSubscriptionOKCurrentPlan) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptGetSubscriptionOKCurrentPlan) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -21817,55 +21845,6 @@ func (s OptListWorkflowOKWorkflowsItemServicePrincipalId) MarshalJSON() ([]byte,
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptListWorkflowOKWorkflowsItemServicePrincipalId) UnmarshalJSON(data []byte) error {
-	d := jx.DecodeBytes(data)
-	return s.Decode(d)
-}
-
-// Encode encodes GetSubscriptionOKCurrentPlan as json.
-func (o OptNilGetSubscriptionOKCurrentPlan) Encode(e *jx.Encoder) {
-	if !o.Set {
-		return
-	}
-	if o.Null {
-		e.Null()
-		return
-	}
-	o.Value.Encode(e)
-}
-
-// Decode decodes GetSubscriptionOKCurrentPlan from json.
-func (o *OptNilGetSubscriptionOKCurrentPlan) Decode(d *jx.Decoder) error {
-	if o == nil {
-		return errors.New("invalid: unable to decode OptNilGetSubscriptionOKCurrentPlan to nil")
-	}
-	if d.Next() == jx.Null {
-		if err := d.Null(); err != nil {
-			return err
-		}
-
-		var v GetSubscriptionOKCurrentPlan
-		o.Value = v
-		o.Set = true
-		o.Null = true
-		return nil
-	}
-	o.Set = true
-	o.Null = false
-	if err := o.Value.Decode(d); err != nil {
-		return err
-	}
-	return nil
-}
-
-// MarshalJSON implements stdjson.Marshaler.
-func (s OptNilGetSubscriptionOKCurrentPlan) MarshalJSON() ([]byte, error) {
-	e := jx.Encoder{}
-	s.Encode(&e)
-	return e.Bytes(), nil
-}
-
-// UnmarshalJSON implements stdjson.Unmarshaler.
-func (s *OptNilGetSubscriptionOKCurrentPlan) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }

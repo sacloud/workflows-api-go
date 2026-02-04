@@ -1912,7 +1912,7 @@ func (s *GetSubscriptionOKCurrentPlan) SetFake() {
 	}
 	{
 		{
-			s.ActivateUntil.SetFake()
+			s.ActivateUntil = []byte("null")
 		}
 	}
 	{
@@ -1961,7 +1961,7 @@ func (s *GetSubscriptionOKMonthAppliedPlan) SetFake() {
 	}
 	{
 		{
-			s.ActivateUntil.SetFake()
+			s.ActivateUntil = []byte("null")
 		}
 	}
 	{
@@ -3304,11 +3304,6 @@ func (s *ListWorkflowUnauthorized) SetFake() {
 }
 
 // SetFake set fake values.
-func (s *NilDateTime) SetFake() {
-	s.Null = true
-}
-
-// SetFake set fake values.
 func (s *OptBool) SetFake() {
 	var elem bool
 	{
@@ -3354,6 +3349,15 @@ func (s *OptCreateExecutionReq) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptCreateSubscriptionReq) SetFake() {
+	var elem CreateSubscriptionReq
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 	var elem CreateWorkflowCreatedWorkflowServicePrincipalId
 	{
@@ -3383,6 +3387,15 @@ func (s *OptDateTime) SetFake() {
 // SetFake set fake values.
 func (s *OptGetExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem GetExecutionOKExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptGetSubscriptionOKCurrentPlan) SetFake() {
+	var elem GetSubscriptionOKCurrentPlan
 	{
 		elem.SetFake()
 	}
@@ -3432,12 +3445,6 @@ func (s *OptListWorkflowOKWorkflowsItemServicePrincipalId) SetFake() {
 		elem.SetFake()
 	}
 	s.SetTo(elem)
-}
-
-// SetFake set fake values.
-func (s *OptNilGetSubscriptionOKCurrentPlan) SetFake() {
-	s.Null = true
-	s.Set = true
 }
 
 // SetFake set fake values.
