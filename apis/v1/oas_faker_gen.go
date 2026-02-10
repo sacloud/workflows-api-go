@@ -163,6 +163,16 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) SetFake() {
+	*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -411,6 +421,16 @@ func (s *CancelExecutionOKExecutionWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CancelExecutionOKExecutionWorkflowConcurrencyMode) SetFake() {
+	*s = CancelExecutionOKExecutionWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -631,6 +651,16 @@ func (s *CreateExecutionCreatedExecutionWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateExecutionCreatedExecutionWorkflowConcurrencyMode) SetFake() {
+	*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -893,6 +923,16 @@ func (s *CreateWorkflowCreatedWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateWorkflowCreatedWorkflowConcurrencyMode) SetFake() {
+	*s = CreateWorkflowCreatedWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -1005,6 +1045,16 @@ func (s *CreateWorkflowReq) SetFake() {
 			s.ServicePrincipalId.SetFake()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *CreateWorkflowReqConcurrencyMode) SetFake() {
+	*s = CreateWorkflowReqConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -1773,6 +1823,16 @@ func (s *GetExecutionOKExecutionWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetExecutionOKExecutionWorkflowConcurrencyMode) SetFake() {
+	*s = GetExecutionOKExecutionWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -2144,6 +2204,16 @@ func (s *GetWorkflowOKWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *GetWorkflowOKWorkflowConcurrencyMode) SetFake() {
+	*s = GetWorkflowOKWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -2687,6 +2757,16 @@ func (s *ListExecutionOKExecutionsItemWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListExecutionOKExecutionsItemWorkflowConcurrencyMode) SetFake() {
+	*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -3008,6 +3088,16 @@ func (s *ListWorkflowOKWorkflowsItem) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *ListWorkflowOKWorkflowsItemConcurrencyMode) SetFake() {
+	*s = ListWorkflowOKWorkflowsItemConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -3313,6 +3403,15 @@ func (s *OptBool) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) SetFake() {
+	var elem CancelExecutionAcceptedExecutionWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
 	{
@@ -3322,8 +3421,26 @@ func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) SetFake(
 }
 
 // SetFake set fake values.
+func (s *OptCancelExecutionOKExecutionWorkflowConcurrencyMode) SetFake() {
+	var elem CancelExecutionOKExecutionWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) SetFake() {
 	var elem CancelExecutionOKExecutionWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) SetFake() {
+	var elem CreateExecutionCreatedExecutionWorkflowConcurrencyMode
 	{
 		elem.SetFake()
 	}
@@ -3358,8 +3475,26 @@ func (s *OptCreateSubscriptionReq) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptCreateWorkflowCreatedWorkflowConcurrencyMode) SetFake() {
+	var elem CreateWorkflowCreatedWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) SetFake() {
 	var elem CreateWorkflowCreatedWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptCreateWorkflowReqConcurrencyMode) SetFake() {
+	var elem CreateWorkflowReqConcurrencyMode
 	{
 		elem.SetFake()
 	}
@@ -3380,6 +3515,15 @@ func (s *OptDateTime) SetFake() {
 	var elem time.Time
 	{
 		elem = time.Now()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptGetExecutionOKExecutionWorkflowConcurrencyMode) SetFake() {
+	var elem GetExecutionOKExecutionWorkflowConcurrencyMode
+	{
+		elem.SetFake()
 	}
 	s.SetTo(elem)
 }
@@ -3412,6 +3556,15 @@ func (s *OptGetSubscriptionOKMonthAppliedPlan) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptGetWorkflowOKWorkflowConcurrencyMode) SetFake() {
+	var elem GetWorkflowOKWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptGetWorkflowOKWorkflowServicePrincipalId) SetFake() {
 	var elem GetWorkflowOKWorkflowServicePrincipalId
 	{
@@ -3430,8 +3583,26 @@ func (s *OptInt) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) SetFake() {
+	var elem ListExecutionOKExecutionsItemWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptListExecutionOKExecutionsItemWorkflowServicePrincipalId) SetFake() {
 	var elem ListExecutionOKExecutionsItemWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptListWorkflowOKWorkflowsItemConcurrencyMode) SetFake() {
+	var elem ListWorkflowOKWorkflowsItemConcurrencyMode
 	{
 		elem.SetFake()
 	}
@@ -3457,8 +3628,26 @@ func (s *OptString) SetFake() {
 }
 
 // SetFake set fake values.
+func (s *OptUpdateWorkflowOKWorkflowConcurrencyMode) SetFake() {
+	var elem UpdateWorkflowOKWorkflowConcurrencyMode
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
 func (s *OptUpdateWorkflowOKWorkflowServicePrincipalId) SetFake() {
 	var elem UpdateWorkflowOKWorkflowServicePrincipalId
+	{
+		elem.SetFake()
+	}
+	s.SetTo(elem)
+}
+
+// SetFake set fake values.
+func (s *OptUpdateWorkflowReqConcurrencyMode) SetFake() {
+	var elem UpdateWorkflowReqConcurrencyMode
 	{
 		elem.SetFake()
 	}
@@ -3589,6 +3778,16 @@ func (s *UpdateWorkflowOKWorkflow) SetFake() {
 			s.UpdatedAt = time.Now()
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateWorkflowOKWorkflowConcurrencyMode) SetFake() {
+	*s = UpdateWorkflowOKWorkflowConcurrencyModeParallel
 }
 
 // SetFake set fake values.
@@ -3644,6 +3843,16 @@ func (s *UpdateWorkflowReq) SetFake() {
 			}
 		}
 	}
+	{
+		{
+			s.ConcurrencyMode.SetFake()
+		}
+	}
+}
+
+// SetFake set fake values.
+func (s *UpdateWorkflowReqConcurrencyMode) SetFake() {
+	*s = UpdateWorkflowReqConcurrencyModeParallel
 }
 
 // SetFake set fake values.

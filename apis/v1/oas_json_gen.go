@@ -573,9 +573,15 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow = [9]string{
+var jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -585,6 +591,7 @@ var jsonFieldsNameOfCancelExecutionAcceptedExecutionWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes CancelExecutionAcceptedExecutionWorkflow from json.
@@ -706,6 +713,16 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -759,6 +776,48 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) MarshalJSON() ([]byte, error)
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CancelExecutionAcceptedExecutionWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CancelExecutionAcceptedExecutionWorkflowConcurrencyMode as json.
+func (s CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CancelExecutionAcceptedExecutionWorkflowConcurrencyMode from json.
+func (s *CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionAcceptedExecutionWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CancelExecutionAcceptedExecutionWorkflowConcurrencyMode(v) {
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue
+	default:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -2034,9 +2093,15 @@ func (s *CancelExecutionOKExecutionWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfCancelExecutionOKExecutionWorkflow = [9]string{
+var jsonFieldsNameOfCancelExecutionOKExecutionWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -2046,6 +2111,7 @@ var jsonFieldsNameOfCancelExecutionOKExecutionWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes CancelExecutionOKExecutionWorkflow from json.
@@ -2167,6 +2233,16 @@ func (s *CancelExecutionOKExecutionWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -2220,6 +2296,48 @@ func (s *CancelExecutionOKExecutionWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CancelExecutionOKExecutionWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CancelExecutionOKExecutionWorkflowConcurrencyMode as json.
+func (s CancelExecutionOKExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CancelExecutionOKExecutionWorkflowConcurrencyMode from json.
+func (s *CancelExecutionOKExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CancelExecutionOKExecutionWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CancelExecutionOKExecutionWorkflowConcurrencyMode(v) {
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeParallel
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeLock:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeLock
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeQueue
+	default:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CancelExecutionOKExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CancelExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -3269,9 +3387,15 @@ func (s *CreateExecutionCreatedExecutionWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfCreateExecutionCreatedExecutionWorkflow = [9]string{
+var jsonFieldsNameOfCreateExecutionCreatedExecutionWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -3281,6 +3405,7 @@ var jsonFieldsNameOfCreateExecutionCreatedExecutionWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes CreateExecutionCreatedExecutionWorkflow from json.
@@ -3402,6 +3527,16 @@ func (s *CreateExecutionCreatedExecutionWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -3455,6 +3590,48 @@ func (s *CreateExecutionCreatedExecutionWorkflow) MarshalJSON() ([]byte, error) 
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CreateExecutionCreatedExecutionWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CreateExecutionCreatedExecutionWorkflowConcurrencyMode as json.
+func (s CreateExecutionCreatedExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CreateExecutionCreatedExecutionWorkflowConcurrencyMode from json.
+func (s *CreateExecutionCreatedExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CreateExecutionCreatedExecutionWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CreateExecutionCreatedExecutionWorkflowConcurrencyMode(v) {
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue
+	default:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CreateExecutionCreatedExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CreateExecutionCreatedExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -5109,9 +5286,15 @@ func (s *CreateWorkflowCreatedWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfCreateWorkflowCreatedWorkflow = [9]string{
+var jsonFieldsNameOfCreateWorkflowCreatedWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -5121,6 +5304,7 @@ var jsonFieldsNameOfCreateWorkflowCreatedWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes CreateWorkflowCreatedWorkflow from json.
@@ -5242,6 +5426,16 @@ func (s *CreateWorkflowCreatedWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -5295,6 +5489,48 @@ func (s *CreateWorkflowCreatedWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CreateWorkflowCreatedWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CreateWorkflowCreatedWorkflowConcurrencyMode as json.
+func (s CreateWorkflowCreatedWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CreateWorkflowCreatedWorkflowConcurrencyMode from json.
+func (s *CreateWorkflowCreatedWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CreateWorkflowCreatedWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CreateWorkflowCreatedWorkflowConcurrencyMode(v) {
+	case CreateWorkflowCreatedWorkflowConcurrencyModeParallel:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeParallel
+	case CreateWorkflowCreatedWorkflowConcurrencyModeLock:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeLock
+	case CreateWorkflowCreatedWorkflowConcurrencyModeQueue:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeQueue
+	default:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CreateWorkflowCreatedWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CreateWorkflowCreatedWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -5837,9 +6073,15 @@ func (s *CreateWorkflowReq) encodeFields(e *jx.Encoder) {
 			s.ServicePrincipalId.Encode(e)
 		}
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfCreateWorkflowReq = [8]string{
+var jsonFieldsNameOfCreateWorkflowReq = [9]string{
 	0: "Name",
 	1: "Description",
 	2: "Runbook",
@@ -5848,6 +6090,7 @@ var jsonFieldsNameOfCreateWorkflowReq = [8]string{
 	5: "Tags",
 	6: "RevisionAlias",
 	7: "ServicePrincipalId",
+	8: "ConcurrencyMode",
 }
 
 // Decode decodes CreateWorkflowReq from json.
@@ -5855,7 +6098,7 @@ func (s *CreateWorkflowReq) Decode(d *jx.Decoder) error {
 	if s == nil {
 		return errors.New("invalid: unable to decode CreateWorkflowReq to nil")
 	}
-	var requiredBitSet [1]uint8
+	var requiredBitSet [2]uint8
 
 	if err := d.ObjBytes(func(d *jx.Decoder, k []byte) error {
 		switch string(k) {
@@ -5954,6 +6197,16 @@ func (s *CreateWorkflowReq) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"ServicePrincipalId\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -5963,8 +6216,9 @@ func (s *CreateWorkflowReq) Decode(d *jx.Decoder) error {
 	}
 	// Validate required fields.
 	var failures []validate.FieldError
-	for i, mask := range [1]uint8{
+	for i, mask := range [2]uint8{
 		0b00011101,
+		0b00000000,
 	} {
 		if result := (requiredBitSet[i] & mask) ^ mask; result != 0 {
 			// Mask only required fields and check equality to mask using XOR.
@@ -6006,6 +6260,48 @@ func (s *CreateWorkflowReq) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *CreateWorkflowReq) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CreateWorkflowReqConcurrencyMode as json.
+func (s CreateWorkflowReqConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes CreateWorkflowReqConcurrencyMode from json.
+func (s *CreateWorkflowReqConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode CreateWorkflowReqConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch CreateWorkflowReqConcurrencyMode(v) {
+	case CreateWorkflowReqConcurrencyModeParallel:
+		*s = CreateWorkflowReqConcurrencyModeParallel
+	case CreateWorkflowReqConcurrencyModeLock:
+		*s = CreateWorkflowReqConcurrencyModeLock
+	case CreateWorkflowReqConcurrencyModeQueue:
+		*s = CreateWorkflowReqConcurrencyModeQueue
+	default:
+		*s = CreateWorkflowReqConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s CreateWorkflowReqConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *CreateWorkflowReqConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -11334,9 +11630,15 @@ func (s *GetExecutionOKExecutionWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfGetExecutionOKExecutionWorkflow = [9]string{
+var jsonFieldsNameOfGetExecutionOKExecutionWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -11346,6 +11648,7 @@ var jsonFieldsNameOfGetExecutionOKExecutionWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes GetExecutionOKExecutionWorkflow from json.
@@ -11467,6 +11770,16 @@ func (s *GetExecutionOKExecutionWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -11520,6 +11833,48 @@ func (s *GetExecutionOKExecutionWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetExecutionOKExecutionWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetExecutionOKExecutionWorkflowConcurrencyMode as json.
+func (s GetExecutionOKExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes GetExecutionOKExecutionWorkflowConcurrencyMode from json.
+func (s *GetExecutionOKExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetExecutionOKExecutionWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch GetExecutionOKExecutionWorkflowConcurrencyMode(v) {
+	case GetExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeParallel
+	case GetExecutionOKExecutionWorkflowConcurrencyModeLock:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeLock
+	case GetExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeQueue
+	default:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s GetExecutionOKExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -13649,9 +14004,15 @@ func (s *GetWorkflowOKWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfGetWorkflowOKWorkflow = [9]string{
+var jsonFieldsNameOfGetWorkflowOKWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -13661,6 +14022,7 @@ var jsonFieldsNameOfGetWorkflowOKWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes GetWorkflowOKWorkflow from json.
@@ -13782,6 +14144,16 @@ func (s *GetWorkflowOKWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -13835,6 +14207,48 @@ func (s *GetWorkflowOKWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *GetWorkflowOKWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes GetWorkflowOKWorkflowConcurrencyMode as json.
+func (s GetWorkflowOKWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes GetWorkflowOKWorkflowConcurrencyMode from json.
+func (s *GetWorkflowOKWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode GetWorkflowOKWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch GetWorkflowOKWorkflowConcurrencyMode(v) {
+	case GetWorkflowOKWorkflowConcurrencyModeParallel:
+		*s = GetWorkflowOKWorkflowConcurrencyModeParallel
+	case GetWorkflowOKWorkflowConcurrencyModeLock:
+		*s = GetWorkflowOKWorkflowConcurrencyModeLock
+	case GetWorkflowOKWorkflowConcurrencyModeQueue:
+		*s = GetWorkflowOKWorkflowConcurrencyModeQueue
+	default:
+		*s = GetWorkflowOKWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s GetWorkflowOKWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *GetWorkflowOKWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -17042,9 +17456,15 @@ func (s *ListExecutionOKExecutionsItemWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfListExecutionOKExecutionsItemWorkflow = [9]string{
+var jsonFieldsNameOfListExecutionOKExecutionsItemWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -17054,6 +17474,7 @@ var jsonFieldsNameOfListExecutionOKExecutionsItemWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes ListExecutionOKExecutionsItemWorkflow from json.
@@ -17175,6 +17596,16 @@ func (s *ListExecutionOKExecutionsItemWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -17228,6 +17659,48 @@ func (s *ListExecutionOKExecutionsItemWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ListExecutionOKExecutionsItemWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes ListExecutionOKExecutionsItemWorkflowConcurrencyMode as json.
+func (s ListExecutionOKExecutionsItemWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes ListExecutionOKExecutionsItemWorkflowConcurrencyMode from json.
+func (s *ListExecutionOKExecutionsItemWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ListExecutionOKExecutionsItemWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch ListExecutionOKExecutionsItemWorkflowConcurrencyMode(v) {
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue
+	default:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s ListExecutionOKExecutionsItemWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ListExecutionOKExecutionsItemWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -19092,9 +19565,15 @@ func (s *ListWorkflowOKWorkflowsItem) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfListWorkflowOKWorkflowsItem = [9]string{
+var jsonFieldsNameOfListWorkflowOKWorkflowsItem = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -19104,6 +19583,7 @@ var jsonFieldsNameOfListWorkflowOKWorkflowsItem = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes ListWorkflowOKWorkflowsItem from json.
@@ -19225,6 +19705,16 @@ func (s *ListWorkflowOKWorkflowsItem) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -19278,6 +19768,48 @@ func (s *ListWorkflowOKWorkflowsItem) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *ListWorkflowOKWorkflowsItem) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes ListWorkflowOKWorkflowsItemConcurrencyMode as json.
+func (s ListWorkflowOKWorkflowsItemConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes ListWorkflowOKWorkflowsItemConcurrencyMode from json.
+func (s *ListWorkflowOKWorkflowsItemConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode ListWorkflowOKWorkflowsItemConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch ListWorkflowOKWorkflowsItemConcurrencyMode(v) {
+	case ListWorkflowOKWorkflowsItemConcurrencyModeParallel:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeParallel
+	case ListWorkflowOKWorkflowsItemConcurrencyModeLock:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeLock
+	case ListWorkflowOKWorkflowsItemConcurrencyModeQueue:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeQueue
+	default:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s ListWorkflowOKWorkflowsItemConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *ListWorkflowOKWorkflowsItemConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -21350,6 +21882,39 @@ func (s *OptBool) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes CancelExecutionAcceptedExecutionWorkflowConcurrencyMode as json.
+func (o OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes CancelExecutionAcceptedExecutionWorkflowConcurrencyMode from json.
+func (o *OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes CancelExecutionAcceptedExecutionWorkflowServicePrincipalId as json.
 func (o OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21383,6 +21948,39 @@ func (s *OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Unmarsha
 	return s.Decode(d)
 }
 
+// Encode encodes CancelExecutionOKExecutionWorkflowConcurrencyMode as json.
+func (o OptCancelExecutionOKExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes CancelExecutionOKExecutionWorkflowConcurrencyMode from json.
+func (o *OptCancelExecutionOKExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCancelExecutionOKExecutionWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCancelExecutionOKExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCancelExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes CancelExecutionOKExecutionWorkflowServicePrincipalId as json.
 func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21412,6 +22010,39 @@ func (s OptCancelExecutionOKExecutionWorkflowServicePrincipalId) MarshalJSON() (
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptCancelExecutionOKExecutionWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CreateExecutionCreatedExecutionWorkflowConcurrencyMode as json.
+func (o OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes CreateExecutionCreatedExecutionWorkflowConcurrencyMode from json.
+func (o *OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -21515,6 +22146,39 @@ func (s *OptCreateSubscriptionReq) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes CreateWorkflowCreatedWorkflowConcurrencyMode as json.
+func (o OptCreateWorkflowCreatedWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes CreateWorkflowCreatedWorkflowConcurrencyMode from json.
+func (o *OptCreateWorkflowCreatedWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCreateWorkflowCreatedWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCreateWorkflowCreatedWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCreateWorkflowCreatedWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes CreateWorkflowCreatedWorkflowServicePrincipalId as json.
 func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21544,6 +22208,39 @@ func (s OptCreateWorkflowCreatedWorkflowServicePrincipalId) MarshalJSON() ([]byt
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptCreateWorkflowCreatedWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes CreateWorkflowReqConcurrencyMode as json.
+func (o OptCreateWorkflowReqConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes CreateWorkflowReqConcurrencyMode from json.
+func (o *OptCreateWorkflowReqConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptCreateWorkflowReqConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptCreateWorkflowReqConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptCreateWorkflowReqConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -21614,6 +22311,39 @@ func (s OptDateTime) MarshalJSON() ([]byte, error) {
 func (s *OptDateTime) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d, json.DecodeDateTime)
+}
+
+// Encode encodes GetExecutionOKExecutionWorkflowConcurrencyMode as json.
+func (o OptGetExecutionOKExecutionWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes GetExecutionOKExecutionWorkflowConcurrencyMode from json.
+func (o *OptGetExecutionOKExecutionWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptGetExecutionOKExecutionWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptGetExecutionOKExecutionWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptGetExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
 }
 
 // Encode encodes GetExecutionOKExecutionWorkflowServicePrincipalId as json.
@@ -21715,6 +22445,39 @@ func (s *OptGetSubscriptionOKMonthAppliedPlan) UnmarshalJSON(data []byte) error 
 	return s.Decode(d)
 }
 
+// Encode encodes GetWorkflowOKWorkflowConcurrencyMode as json.
+func (o OptGetWorkflowOKWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes GetWorkflowOKWorkflowConcurrencyMode from json.
+func (o *OptGetWorkflowOKWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptGetWorkflowOKWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptGetWorkflowOKWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptGetWorkflowOKWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes GetWorkflowOKWorkflowServicePrincipalId as json.
 func (o OptGetWorkflowOKWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21783,6 +22546,39 @@ func (s *OptInt) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes ListExecutionOKExecutionsItemWorkflowConcurrencyMode as json.
+func (o OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes ListExecutionOKExecutionsItemWorkflowConcurrencyMode from json.
+func (o *OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptListExecutionOKExecutionsItemWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes ListExecutionOKExecutionsItemWorkflowServicePrincipalId as json.
 func (o OptListExecutionOKExecutionsItemWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21812,6 +22608,39 @@ func (s OptListExecutionOKExecutionsItemWorkflowServicePrincipalId) MarshalJSON(
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptListExecutionOKExecutionsItemWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes ListWorkflowOKWorkflowsItemConcurrencyMode as json.
+func (o OptListWorkflowOKWorkflowsItemConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes ListWorkflowOKWorkflowsItemConcurrencyMode from json.
+func (o *OptListWorkflowOKWorkflowsItemConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptListWorkflowOKWorkflowsItemConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptListWorkflowOKWorkflowsItemConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptListWorkflowOKWorkflowsItemConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -21884,6 +22713,39 @@ func (s *OptString) UnmarshalJSON(data []byte) error {
 	return s.Decode(d)
 }
 
+// Encode encodes UpdateWorkflowOKWorkflowConcurrencyMode as json.
+func (o OptUpdateWorkflowOKWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes UpdateWorkflowOKWorkflowConcurrencyMode from json.
+func (o *OptUpdateWorkflowOKWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptUpdateWorkflowOKWorkflowConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptUpdateWorkflowOKWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptUpdateWorkflowOKWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
 // Encode encodes UpdateWorkflowOKWorkflowServicePrincipalId as json.
 func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Encode(e *jx.Encoder) {
 	if !o.Set {
@@ -21913,6 +22775,39 @@ func (s OptUpdateWorkflowOKWorkflowServicePrincipalId) MarshalJSON() ([]byte, er
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *OptUpdateWorkflowOKWorkflowServicePrincipalId) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes UpdateWorkflowReqConcurrencyMode as json.
+func (o OptUpdateWorkflowReqConcurrencyMode) Encode(e *jx.Encoder) {
+	if !o.Set {
+		return
+	}
+	e.Str(string(o.Value))
+}
+
+// Decode decodes UpdateWorkflowReqConcurrencyMode from json.
+func (o *OptUpdateWorkflowReqConcurrencyMode) Decode(d *jx.Decoder) error {
+	if o == nil {
+		return errors.New("invalid: unable to decode OptUpdateWorkflowReqConcurrencyMode to nil")
+	}
+	o.Set = true
+	if err := o.Value.Decode(d); err != nil {
+		return err
+	}
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s OptUpdateWorkflowReqConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *OptUpdateWorkflowReqConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -22533,9 +23428,15 @@ func (s *UpdateWorkflowOKWorkflow) encodeFields(e *jx.Encoder) {
 		e.FieldStart("UpdatedAt")
 		json.EncodeDateTime(e, s.UpdatedAt)
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfUpdateWorkflowOKWorkflow = [9]string{
+var jsonFieldsNameOfUpdateWorkflowOKWorkflow = [10]string{
 	0: "Id",
 	1: "Name",
 	2: "Description",
@@ -22545,6 +23446,7 @@ var jsonFieldsNameOfUpdateWorkflowOKWorkflow = [9]string{
 	6: "ServicePrincipalId",
 	7: "CreatedAt",
 	8: "UpdatedAt",
+	9: "ConcurrencyMode",
 }
 
 // Decode decodes UpdateWorkflowOKWorkflow from json.
@@ -22666,6 +23568,16 @@ func (s *UpdateWorkflowOKWorkflow) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"UpdatedAt\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -22719,6 +23631,48 @@ func (s *UpdateWorkflowOKWorkflow) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UpdateWorkflowOKWorkflow) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes UpdateWorkflowOKWorkflowConcurrencyMode as json.
+func (s UpdateWorkflowOKWorkflowConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes UpdateWorkflowOKWorkflowConcurrencyMode from json.
+func (s *UpdateWorkflowOKWorkflowConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode UpdateWorkflowOKWorkflowConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch UpdateWorkflowOKWorkflowConcurrencyMode(v) {
+	case UpdateWorkflowOKWorkflowConcurrencyModeParallel:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeParallel
+	case UpdateWorkflowOKWorkflowConcurrencyModeLock:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeLock
+	case UpdateWorkflowOKWorkflowConcurrencyModeQueue:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeQueue
+	default:
+		*s = UpdateWorkflowOKWorkflowConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s UpdateWorkflowOKWorkflowConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *UpdateWorkflowOKWorkflowConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
@@ -22912,14 +23866,21 @@ func (s *UpdateWorkflowReq) encodeFields(e *jx.Encoder) {
 			e.ArrEnd()
 		}
 	}
+	{
+		if s.ConcurrencyMode.Set {
+			e.FieldStart("ConcurrencyMode")
+			s.ConcurrencyMode.Encode(e)
+		}
+	}
 }
 
-var jsonFieldsNameOfUpdateWorkflowReq = [5]string{
+var jsonFieldsNameOfUpdateWorkflowReq = [6]string{
 	0: "Name",
 	1: "Description",
 	2: "Publish",
 	3: "Logging",
 	4: "Tags",
+	5: "ConcurrencyMode",
 }
 
 // Decode decodes UpdateWorkflowReq from json.
@@ -22987,6 +23948,16 @@ func (s *UpdateWorkflowReq) Decode(d *jx.Decoder) error {
 			}(); err != nil {
 				return errors.Wrap(err, "decode field \"Tags\"")
 			}
+		case "ConcurrencyMode":
+			if err := func() error {
+				s.ConcurrencyMode.Reset()
+				if err := s.ConcurrencyMode.Decode(d); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return errors.Wrap(err, "decode field \"ConcurrencyMode\"")
+			}
 		default:
 			return d.Skip()
 		}
@@ -23007,6 +23978,48 @@ func (s *UpdateWorkflowReq) MarshalJSON() ([]byte, error) {
 
 // UnmarshalJSON implements stdjson.Unmarshaler.
 func (s *UpdateWorkflowReq) UnmarshalJSON(data []byte) error {
+	d := jx.DecodeBytes(data)
+	return s.Decode(d)
+}
+
+// Encode encodes UpdateWorkflowReqConcurrencyMode as json.
+func (s UpdateWorkflowReqConcurrencyMode) Encode(e *jx.Encoder) {
+	e.Str(string(s))
+}
+
+// Decode decodes UpdateWorkflowReqConcurrencyMode from json.
+func (s *UpdateWorkflowReqConcurrencyMode) Decode(d *jx.Decoder) error {
+	if s == nil {
+		return errors.New("invalid: unable to decode UpdateWorkflowReqConcurrencyMode to nil")
+	}
+	v, err := d.StrBytes()
+	if err != nil {
+		return err
+	}
+	// Try to use constant string.
+	switch UpdateWorkflowReqConcurrencyMode(v) {
+	case UpdateWorkflowReqConcurrencyModeParallel:
+		*s = UpdateWorkflowReqConcurrencyModeParallel
+	case UpdateWorkflowReqConcurrencyModeLock:
+		*s = UpdateWorkflowReqConcurrencyModeLock
+	case UpdateWorkflowReqConcurrencyModeQueue:
+		*s = UpdateWorkflowReqConcurrencyModeQueue
+	default:
+		*s = UpdateWorkflowReqConcurrencyMode(v)
+	}
+
+	return nil
+}
+
+// MarshalJSON implements stdjson.Marshaler.
+func (s UpdateWorkflowReqConcurrencyMode) MarshalJSON() ([]byte, error) {
+	e := jx.Encoder{}
+	s.Encode(&e)
+	return e.Bytes(), nil
+}
+
+// UnmarshalJSON implements stdjson.Unmarshaler.
+func (s *UpdateWorkflowReqConcurrencyMode) UnmarshalJSON(data []byte) error {
 	d := jx.DecodeBytes(data)
 	return s.Decode(d)
 }
