@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.3.0](https://github.com/sacloud/workflows-api-go/compare/v0.2.0...v0.3.0) - 2026-02-10
+- OpenAPI定義ファイルの追加 by @a2not in https://github.com/sacloud/workflows-api-go/pull/36
+- chore(openapi): OpenAPI定義の更新を反映 by @a2not in https://github.com/sacloud/workflows-api-go/pull/40
+- go: bump github.com/sacloud/saclient-go from 0.2.7 to 0.3.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/38
+- ci: bump Songmu/tagpr from 1.10.0 to 1.15.0 by @dependabot[bot] in https://github.com/sacloud/workflows-api-go/pull/39
+
 ## [v0.2.0](https://github.com/sacloud/workflows-api-go/compare/v0.1.0...v0.2.0) - 2026-01-23
 - OpenAPI specの更新に追従 by @a2not in https://github.com/sacloud/workflows-api-go/pull/22
 - feat(workflow): ListWorkflowSuggest APIの実装 by @a2not in https://github.com/sacloud/workflows-api-go/pull/27
