@@ -351,10 +351,41 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Validate() error {
@@ -763,10 +794,41 @@ func (s *CancelExecutionOKExecutionWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s CancelExecutionOKExecutionWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s CancelExecutionOKExecutionWorkflowServicePrincipalId) Validate() error {
@@ -1175,10 +1237,41 @@ func (s *CreateExecutionCreatedExecutionWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s CreateExecutionCreatedExecutionWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s CreateExecutionCreatedExecutionWorkflowServicePrincipalId) Validate() error {
@@ -1531,10 +1624,41 @@ func (s *CreateWorkflowCreatedWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s CreateWorkflowCreatedWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s CreateWorkflowCreatedWorkflowServicePrincipalId) Validate() error {
@@ -1733,10 +1857,41 @@ func (s *CreateWorkflowReq) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s CreateWorkflowReqConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s CreateWorkflowReqServicePrincipalId) Validate() error {
@@ -2363,10 +2518,41 @@ func (s *GetExecutionOKExecutionWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s GetExecutionOKExecutionWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s GetExecutionOKExecutionWorkflowServicePrincipalId) Validate() error {
@@ -2733,10 +2919,41 @@ func (s *GetWorkflowOKWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s GetWorkflowOKWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s GetWorkflowOKWorkflowServicePrincipalId) Validate() error {
@@ -3617,10 +3834,41 @@ func (s *ListExecutionOKExecutionsItemWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s ListExecutionOKExecutionsItemWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s ListExecutionOKExecutionsItemWorkflowServicePrincipalId) Validate() error {
@@ -4069,10 +4317,41 @@ func (s *ListWorkflowOKWorkflowsItem) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s ListWorkflowOKWorkflowsItemConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s ListWorkflowOKWorkflowsItemServicePrincipalId) Validate() error {
@@ -4687,10 +4966,41 @@ func (s *UpdateWorkflowOKWorkflow) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s UpdateWorkflowOKWorkflowConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s UpdateWorkflowOKWorkflowServicePrincipalId) Validate() error {
@@ -4848,10 +5158,41 @@ func (s *UpdateWorkflowReq) Validate() error {
 			Error: err,
 		})
 	}
+	if err := func() error {
+		if value, ok := s.ConcurrencyMode.Get(); ok {
+			if err := func() error {
+				if err := value.Validate(); err != nil {
+					return err
+				}
+				return nil
+			}(); err != nil {
+				return err
+			}
+		}
+		return nil
+	}(); err != nil {
+		failures = append(failures, validate.FieldError{
+			Name:  "ConcurrencyMode",
+			Error: err,
+		})
+	}
 	if len(failures) > 0 {
 		return &validate.Error{Fields: failures}
 	}
 	return nil
+}
+
+func (s UpdateWorkflowReqConcurrencyMode) Validate() error {
+	switch s {
+	case "parallel":
+		return nil
+	case "lock":
+		return nil
+	case "queue":
+		return nil
+	default:
+		return errors.Errorf("invalid value: %v", s)
+	}
 }
 
 func (s *UpdateWorkflowReqTagsItem) Validate() error {

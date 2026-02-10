@@ -98,6 +98,14 @@
                         "type": "number"
                       }
                     ]
+                  },
+                  "ConcurrencyMode": {
+                    "enum": [
+                      "parallel",
+                      "lock",
+                      "queue"
+                    ],
+                    "type": "string"
                   }
                 },
                 "required": [
@@ -118,7 +126,8 @@
                     "Name": "sampleString"
                   }
                 ],
-                "RevisionAlias": "sampleString"
+                "RevisionAlias": "sampleString",
+                "ConcurrencyMode": "parallel"
               }
             }
           }
@@ -193,6 +202,14 @@
                         "UpdatedAt": {
                           "format": "date-time",
                           "type": "string"
+                        },
+                        "ConcurrencyMode": {
+                          "enum": [
+                            "parallel",
+                            "lock",
+                            "queue"
+                          ],
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -225,7 +242,8 @@
                       }
                     ],
                     "CreatedAt": "2020-01-01T00:00:00Z",
-                    "UpdatedAt": "2020-01-01T00:00:00Z"
+                    "UpdatedAt": "2020-01-01T00:00:00Z",
+                    "ConcurrencyMode": "parallel"
                   }
                 }
               }
@@ -252,7 +270,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -278,7 +296,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -304,7 +322,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -330,7 +348,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -356,7 +374,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -550,6 +568,14 @@
                           "UpdatedAt": {
                             "format": "date-time",
                             "type": "string"
+                          },
+                          "ConcurrencyMode": {
+                            "enum": [
+                              "parallel",
+                              "lock",
+                              "queue"
+                            ],
+                            "type": "string"
                           }
                         },
                         "required": [
@@ -590,7 +616,8 @@
                         }
                       ],
                       "CreatedAt": "2020-01-01T00:00:00Z",
-                      "UpdatedAt": "2020-01-01T00:00:00Z"
+                      "UpdatedAt": "2020-01-01T00:00:00Z",
+                      "ConcurrencyMode": "parallel"
                     }
                   ]
                 }
@@ -618,7 +645,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -644,7 +671,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -670,7 +697,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -696,7 +723,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -722,7 +749,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -899,7 +926,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -925,7 +952,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -951,7 +978,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -977,7 +1004,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -1003,7 +1030,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -1103,6 +1130,14 @@
                         "UpdatedAt": {
                           "format": "date-time",
                           "type": "string"
+                        },
+                        "ConcurrencyMode": {
+                          "enum": [
+                            "parallel",
+                            "lock",
+                            "queue"
+                          ],
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -1135,7 +1170,8 @@
                       }
                     ],
                     "CreatedAt": "2020-01-01T00:00:00Z",
-                    "UpdatedAt": "2020-01-01T00:00:00Z"
+                    "UpdatedAt": "2020-01-01T00:00:00Z",
+                    "ConcurrencyMode": "parallel"
                   }
                 }
               }
@@ -1162,7 +1198,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -1188,7 +1224,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -1214,7 +1250,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -1240,7 +1276,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -1266,7 +1302,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -1333,6 +1369,14 @@
                         "Name"
                       ]
                     }
+                  },
+                  "ConcurrencyMode": {
+                    "enum": [
+                      "parallel",
+                      "lock",
+                      "queue"
+                    ],
+                    "type": "string"
                   }
                 }
               },
@@ -1345,7 +1389,8 @@
                   {
                     "Name": "sampleString"
                   }
-                ]
+                ],
+                "ConcurrencyMode": "parallel"
               }
             }
           }
@@ -1420,6 +1465,14 @@
                         "UpdatedAt": {
                           "format": "date-time",
                           "type": "string"
+                        },
+                        "ConcurrencyMode": {
+                          "enum": [
+                            "parallel",
+                            "lock",
+                            "queue"
+                          ],
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -1452,7 +1505,8 @@
                       }
                     ],
                     "CreatedAt": "2020-01-01T00:00:00Z",
-                    "UpdatedAt": "2020-01-01T00:00:00Z"
+                    "UpdatedAt": "2020-01-01T00:00:00Z",
+                    "ConcurrencyMode": "parallel"
                   }
                 }
               }
@@ -1479,7 +1533,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -1505,7 +1559,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -1531,7 +1585,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -1557,7 +1611,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -1583,7 +1637,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -1654,7 +1708,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -1680,7 +1734,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -1706,7 +1760,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -1732,7 +1786,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -1757,7 +1811,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -1784,7 +1838,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -1931,7 +1985,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -1957,7 +2011,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -1983,7 +2037,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -2009,7 +2063,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -2034,7 +2088,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -2061,7 +2115,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -2268,7 +2322,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -2294,7 +2348,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -2320,7 +2374,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -2346,7 +2400,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -2372,7 +2426,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -2501,7 +2555,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -2527,7 +2581,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -2553,7 +2607,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -2579,7 +2633,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -2605,7 +2659,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -2758,7 +2812,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -2784,7 +2838,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -2810,7 +2864,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -2836,7 +2890,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -2861,7 +2915,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -2888,7 +2942,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -3015,7 +3069,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -3041,7 +3095,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -3067,7 +3121,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -3093,7 +3147,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -3119,7 +3173,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -3270,6 +3324,14 @@
                             "UpdatedAt": {
                               "format": "date-time",
                               "type": "string"
+                            },
+                            "ConcurrencyMode": {
+                              "enum": [
+                                "parallel",
+                                "lock",
+                                "queue"
+                              ],
+                              "type": "string"
                             }
                           },
                           "required": [
@@ -3383,7 +3445,8 @@
                         }
                       ],
                       "CreatedAt": "2020-01-01T00:00:00Z",
-                      "UpdatedAt": "2020-01-01T00:00:00Z"
+                      "UpdatedAt": "2020-01-01T00:00:00Z",
+                      "ConcurrencyMode": "parallel"
                     },
                     "Status": "Queued",
                     "Revision": 123,
@@ -3424,7 +3487,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -3450,7 +3513,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -3476,7 +3539,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -3502,7 +3565,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -3527,7 +3590,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -3554,7 +3617,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -3722,6 +3785,14 @@
                               "UpdatedAt": {
                                 "format": "date-time",
                                 "type": "string"
+                              },
+                              "ConcurrencyMode": {
+                                "enum": [
+                                  "parallel",
+                                  "lock",
+                                  "queue"
+                                ],
+                                "type": "string"
                               }
                             },
                             "required": [
@@ -3843,7 +3914,8 @@
                           }
                         ],
                         "CreatedAt": "2020-01-01T00:00:00Z",
-                        "UpdatedAt": "2020-01-01T00:00:00Z"
+                        "UpdatedAt": "2020-01-01T00:00:00Z",
+                        "ConcurrencyMode": "parallel"
                       },
                       "Status": "Queued",
                       "Revision": 123,
@@ -3885,7 +3957,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -3911,7 +3983,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -3937,7 +4009,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -3963,7 +4035,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -3989,7 +4061,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -4115,6 +4187,14 @@
                             "UpdatedAt": {
                               "format": "date-time",
                               "type": "string"
+                            },
+                            "ConcurrencyMode": {
+                              "enum": [
+                                "parallel",
+                                "lock",
+                                "queue"
+                              ],
+                              "type": "string"
                             }
                           },
                           "required": [
@@ -4228,7 +4308,8 @@
                         }
                       ],
                       "CreatedAt": "2020-01-01T00:00:00Z",
-                      "UpdatedAt": "2020-01-01T00:00:00Z"
+                      "UpdatedAt": "2020-01-01T00:00:00Z",
+                      "ConcurrencyMode": "parallel"
                     },
                     "Status": "Queued",
                     "Revision": 123,
@@ -4331,6 +4412,14 @@
                             "UpdatedAt": {
                               "format": "date-time",
                               "type": "string"
+                            },
+                            "ConcurrencyMode": {
+                              "enum": [
+                                "parallel",
+                                "lock",
+                                "queue"
+                              ],
+                              "type": "string"
                             }
                           },
                           "required": [
@@ -4444,7 +4533,8 @@
                         }
                       ],
                       "CreatedAt": "2020-01-01T00:00:00Z",
-                      "UpdatedAt": "2020-01-01T00:00:00Z"
+                      "UpdatedAt": "2020-01-01T00:00:00Z",
+                      "ConcurrencyMode": "parallel"
                     },
                     "Status": "Queued",
                     "Revision": 123,
@@ -4485,7 +4575,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -4511,7 +4601,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -4537,7 +4627,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -4563,7 +4653,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -4588,7 +4678,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -4615,7 +4705,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -4741,6 +4831,14 @@
                             "UpdatedAt": {
                               "format": "date-time",
                               "type": "string"
+                            },
+                            "ConcurrencyMode": {
+                              "enum": [
+                                "parallel",
+                                "lock",
+                                "queue"
+                              ],
+                              "type": "string"
                             }
                           },
                           "required": [
@@ -4854,7 +4952,8 @@
                         }
                       ],
                       "CreatedAt": "2020-01-01T00:00:00Z",
-                      "UpdatedAt": "2020-01-01T00:00:00Z"
+                      "UpdatedAt": "2020-01-01T00:00:00Z",
+                      "ConcurrencyMode": "parallel"
                     },
                     "Status": "Queued",
                     "Revision": 123,
@@ -4895,7 +4994,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -4921,7 +5020,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -4947,7 +5046,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -4973,7 +5072,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -4999,7 +5098,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -5082,7 +5181,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -5108,7 +5207,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -5134,7 +5233,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -5160,7 +5259,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -5185,7 +5284,7 @@
                   ]
                 },
                 "example": {
-                  "is_ok": true,
+                  "is_ok": false,
                   "Message": "sampleString"
                 }
               }
@@ -5212,7 +5311,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -5435,7 +5534,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -5461,7 +5560,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -5487,7 +5586,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -5513,7 +5612,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -5539,7 +5638,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -5660,7 +5759,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -5686,7 +5785,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -5712,7 +5811,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -5738,7 +5837,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -5764,7 +5863,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -5977,7 +6076,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -6003,7 +6102,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -6029,7 +6128,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -6055,7 +6154,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -6081,7 +6180,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -6142,7 +6241,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -6168,7 +6267,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -6194,7 +6293,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -6220,7 +6319,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -6246,7 +6345,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }
@@ -6286,7 +6385,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Bad Request"
+                  "Message": "Bad Request"
                 }
               }
             }
@@ -6312,7 +6411,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Unauthorized"
+                  "Message": "Unauthorized"
                 }
               }
             }
@@ -6338,7 +6437,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Forbidden"
+                  "Message": "Forbidden"
                 }
               }
             }
@@ -6364,7 +6463,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Not Found"
+                  "Message": "Not Found"
                 }
               }
             }
@@ -6390,7 +6489,7 @@
                 },
                 "example": {
                   "is_ok": false,
-                  "message": "Internal Server Error"
+                  "Message": "Internal Server Error"
                 }
               }
             }

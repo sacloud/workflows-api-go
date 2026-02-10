@@ -330,6 +330,7 @@ type CancelExecutionAcceptedExecutionWorkflow struct {
 	ServicePrincipalId OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                                     `json:"CreatedAt"`
 	UpdatedAt          time.Time                                                     `json:"UpdatedAt"`
+	ConcurrencyMode    OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -377,6 +378,11 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *CancelExecutionAcceptedExecutionWorkflow) GetConcurrencyMode() OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *CancelExecutionAcceptedExecutionWorkflow) SetID(val string) {
 	s.ID = val
@@ -420,6 +426,59 @@ func (s *CancelExecutionAcceptedExecutionWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *CancelExecutionAcceptedExecutionWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *CancelExecutionAcceptedExecutionWorkflow) SetConcurrencyMode(val OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type CancelExecutionAcceptedExecutionWorkflowConcurrencyMode string
+
+const (
+	CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel CancelExecutionAcceptedExecutionWorkflowConcurrencyMode = "parallel"
+	CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock     CancelExecutionAcceptedExecutionWorkflowConcurrencyMode = "lock"
+	CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue    CancelExecutionAcceptedExecutionWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all CancelExecutionAcceptedExecutionWorkflowConcurrencyMode values.
+func (CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) AllValues() []CancelExecutionAcceptedExecutionWorkflowConcurrencyMode {
+	return []CancelExecutionAcceptedExecutionWorkflowConcurrencyMode{
+		CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel,
+		CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock,
+		CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch CancelExecutionAcceptedExecutionWorkflowConcurrencyMode(data) {
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeParallel
+		return nil
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeLock
+		return nil
+	case CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue:
+		*s = CancelExecutionAcceptedExecutionWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // CancelExecutionAcceptedExecutionWorkflowServicePrincipalId represents sum type.
@@ -924,6 +983,7 @@ type CancelExecutionOKExecutionWorkflow struct {
 	ServicePrincipalId OptCancelExecutionOKExecutionWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                               `json:"CreatedAt"`
 	UpdatedAt          time.Time                                               `json:"UpdatedAt"`
+	ConcurrencyMode    OptCancelExecutionOKExecutionWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -971,6 +1031,11 @@ func (s *CancelExecutionOKExecutionWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *CancelExecutionOKExecutionWorkflow) GetConcurrencyMode() OptCancelExecutionOKExecutionWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *CancelExecutionOKExecutionWorkflow) SetID(val string) {
 	s.ID = val
@@ -1014,6 +1079,59 @@ func (s *CancelExecutionOKExecutionWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *CancelExecutionOKExecutionWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *CancelExecutionOKExecutionWorkflow) SetConcurrencyMode(val OptCancelExecutionOKExecutionWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type CancelExecutionOKExecutionWorkflowConcurrencyMode string
+
+const (
+	CancelExecutionOKExecutionWorkflowConcurrencyModeParallel CancelExecutionOKExecutionWorkflowConcurrencyMode = "parallel"
+	CancelExecutionOKExecutionWorkflowConcurrencyModeLock     CancelExecutionOKExecutionWorkflowConcurrencyMode = "lock"
+	CancelExecutionOKExecutionWorkflowConcurrencyModeQueue    CancelExecutionOKExecutionWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all CancelExecutionOKExecutionWorkflowConcurrencyMode values.
+func (CancelExecutionOKExecutionWorkflowConcurrencyMode) AllValues() []CancelExecutionOKExecutionWorkflowConcurrencyMode {
+	return []CancelExecutionOKExecutionWorkflowConcurrencyMode{
+		CancelExecutionOKExecutionWorkflowConcurrencyModeParallel,
+		CancelExecutionOKExecutionWorkflowConcurrencyModeLock,
+		CancelExecutionOKExecutionWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CancelExecutionOKExecutionWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CancelExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch CancelExecutionOKExecutionWorkflowConcurrencyMode(data) {
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeParallel
+		return nil
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeLock:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeLock
+		return nil
+	case CancelExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		*s = CancelExecutionOKExecutionWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // CancelExecutionOKExecutionWorkflowServicePrincipalId represents sum type.
@@ -1464,6 +1582,7 @@ type CreateExecutionCreatedExecutionWorkflow struct {
 	ServicePrincipalId OptCreateExecutionCreatedExecutionWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                                    `json:"CreatedAt"`
 	UpdatedAt          time.Time                                                    `json:"UpdatedAt"`
+	ConcurrencyMode    OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -1511,6 +1630,11 @@ func (s *CreateExecutionCreatedExecutionWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *CreateExecutionCreatedExecutionWorkflow) GetConcurrencyMode() OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *CreateExecutionCreatedExecutionWorkflow) SetID(val string) {
 	s.ID = val
@@ -1554,6 +1678,59 @@ func (s *CreateExecutionCreatedExecutionWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *CreateExecutionCreatedExecutionWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *CreateExecutionCreatedExecutionWorkflow) SetConcurrencyMode(val OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type CreateExecutionCreatedExecutionWorkflowConcurrencyMode string
+
+const (
+	CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel CreateExecutionCreatedExecutionWorkflowConcurrencyMode = "parallel"
+	CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock     CreateExecutionCreatedExecutionWorkflowConcurrencyMode = "lock"
+	CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue    CreateExecutionCreatedExecutionWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all CreateExecutionCreatedExecutionWorkflowConcurrencyMode values.
+func (CreateExecutionCreatedExecutionWorkflowConcurrencyMode) AllValues() []CreateExecutionCreatedExecutionWorkflowConcurrencyMode {
+	return []CreateExecutionCreatedExecutionWorkflowConcurrencyMode{
+		CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel,
+		CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock,
+		CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CreateExecutionCreatedExecutionWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CreateExecutionCreatedExecutionWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch CreateExecutionCreatedExecutionWorkflowConcurrencyMode(data) {
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeParallel
+		return nil
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeLock
+		return nil
+	case CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue:
+		*s = CreateExecutionCreatedExecutionWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // CreateExecutionCreatedExecutionWorkflowServicePrincipalId represents sum type.
@@ -2011,6 +2188,7 @@ type CreateWorkflowCreatedWorkflow struct {
 	ServicePrincipalId OptCreateWorkflowCreatedWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                          `json:"CreatedAt"`
 	UpdatedAt          time.Time                                          `json:"UpdatedAt"`
+	ConcurrencyMode    OptCreateWorkflowCreatedWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -2058,6 +2236,11 @@ func (s *CreateWorkflowCreatedWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *CreateWorkflowCreatedWorkflow) GetConcurrencyMode() OptCreateWorkflowCreatedWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *CreateWorkflowCreatedWorkflow) SetID(val string) {
 	s.ID = val
@@ -2101,6 +2284,59 @@ func (s *CreateWorkflowCreatedWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *CreateWorkflowCreatedWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *CreateWorkflowCreatedWorkflow) SetConcurrencyMode(val OptCreateWorkflowCreatedWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type CreateWorkflowCreatedWorkflowConcurrencyMode string
+
+const (
+	CreateWorkflowCreatedWorkflowConcurrencyModeParallel CreateWorkflowCreatedWorkflowConcurrencyMode = "parallel"
+	CreateWorkflowCreatedWorkflowConcurrencyModeLock     CreateWorkflowCreatedWorkflowConcurrencyMode = "lock"
+	CreateWorkflowCreatedWorkflowConcurrencyModeQueue    CreateWorkflowCreatedWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all CreateWorkflowCreatedWorkflowConcurrencyMode values.
+func (CreateWorkflowCreatedWorkflowConcurrencyMode) AllValues() []CreateWorkflowCreatedWorkflowConcurrencyMode {
+	return []CreateWorkflowCreatedWorkflowConcurrencyMode{
+		CreateWorkflowCreatedWorkflowConcurrencyModeParallel,
+		CreateWorkflowCreatedWorkflowConcurrencyModeLock,
+		CreateWorkflowCreatedWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CreateWorkflowCreatedWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case CreateWorkflowCreatedWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case CreateWorkflowCreatedWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case CreateWorkflowCreatedWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CreateWorkflowCreatedWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch CreateWorkflowCreatedWorkflowConcurrencyMode(data) {
+	case CreateWorkflowCreatedWorkflowConcurrencyModeParallel:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeParallel
+		return nil
+	case CreateWorkflowCreatedWorkflowConcurrencyModeLock:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeLock
+		return nil
+	case CreateWorkflowCreatedWorkflowConcurrencyModeQueue:
+		*s = CreateWorkflowCreatedWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // CreateWorkflowCreatedWorkflowServicePrincipalId represents sum type.
@@ -2275,6 +2511,7 @@ type CreateWorkflowReq struct {
 	Tags               []CreateWorkflowReqTagsItem            `json:"Tags"`
 	RevisionAlias      OptString                              `json:"RevisionAlias"`
 	ServicePrincipalId OptCreateWorkflowReqServicePrincipalId `json:"ServicePrincipalId"`
+	ConcurrencyMode    OptCreateWorkflowReqConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetName returns the value of Name.
@@ -2317,6 +2554,11 @@ func (s *CreateWorkflowReq) GetServicePrincipalId() OptCreateWorkflowReqServiceP
 	return s.ServicePrincipalId
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *CreateWorkflowReq) GetConcurrencyMode() OptCreateWorkflowReqConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetName sets the value of Name.
 func (s *CreateWorkflowReq) SetName(val string) {
 	s.Name = val
@@ -2355,6 +2597,59 @@ func (s *CreateWorkflowReq) SetRevisionAlias(val OptString) {
 // SetServicePrincipalId sets the value of ServicePrincipalId.
 func (s *CreateWorkflowReq) SetServicePrincipalId(val OptCreateWorkflowReqServicePrincipalId) {
 	s.ServicePrincipalId = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *CreateWorkflowReq) SetConcurrencyMode(val OptCreateWorkflowReqConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type CreateWorkflowReqConcurrencyMode string
+
+const (
+	CreateWorkflowReqConcurrencyModeParallel CreateWorkflowReqConcurrencyMode = "parallel"
+	CreateWorkflowReqConcurrencyModeLock     CreateWorkflowReqConcurrencyMode = "lock"
+	CreateWorkflowReqConcurrencyModeQueue    CreateWorkflowReqConcurrencyMode = "queue"
+)
+
+// AllValues returns all CreateWorkflowReqConcurrencyMode values.
+func (CreateWorkflowReqConcurrencyMode) AllValues() []CreateWorkflowReqConcurrencyMode {
+	return []CreateWorkflowReqConcurrencyMode{
+		CreateWorkflowReqConcurrencyModeParallel,
+		CreateWorkflowReqConcurrencyModeLock,
+		CreateWorkflowReqConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s CreateWorkflowReqConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case CreateWorkflowReqConcurrencyModeParallel:
+		return []byte(s), nil
+	case CreateWorkflowReqConcurrencyModeLock:
+		return []byte(s), nil
+	case CreateWorkflowReqConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *CreateWorkflowReqConcurrencyMode) UnmarshalText(data []byte) error {
+	switch CreateWorkflowReqConcurrencyMode(data) {
+	case CreateWorkflowReqConcurrencyModeParallel:
+		*s = CreateWorkflowReqConcurrencyModeParallel
+		return nil
+	case CreateWorkflowReqConcurrencyModeLock:
+		*s = CreateWorkflowReqConcurrencyModeLock
+		return nil
+	case CreateWorkflowReqConcurrencyModeQueue:
+		*s = CreateWorkflowReqConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // CreateWorkflowReqServicePrincipalId represents sum type.
@@ -3869,6 +4164,7 @@ type GetExecutionOKExecutionWorkflow struct {
 	ServicePrincipalId OptGetExecutionOKExecutionWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                            `json:"CreatedAt"`
 	UpdatedAt          time.Time                                            `json:"UpdatedAt"`
+	ConcurrencyMode    OptGetExecutionOKExecutionWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -3916,6 +4212,11 @@ func (s *GetExecutionOKExecutionWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *GetExecutionOKExecutionWorkflow) GetConcurrencyMode() OptGetExecutionOKExecutionWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *GetExecutionOKExecutionWorkflow) SetID(val string) {
 	s.ID = val
@@ -3959,6 +4260,59 @@ func (s *GetExecutionOKExecutionWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *GetExecutionOKExecutionWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *GetExecutionOKExecutionWorkflow) SetConcurrencyMode(val OptGetExecutionOKExecutionWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type GetExecutionOKExecutionWorkflowConcurrencyMode string
+
+const (
+	GetExecutionOKExecutionWorkflowConcurrencyModeParallel GetExecutionOKExecutionWorkflowConcurrencyMode = "parallel"
+	GetExecutionOKExecutionWorkflowConcurrencyModeLock     GetExecutionOKExecutionWorkflowConcurrencyMode = "lock"
+	GetExecutionOKExecutionWorkflowConcurrencyModeQueue    GetExecutionOKExecutionWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all GetExecutionOKExecutionWorkflowConcurrencyMode values.
+func (GetExecutionOKExecutionWorkflowConcurrencyMode) AllValues() []GetExecutionOKExecutionWorkflowConcurrencyMode {
+	return []GetExecutionOKExecutionWorkflowConcurrencyMode{
+		GetExecutionOKExecutionWorkflowConcurrencyModeParallel,
+		GetExecutionOKExecutionWorkflowConcurrencyModeLock,
+		GetExecutionOKExecutionWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetExecutionOKExecutionWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case GetExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case GetExecutionOKExecutionWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case GetExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetExecutionOKExecutionWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch GetExecutionOKExecutionWorkflowConcurrencyMode(data) {
+	case GetExecutionOKExecutionWorkflowConcurrencyModeParallel:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeParallel
+		return nil
+	case GetExecutionOKExecutionWorkflowConcurrencyModeLock:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeLock
+		return nil
+	case GetExecutionOKExecutionWorkflowConcurrencyModeQueue:
+		*s = GetExecutionOKExecutionWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // GetExecutionOKExecutionWorkflowServicePrincipalId represents sum type.
@@ -4647,6 +5001,7 @@ type GetWorkflowOKWorkflow struct {
 	ServicePrincipalId OptGetWorkflowOKWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                  `json:"CreatedAt"`
 	UpdatedAt          time.Time                                  `json:"UpdatedAt"`
+	ConcurrencyMode    OptGetWorkflowOKWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -4694,6 +5049,11 @@ func (s *GetWorkflowOKWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *GetWorkflowOKWorkflow) GetConcurrencyMode() OptGetWorkflowOKWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *GetWorkflowOKWorkflow) SetID(val string) {
 	s.ID = val
@@ -4737,6 +5097,59 @@ func (s *GetWorkflowOKWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *GetWorkflowOKWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *GetWorkflowOKWorkflow) SetConcurrencyMode(val OptGetWorkflowOKWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type GetWorkflowOKWorkflowConcurrencyMode string
+
+const (
+	GetWorkflowOKWorkflowConcurrencyModeParallel GetWorkflowOKWorkflowConcurrencyMode = "parallel"
+	GetWorkflowOKWorkflowConcurrencyModeLock     GetWorkflowOKWorkflowConcurrencyMode = "lock"
+	GetWorkflowOKWorkflowConcurrencyModeQueue    GetWorkflowOKWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all GetWorkflowOKWorkflowConcurrencyMode values.
+func (GetWorkflowOKWorkflowConcurrencyMode) AllValues() []GetWorkflowOKWorkflowConcurrencyMode {
+	return []GetWorkflowOKWorkflowConcurrencyMode{
+		GetWorkflowOKWorkflowConcurrencyModeParallel,
+		GetWorkflowOKWorkflowConcurrencyModeLock,
+		GetWorkflowOKWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s GetWorkflowOKWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case GetWorkflowOKWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case GetWorkflowOKWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case GetWorkflowOKWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *GetWorkflowOKWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch GetWorkflowOKWorkflowConcurrencyMode(data) {
+	case GetWorkflowOKWorkflowConcurrencyModeParallel:
+		*s = GetWorkflowOKWorkflowConcurrencyModeParallel
+		return nil
+	case GetWorkflowOKWorkflowConcurrencyModeLock:
+		*s = GetWorkflowOKWorkflowConcurrencyModeLock
+		return nil
+	case GetWorkflowOKWorkflowConcurrencyModeQueue:
+		*s = GetWorkflowOKWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // GetWorkflowOKWorkflowServicePrincipalId represents sum type.
@@ -5936,6 +6349,7 @@ type ListExecutionOKExecutionsItemWorkflow struct {
 	ServicePrincipalId OptListExecutionOKExecutionsItemWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                                  `json:"CreatedAt"`
 	UpdatedAt          time.Time                                                  `json:"UpdatedAt"`
+	ConcurrencyMode    OptListExecutionOKExecutionsItemWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -5983,6 +6397,11 @@ func (s *ListExecutionOKExecutionsItemWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *ListExecutionOKExecutionsItemWorkflow) GetConcurrencyMode() OptListExecutionOKExecutionsItemWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *ListExecutionOKExecutionsItemWorkflow) SetID(val string) {
 	s.ID = val
@@ -6026,6 +6445,59 @@ func (s *ListExecutionOKExecutionsItemWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *ListExecutionOKExecutionsItemWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *ListExecutionOKExecutionsItemWorkflow) SetConcurrencyMode(val OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type ListExecutionOKExecutionsItemWorkflowConcurrencyMode string
+
+const (
+	ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel ListExecutionOKExecutionsItemWorkflowConcurrencyMode = "parallel"
+	ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock     ListExecutionOKExecutionsItemWorkflowConcurrencyMode = "lock"
+	ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue    ListExecutionOKExecutionsItemWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all ListExecutionOKExecutionsItemWorkflowConcurrencyMode values.
+func (ListExecutionOKExecutionsItemWorkflowConcurrencyMode) AllValues() []ListExecutionOKExecutionsItemWorkflowConcurrencyMode {
+	return []ListExecutionOKExecutionsItemWorkflowConcurrencyMode{
+		ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel,
+		ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock,
+		ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s ListExecutionOKExecutionsItemWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *ListExecutionOKExecutionsItemWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch ListExecutionOKExecutionsItemWorkflowConcurrencyMode(data) {
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeParallel
+		return nil
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeLock
+		return nil
+	case ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue:
+		*s = ListExecutionOKExecutionsItemWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // ListExecutionOKExecutionsItemWorkflowServicePrincipalId represents sum type.
@@ -6661,6 +7133,7 @@ type ListWorkflowOKWorkflowsItem struct {
 	ServicePrincipalId OptListWorkflowOKWorkflowsItemServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                        `json:"CreatedAt"`
 	UpdatedAt          time.Time                                        `json:"UpdatedAt"`
+	ConcurrencyMode    OptListWorkflowOKWorkflowsItemConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -6708,6 +7181,11 @@ func (s *ListWorkflowOKWorkflowsItem) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *ListWorkflowOKWorkflowsItem) GetConcurrencyMode() OptListWorkflowOKWorkflowsItemConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *ListWorkflowOKWorkflowsItem) SetID(val string) {
 	s.ID = val
@@ -6751,6 +7229,59 @@ func (s *ListWorkflowOKWorkflowsItem) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *ListWorkflowOKWorkflowsItem) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *ListWorkflowOKWorkflowsItem) SetConcurrencyMode(val OptListWorkflowOKWorkflowsItemConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type ListWorkflowOKWorkflowsItemConcurrencyMode string
+
+const (
+	ListWorkflowOKWorkflowsItemConcurrencyModeParallel ListWorkflowOKWorkflowsItemConcurrencyMode = "parallel"
+	ListWorkflowOKWorkflowsItemConcurrencyModeLock     ListWorkflowOKWorkflowsItemConcurrencyMode = "lock"
+	ListWorkflowOKWorkflowsItemConcurrencyModeQueue    ListWorkflowOKWorkflowsItemConcurrencyMode = "queue"
+)
+
+// AllValues returns all ListWorkflowOKWorkflowsItemConcurrencyMode values.
+func (ListWorkflowOKWorkflowsItemConcurrencyMode) AllValues() []ListWorkflowOKWorkflowsItemConcurrencyMode {
+	return []ListWorkflowOKWorkflowsItemConcurrencyMode{
+		ListWorkflowOKWorkflowsItemConcurrencyModeParallel,
+		ListWorkflowOKWorkflowsItemConcurrencyModeLock,
+		ListWorkflowOKWorkflowsItemConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s ListWorkflowOKWorkflowsItemConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case ListWorkflowOKWorkflowsItemConcurrencyModeParallel:
+		return []byte(s), nil
+	case ListWorkflowOKWorkflowsItemConcurrencyModeLock:
+		return []byte(s), nil
+	case ListWorkflowOKWorkflowsItemConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *ListWorkflowOKWorkflowsItemConcurrencyMode) UnmarshalText(data []byte) error {
+	switch ListWorkflowOKWorkflowsItemConcurrencyMode(data) {
+	case ListWorkflowOKWorkflowsItemConcurrencyModeParallel:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeParallel
+		return nil
+	case ListWorkflowOKWorkflowsItemConcurrencyModeLock:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeLock
+		return nil
+	case ListWorkflowOKWorkflowsItemConcurrencyModeQueue:
+		*s = ListWorkflowOKWorkflowsItemConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // ListWorkflowOKWorkflowsItemServicePrincipalId represents sum type.
@@ -7652,6 +8183,52 @@ func (o OptBool) Or(d bool) bool {
 	return d
 }
 
+// NewOptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode returns new OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode with value set to v.
+func NewOptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode(v CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode {
+	return OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode is optional CancelExecutionAcceptedExecutionWorkflowConcurrencyMode.
+type OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode struct {
+	Value CancelExecutionAcceptedExecutionWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode was set.
+func (o OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Reset() {
+	var v CancelExecutionAcceptedExecutionWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) SetTo(v CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Get() (v CancelExecutionAcceptedExecutionWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCancelExecutionAcceptedExecutionWorkflowConcurrencyMode) Or(d CancelExecutionAcceptedExecutionWorkflowConcurrencyMode) CancelExecutionAcceptedExecutionWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId returns new OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId with value set to v.
 func NewOptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId(v CancelExecutionAcceptedExecutionWorkflowServicePrincipalId) OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId {
 	return OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId{
@@ -7698,6 +8275,52 @@ func (o OptCancelExecutionAcceptedExecutionWorkflowServicePrincipalId) Or(d Canc
 	return d
 }
 
+// NewOptCancelExecutionOKExecutionWorkflowConcurrencyMode returns new OptCancelExecutionOKExecutionWorkflowConcurrencyMode with value set to v.
+func NewOptCancelExecutionOKExecutionWorkflowConcurrencyMode(v CancelExecutionOKExecutionWorkflowConcurrencyMode) OptCancelExecutionOKExecutionWorkflowConcurrencyMode {
+	return OptCancelExecutionOKExecutionWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCancelExecutionOKExecutionWorkflowConcurrencyMode is optional CancelExecutionOKExecutionWorkflowConcurrencyMode.
+type OptCancelExecutionOKExecutionWorkflowConcurrencyMode struct {
+	Value CancelExecutionOKExecutionWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptCancelExecutionOKExecutionWorkflowConcurrencyMode was set.
+func (o OptCancelExecutionOKExecutionWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCancelExecutionOKExecutionWorkflowConcurrencyMode) Reset() {
+	var v CancelExecutionOKExecutionWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCancelExecutionOKExecutionWorkflowConcurrencyMode) SetTo(v CancelExecutionOKExecutionWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCancelExecutionOKExecutionWorkflowConcurrencyMode) Get() (v CancelExecutionOKExecutionWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCancelExecutionOKExecutionWorkflowConcurrencyMode) Or(d CancelExecutionOKExecutionWorkflowConcurrencyMode) CancelExecutionOKExecutionWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCancelExecutionOKExecutionWorkflowServicePrincipalId returns new OptCancelExecutionOKExecutionWorkflowServicePrincipalId with value set to v.
 func NewOptCancelExecutionOKExecutionWorkflowServicePrincipalId(v CancelExecutionOKExecutionWorkflowServicePrincipalId) OptCancelExecutionOKExecutionWorkflowServicePrincipalId {
 	return OptCancelExecutionOKExecutionWorkflowServicePrincipalId{
@@ -7738,6 +8361,52 @@ func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Get() (v Cancel
 
 // Or returns value if set, or given parameter if does not.
 func (o OptCancelExecutionOKExecutionWorkflowServicePrincipalId) Or(d CancelExecutionOKExecutionWorkflowServicePrincipalId) CancelExecutionOKExecutionWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptCreateExecutionCreatedExecutionWorkflowConcurrencyMode returns new OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode with value set to v.
+func NewOptCreateExecutionCreatedExecutionWorkflowConcurrencyMode(v CreateExecutionCreatedExecutionWorkflowConcurrencyMode) OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode {
+	return OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode is optional CreateExecutionCreatedExecutionWorkflowConcurrencyMode.
+type OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode struct {
+	Value CreateExecutionCreatedExecutionWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode was set.
+func (o OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) Reset() {
+	var v CreateExecutionCreatedExecutionWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) SetTo(v CreateExecutionCreatedExecutionWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) Get() (v CreateExecutionCreatedExecutionWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateExecutionCreatedExecutionWorkflowConcurrencyMode) Or(d CreateExecutionCreatedExecutionWorkflowConcurrencyMode) CreateExecutionCreatedExecutionWorkflowConcurrencyMode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -7882,6 +8551,52 @@ func (o OptCreateSubscriptionReq) Or(d CreateSubscriptionReq) CreateSubscription
 	return d
 }
 
+// NewOptCreateWorkflowCreatedWorkflowConcurrencyMode returns new OptCreateWorkflowCreatedWorkflowConcurrencyMode with value set to v.
+func NewOptCreateWorkflowCreatedWorkflowConcurrencyMode(v CreateWorkflowCreatedWorkflowConcurrencyMode) OptCreateWorkflowCreatedWorkflowConcurrencyMode {
+	return OptCreateWorkflowCreatedWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateWorkflowCreatedWorkflowConcurrencyMode is optional CreateWorkflowCreatedWorkflowConcurrencyMode.
+type OptCreateWorkflowCreatedWorkflowConcurrencyMode struct {
+	Value CreateWorkflowCreatedWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptCreateWorkflowCreatedWorkflowConcurrencyMode was set.
+func (o OptCreateWorkflowCreatedWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateWorkflowCreatedWorkflowConcurrencyMode) Reset() {
+	var v CreateWorkflowCreatedWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateWorkflowCreatedWorkflowConcurrencyMode) SetTo(v CreateWorkflowCreatedWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateWorkflowCreatedWorkflowConcurrencyMode) Get() (v CreateWorkflowCreatedWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateWorkflowCreatedWorkflowConcurrencyMode) Or(d CreateWorkflowCreatedWorkflowConcurrencyMode) CreateWorkflowCreatedWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptCreateWorkflowCreatedWorkflowServicePrincipalId returns new OptCreateWorkflowCreatedWorkflowServicePrincipalId with value set to v.
 func NewOptCreateWorkflowCreatedWorkflowServicePrincipalId(v CreateWorkflowCreatedWorkflowServicePrincipalId) OptCreateWorkflowCreatedWorkflowServicePrincipalId {
 	return OptCreateWorkflowCreatedWorkflowServicePrincipalId{
@@ -7922,6 +8637,52 @@ func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Get() (v CreateWorkf
 
 // Or returns value if set, or given parameter if does not.
 func (o OptCreateWorkflowCreatedWorkflowServicePrincipalId) Or(d CreateWorkflowCreatedWorkflowServicePrincipalId) CreateWorkflowCreatedWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptCreateWorkflowReqConcurrencyMode returns new OptCreateWorkflowReqConcurrencyMode with value set to v.
+func NewOptCreateWorkflowReqConcurrencyMode(v CreateWorkflowReqConcurrencyMode) OptCreateWorkflowReqConcurrencyMode {
+	return OptCreateWorkflowReqConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptCreateWorkflowReqConcurrencyMode is optional CreateWorkflowReqConcurrencyMode.
+type OptCreateWorkflowReqConcurrencyMode struct {
+	Value CreateWorkflowReqConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptCreateWorkflowReqConcurrencyMode was set.
+func (o OptCreateWorkflowReqConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptCreateWorkflowReqConcurrencyMode) Reset() {
+	var v CreateWorkflowReqConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptCreateWorkflowReqConcurrencyMode) SetTo(v CreateWorkflowReqConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptCreateWorkflowReqConcurrencyMode) Get() (v CreateWorkflowReqConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptCreateWorkflowReqConcurrencyMode) Or(d CreateWorkflowReqConcurrencyMode) CreateWorkflowReqConcurrencyMode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8014,6 +8775,52 @@ func (o OptDateTime) Get() (v time.Time, ok bool) {
 
 // Or returns value if set, or given parameter if does not.
 func (o OptDateTime) Or(d time.Time) time.Time {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptGetExecutionOKExecutionWorkflowConcurrencyMode returns new OptGetExecutionOKExecutionWorkflowConcurrencyMode with value set to v.
+func NewOptGetExecutionOKExecutionWorkflowConcurrencyMode(v GetExecutionOKExecutionWorkflowConcurrencyMode) OptGetExecutionOKExecutionWorkflowConcurrencyMode {
+	return OptGetExecutionOKExecutionWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetExecutionOKExecutionWorkflowConcurrencyMode is optional GetExecutionOKExecutionWorkflowConcurrencyMode.
+type OptGetExecutionOKExecutionWorkflowConcurrencyMode struct {
+	Value GetExecutionOKExecutionWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptGetExecutionOKExecutionWorkflowConcurrencyMode was set.
+func (o OptGetExecutionOKExecutionWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetExecutionOKExecutionWorkflowConcurrencyMode) Reset() {
+	var v GetExecutionOKExecutionWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetExecutionOKExecutionWorkflowConcurrencyMode) SetTo(v GetExecutionOKExecutionWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetExecutionOKExecutionWorkflowConcurrencyMode) Get() (v GetExecutionOKExecutionWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetExecutionOKExecutionWorkflowConcurrencyMode) Or(d GetExecutionOKExecutionWorkflowConcurrencyMode) GetExecutionOKExecutionWorkflowConcurrencyMode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8158,6 +8965,52 @@ func (o OptGetSubscriptionOKMonthAppliedPlan) Or(d GetSubscriptionOKMonthApplied
 	return d
 }
 
+// NewOptGetWorkflowOKWorkflowConcurrencyMode returns new OptGetWorkflowOKWorkflowConcurrencyMode with value set to v.
+func NewOptGetWorkflowOKWorkflowConcurrencyMode(v GetWorkflowOKWorkflowConcurrencyMode) OptGetWorkflowOKWorkflowConcurrencyMode {
+	return OptGetWorkflowOKWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptGetWorkflowOKWorkflowConcurrencyMode is optional GetWorkflowOKWorkflowConcurrencyMode.
+type OptGetWorkflowOKWorkflowConcurrencyMode struct {
+	Value GetWorkflowOKWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptGetWorkflowOKWorkflowConcurrencyMode was set.
+func (o OptGetWorkflowOKWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptGetWorkflowOKWorkflowConcurrencyMode) Reset() {
+	var v GetWorkflowOKWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptGetWorkflowOKWorkflowConcurrencyMode) SetTo(v GetWorkflowOKWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptGetWorkflowOKWorkflowConcurrencyMode) Get() (v GetWorkflowOKWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptGetWorkflowOKWorkflowConcurrencyMode) Or(d GetWorkflowOKWorkflowConcurrencyMode) GetWorkflowOKWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptGetWorkflowOKWorkflowServicePrincipalId returns new OptGetWorkflowOKWorkflowServicePrincipalId with value set to v.
 func NewOptGetWorkflowOKWorkflowServicePrincipalId(v GetWorkflowOKWorkflowServicePrincipalId) OptGetWorkflowOKWorkflowServicePrincipalId {
 	return OptGetWorkflowOKWorkflowServicePrincipalId{
@@ -8296,6 +9149,52 @@ func (o OptListExecutionHistorySortOrder) Or(d ListExecutionHistorySortOrder) Li
 	return d
 }
 
+// NewOptListExecutionOKExecutionsItemWorkflowConcurrencyMode returns new OptListExecutionOKExecutionsItemWorkflowConcurrencyMode with value set to v.
+func NewOptListExecutionOKExecutionsItemWorkflowConcurrencyMode(v ListExecutionOKExecutionsItemWorkflowConcurrencyMode) OptListExecutionOKExecutionsItemWorkflowConcurrencyMode {
+	return OptListExecutionOKExecutionsItemWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptListExecutionOKExecutionsItemWorkflowConcurrencyMode is optional ListExecutionOKExecutionsItemWorkflowConcurrencyMode.
+type OptListExecutionOKExecutionsItemWorkflowConcurrencyMode struct {
+	Value ListExecutionOKExecutionsItemWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptListExecutionOKExecutionsItemWorkflowConcurrencyMode was set.
+func (o OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) Reset() {
+	var v ListExecutionOKExecutionsItemWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) SetTo(v ListExecutionOKExecutionsItemWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) Get() (v ListExecutionOKExecutionsItemWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptListExecutionOKExecutionsItemWorkflowConcurrencyMode) Or(d ListExecutionOKExecutionsItemWorkflowConcurrencyMode) ListExecutionOKExecutionsItemWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptListExecutionOKExecutionsItemWorkflowServicePrincipalId returns new OptListExecutionOKExecutionsItemWorkflowServicePrincipalId with value set to v.
 func NewOptListExecutionOKExecutionsItemWorkflowServicePrincipalId(v ListExecutionOKExecutionsItemWorkflowServicePrincipalId) OptListExecutionOKExecutionsItemWorkflowServicePrincipalId {
 	return OptListExecutionOKExecutionsItemWorkflowServicePrincipalId{
@@ -8428,6 +9327,52 @@ func (o OptListWorkflowNameMatchType) Get() (v ListWorkflowNameMatchType, ok boo
 
 // Or returns value if set, or given parameter if does not.
 func (o OptListWorkflowNameMatchType) Or(d ListWorkflowNameMatchType) ListWorkflowNameMatchType {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptListWorkflowOKWorkflowsItemConcurrencyMode returns new OptListWorkflowOKWorkflowsItemConcurrencyMode with value set to v.
+func NewOptListWorkflowOKWorkflowsItemConcurrencyMode(v ListWorkflowOKWorkflowsItemConcurrencyMode) OptListWorkflowOKWorkflowsItemConcurrencyMode {
+	return OptListWorkflowOKWorkflowsItemConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptListWorkflowOKWorkflowsItemConcurrencyMode is optional ListWorkflowOKWorkflowsItemConcurrencyMode.
+type OptListWorkflowOKWorkflowsItemConcurrencyMode struct {
+	Value ListWorkflowOKWorkflowsItemConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptListWorkflowOKWorkflowsItemConcurrencyMode was set.
+func (o OptListWorkflowOKWorkflowsItemConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptListWorkflowOKWorkflowsItemConcurrencyMode) Reset() {
+	var v ListWorkflowOKWorkflowsItemConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptListWorkflowOKWorkflowsItemConcurrencyMode) SetTo(v ListWorkflowOKWorkflowsItemConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptListWorkflowOKWorkflowsItemConcurrencyMode) Get() (v ListWorkflowOKWorkflowsItemConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptListWorkflowOKWorkflowsItemConcurrencyMode) Or(d ListWorkflowOKWorkflowsItemConcurrencyMode) ListWorkflowOKWorkflowsItemConcurrencyMode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8802,6 +9747,52 @@ func (o OptString) Or(d string) string {
 	return d
 }
 
+// NewOptUpdateWorkflowOKWorkflowConcurrencyMode returns new OptUpdateWorkflowOKWorkflowConcurrencyMode with value set to v.
+func NewOptUpdateWorkflowOKWorkflowConcurrencyMode(v UpdateWorkflowOKWorkflowConcurrencyMode) OptUpdateWorkflowOKWorkflowConcurrencyMode {
+	return OptUpdateWorkflowOKWorkflowConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateWorkflowOKWorkflowConcurrencyMode is optional UpdateWorkflowOKWorkflowConcurrencyMode.
+type OptUpdateWorkflowOKWorkflowConcurrencyMode struct {
+	Value UpdateWorkflowOKWorkflowConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateWorkflowOKWorkflowConcurrencyMode was set.
+func (o OptUpdateWorkflowOKWorkflowConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateWorkflowOKWorkflowConcurrencyMode) Reset() {
+	var v UpdateWorkflowOKWorkflowConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateWorkflowOKWorkflowConcurrencyMode) SetTo(v UpdateWorkflowOKWorkflowConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateWorkflowOKWorkflowConcurrencyMode) Get() (v UpdateWorkflowOKWorkflowConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateWorkflowOKWorkflowConcurrencyMode) Or(d UpdateWorkflowOKWorkflowConcurrencyMode) UpdateWorkflowOKWorkflowConcurrencyMode {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
 // NewOptUpdateWorkflowOKWorkflowServicePrincipalId returns new OptUpdateWorkflowOKWorkflowServicePrincipalId with value set to v.
 func NewOptUpdateWorkflowOKWorkflowServicePrincipalId(v UpdateWorkflowOKWorkflowServicePrincipalId) OptUpdateWorkflowOKWorkflowServicePrincipalId {
 	return OptUpdateWorkflowOKWorkflowServicePrincipalId{
@@ -8842,6 +9833,52 @@ func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Get() (v UpdateWorkflowOK
 
 // Or returns value if set, or given parameter if does not.
 func (o OptUpdateWorkflowOKWorkflowServicePrincipalId) Or(d UpdateWorkflowOKWorkflowServicePrincipalId) UpdateWorkflowOKWorkflowServicePrincipalId {
+	if v, ok := o.Get(); ok {
+		return v
+	}
+	return d
+}
+
+// NewOptUpdateWorkflowReqConcurrencyMode returns new OptUpdateWorkflowReqConcurrencyMode with value set to v.
+func NewOptUpdateWorkflowReqConcurrencyMode(v UpdateWorkflowReqConcurrencyMode) OptUpdateWorkflowReqConcurrencyMode {
+	return OptUpdateWorkflowReqConcurrencyMode{
+		Value: v,
+		Set:   true,
+	}
+}
+
+// OptUpdateWorkflowReqConcurrencyMode is optional UpdateWorkflowReqConcurrencyMode.
+type OptUpdateWorkflowReqConcurrencyMode struct {
+	Value UpdateWorkflowReqConcurrencyMode
+	Set   bool
+}
+
+// IsSet returns true if OptUpdateWorkflowReqConcurrencyMode was set.
+func (o OptUpdateWorkflowReqConcurrencyMode) IsSet() bool { return o.Set }
+
+// Reset unsets value.
+func (o *OptUpdateWorkflowReqConcurrencyMode) Reset() {
+	var v UpdateWorkflowReqConcurrencyMode
+	o.Value = v
+	o.Set = false
+}
+
+// SetTo sets value to v.
+func (o *OptUpdateWorkflowReqConcurrencyMode) SetTo(v UpdateWorkflowReqConcurrencyMode) {
+	o.Set = true
+	o.Value = v
+}
+
+// Get returns value and boolean that denotes whether value was set.
+func (o OptUpdateWorkflowReqConcurrencyMode) Get() (v UpdateWorkflowReqConcurrencyMode, ok bool) {
+	if !o.Set {
+		return v, false
+	}
+	return o.Value, true
+}
+
+// Or returns value if set, or given parameter if does not.
+func (o OptUpdateWorkflowReqConcurrencyMode) Or(d UpdateWorkflowReqConcurrencyMode) UpdateWorkflowReqConcurrencyMode {
 	if v, ok := o.Get(); ok {
 		return v
 	}
@@ -8993,6 +10030,7 @@ type UpdateWorkflowOKWorkflow struct {
 	ServicePrincipalId OptUpdateWorkflowOKWorkflowServicePrincipalId `json:"ServicePrincipalId"`
 	CreatedAt          time.Time                                     `json:"CreatedAt"`
 	UpdatedAt          time.Time                                     `json:"UpdatedAt"`
+	ConcurrencyMode    OptUpdateWorkflowOKWorkflowConcurrencyMode    `json:"ConcurrencyMode"`
 }
 
 // GetID returns the value of ID.
@@ -9040,6 +10078,11 @@ func (s *UpdateWorkflowOKWorkflow) GetUpdatedAt() time.Time {
 	return s.UpdatedAt
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *UpdateWorkflowOKWorkflow) GetConcurrencyMode() OptUpdateWorkflowOKWorkflowConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetID sets the value of ID.
 func (s *UpdateWorkflowOKWorkflow) SetID(val string) {
 	s.ID = val
@@ -9083,6 +10126,59 @@ func (s *UpdateWorkflowOKWorkflow) SetCreatedAt(val time.Time) {
 // SetUpdatedAt sets the value of UpdatedAt.
 func (s *UpdateWorkflowOKWorkflow) SetUpdatedAt(val time.Time) {
 	s.UpdatedAt = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *UpdateWorkflowOKWorkflow) SetConcurrencyMode(val OptUpdateWorkflowOKWorkflowConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type UpdateWorkflowOKWorkflowConcurrencyMode string
+
+const (
+	UpdateWorkflowOKWorkflowConcurrencyModeParallel UpdateWorkflowOKWorkflowConcurrencyMode = "parallel"
+	UpdateWorkflowOKWorkflowConcurrencyModeLock     UpdateWorkflowOKWorkflowConcurrencyMode = "lock"
+	UpdateWorkflowOKWorkflowConcurrencyModeQueue    UpdateWorkflowOKWorkflowConcurrencyMode = "queue"
+)
+
+// AllValues returns all UpdateWorkflowOKWorkflowConcurrencyMode values.
+func (UpdateWorkflowOKWorkflowConcurrencyMode) AllValues() []UpdateWorkflowOKWorkflowConcurrencyMode {
+	return []UpdateWorkflowOKWorkflowConcurrencyMode{
+		UpdateWorkflowOKWorkflowConcurrencyModeParallel,
+		UpdateWorkflowOKWorkflowConcurrencyModeLock,
+		UpdateWorkflowOKWorkflowConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UpdateWorkflowOKWorkflowConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case UpdateWorkflowOKWorkflowConcurrencyModeParallel:
+		return []byte(s), nil
+	case UpdateWorkflowOKWorkflowConcurrencyModeLock:
+		return []byte(s), nil
+	case UpdateWorkflowOKWorkflowConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UpdateWorkflowOKWorkflowConcurrencyMode) UnmarshalText(data []byte) error {
+	switch UpdateWorkflowOKWorkflowConcurrencyMode(data) {
+	case UpdateWorkflowOKWorkflowConcurrencyModeParallel:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeParallel
+		return nil
+	case UpdateWorkflowOKWorkflowConcurrencyModeLock:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeLock
+		return nil
+	case UpdateWorkflowOKWorkflowConcurrencyModeQueue:
+		*s = UpdateWorkflowOKWorkflowConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 // UpdateWorkflowOKWorkflowServicePrincipalId represents sum type.
@@ -9168,11 +10264,12 @@ func (s *UpdateWorkflowOKWorkflowTagsItem) SetName(val string) {
 }
 
 type UpdateWorkflowReq struct {
-	Name        OptString                   `json:"Name"`
-	Description OptString                   `json:"Description"`
-	Publish     OptBool                     `json:"Publish"`
-	Logging     OptBool                     `json:"Logging"`
-	Tags        []UpdateWorkflowReqTagsItem `json:"Tags"`
+	Name            OptString                           `json:"Name"`
+	Description     OptString                           `json:"Description"`
+	Publish         OptBool                             `json:"Publish"`
+	Logging         OptBool                             `json:"Logging"`
+	Tags            []UpdateWorkflowReqTagsItem         `json:"Tags"`
+	ConcurrencyMode OptUpdateWorkflowReqConcurrencyMode `json:"ConcurrencyMode"`
 }
 
 // GetName returns the value of Name.
@@ -9200,6 +10297,11 @@ func (s *UpdateWorkflowReq) GetTags() []UpdateWorkflowReqTagsItem {
 	return s.Tags
 }
 
+// GetConcurrencyMode returns the value of ConcurrencyMode.
+func (s *UpdateWorkflowReq) GetConcurrencyMode() OptUpdateWorkflowReqConcurrencyMode {
+	return s.ConcurrencyMode
+}
+
 // SetName sets the value of Name.
 func (s *UpdateWorkflowReq) SetName(val OptString) {
 	s.Name = val
@@ -9223,6 +10325,59 @@ func (s *UpdateWorkflowReq) SetLogging(val OptBool) {
 // SetTags sets the value of Tags.
 func (s *UpdateWorkflowReq) SetTags(val []UpdateWorkflowReqTagsItem) {
 	s.Tags = val
+}
+
+// SetConcurrencyMode sets the value of ConcurrencyMode.
+func (s *UpdateWorkflowReq) SetConcurrencyMode(val OptUpdateWorkflowReqConcurrencyMode) {
+	s.ConcurrencyMode = val
+}
+
+type UpdateWorkflowReqConcurrencyMode string
+
+const (
+	UpdateWorkflowReqConcurrencyModeParallel UpdateWorkflowReqConcurrencyMode = "parallel"
+	UpdateWorkflowReqConcurrencyModeLock     UpdateWorkflowReqConcurrencyMode = "lock"
+	UpdateWorkflowReqConcurrencyModeQueue    UpdateWorkflowReqConcurrencyMode = "queue"
+)
+
+// AllValues returns all UpdateWorkflowReqConcurrencyMode values.
+func (UpdateWorkflowReqConcurrencyMode) AllValues() []UpdateWorkflowReqConcurrencyMode {
+	return []UpdateWorkflowReqConcurrencyMode{
+		UpdateWorkflowReqConcurrencyModeParallel,
+		UpdateWorkflowReqConcurrencyModeLock,
+		UpdateWorkflowReqConcurrencyModeQueue,
+	}
+}
+
+// MarshalText implements encoding.TextMarshaler.
+func (s UpdateWorkflowReqConcurrencyMode) MarshalText() ([]byte, error) {
+	switch s {
+	case UpdateWorkflowReqConcurrencyModeParallel:
+		return []byte(s), nil
+	case UpdateWorkflowReqConcurrencyModeLock:
+		return []byte(s), nil
+	case UpdateWorkflowReqConcurrencyModeQueue:
+		return []byte(s), nil
+	default:
+		return nil, errors.Errorf("invalid value: %q", s)
+	}
+}
+
+// UnmarshalText implements encoding.TextUnmarshaler.
+func (s *UpdateWorkflowReqConcurrencyMode) UnmarshalText(data []byte) error {
+	switch UpdateWorkflowReqConcurrencyMode(data) {
+	case UpdateWorkflowReqConcurrencyModeParallel:
+		*s = UpdateWorkflowReqConcurrencyModeParallel
+		return nil
+	case UpdateWorkflowReqConcurrencyModeLock:
+		*s = UpdateWorkflowReqConcurrencyModeLock
+		return nil
+	case UpdateWorkflowReqConcurrencyModeQueue:
+		*s = UpdateWorkflowReqConcurrencyModeQueue
+		return nil
+	default:
+		return errors.Errorf("invalid value: %q", data)
+	}
 }
 
 type UpdateWorkflowReqTagsItem struct {

@@ -33,7 +33,7 @@ func TestCancelExecutionAccepted_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -92,6 +92,18 @@ func TestCancelExecutionAcceptedExecutionWorkflow_EncodeDecode(t *testing.T) {
 	var typ2 CancelExecutionAcceptedExecutionWorkflow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestCancelExecutionAcceptedExecutionWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionAcceptedExecutionWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionAcceptedExecutionWorkflowConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCancelExecutionAcceptedExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionAcceptedExecutionWorkflowServicePrincipalId
 	typ.SetFake()
@@ -134,7 +146,7 @@ func TestCancelExecutionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -175,7 +187,7 @@ func TestCancelExecutionConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -216,7 +228,7 @@ func TestCancelExecutionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -257,7 +269,7 @@ func TestCancelExecutionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -298,7 +310,7 @@ func TestCancelExecutionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -339,7 +351,7 @@ func TestCancelExecutionOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -398,6 +410,18 @@ func TestCancelExecutionOKExecutionWorkflow_EncodeDecode(t *testing.T) {
 	var typ2 CancelExecutionOKExecutionWorkflow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestCancelExecutionOKExecutionWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ CancelExecutionOKExecutionWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CancelExecutionOKExecutionWorkflowConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCancelExecutionOKExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ CancelExecutionOKExecutionWorkflowServicePrincipalId
 	typ.SetFake()
@@ -440,7 +464,7 @@ func TestCancelExecutionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -481,7 +505,7 @@ func TestCreateExecutionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -522,7 +546,7 @@ func TestCreateExecutionConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -563,7 +587,7 @@ func TestCreateExecutionCreated_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -622,6 +646,18 @@ func TestCreateExecutionCreatedExecutionWorkflow_EncodeDecode(t *testing.T) {
 	var typ2 CreateExecutionCreatedExecutionWorkflow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestCreateExecutionCreatedExecutionWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ CreateExecutionCreatedExecutionWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateExecutionCreatedExecutionWorkflowConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestCreateExecutionCreatedExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ CreateExecutionCreatedExecutionWorkflowServicePrincipalId
 	typ.SetFake()
@@ -664,7 +700,7 @@ func TestCreateExecutionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -705,7 +741,7 @@ func TestCreateExecutionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -746,7 +782,7 @@ func TestCreateExecutionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -828,7 +864,7 @@ func TestCreateExecutionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -869,7 +905,7 @@ func TestCreateSubscriptionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -910,7 +946,7 @@ func TestCreateSubscriptionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -951,7 +987,7 @@ func TestCreateSubscriptionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -992,7 +1028,7 @@ func TestCreateSubscriptionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1074,7 +1110,7 @@ func TestCreateSubscriptionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1115,7 +1151,7 @@ func TestCreateWorkflowBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1156,7 +1192,7 @@ func TestCreateWorkflowCreated_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1189,6 +1225,18 @@ func TestCreateWorkflowCreatedWorkflow_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 CreateWorkflowCreatedWorkflow
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestCreateWorkflowCreatedWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ CreateWorkflowCreatedWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateWorkflowCreatedWorkflowConcurrencyMode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCreateWorkflowCreatedWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
@@ -1233,7 +1281,7 @@ func TestCreateWorkflowForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1274,7 +1322,7 @@ func TestCreateWorkflowInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1315,7 +1363,7 @@ func TestCreateWorkflowNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1356,7 +1404,7 @@ func TestCreateWorkflowReq_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Description\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"RevisionAlias\":\"sampleString\",\"Runbook\":\"sampleString\",\"Tags\":[{\"Name\":\"sampleString\"}]}"},
+		{Input: "{\"ConcurrencyMode\":\"parallel\",\"Description\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"RevisionAlias\":\"sampleString\",\"Runbook\":\"sampleString\",\"Tags\":[{\"Name\":\"sampleString\"}]}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1378,6 +1426,18 @@ func TestCreateWorkflowReq_Examples(t *testing.T) {
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}
+}
+func TestCreateWorkflowReqConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ CreateWorkflowReqConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 CreateWorkflowReqConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestCreateWorkflowReqServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ CreateWorkflowReqServicePrincipalId
@@ -1421,7 +1481,7 @@ func TestCreateWorkflowRevisionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1462,7 +1522,7 @@ func TestCreateWorkflowRevisionConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1556,7 +1616,7 @@ func TestCreateWorkflowRevisionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1597,7 +1657,7 @@ func TestCreateWorkflowRevisionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1638,7 +1698,7 @@ func TestCreateWorkflowRevisionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1720,7 +1780,7 @@ func TestCreateWorkflowRevisionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1761,7 +1821,7 @@ func TestCreateWorkflowUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1802,7 +1862,7 @@ func TestDeleteExecutionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1843,7 +1903,7 @@ func TestDeleteExecutionConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1884,7 +1944,7 @@ func TestDeleteExecutionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1925,7 +1985,7 @@ func TestDeleteExecutionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -1966,7 +2026,7 @@ func TestDeleteExecutionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2048,7 +2108,7 @@ func TestDeleteExecutionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2089,7 +2149,7 @@ func TestDeleteSubscriptionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2130,7 +2190,7 @@ func TestDeleteSubscriptionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2171,7 +2231,7 @@ func TestDeleteSubscriptionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2212,7 +2272,7 @@ func TestDeleteSubscriptionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2253,7 +2313,7 @@ func TestDeleteSubscriptionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2294,7 +2354,7 @@ func TestDeleteWorkflowBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2335,7 +2395,7 @@ func TestDeleteWorkflowConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2376,7 +2436,7 @@ func TestDeleteWorkflowForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2417,7 +2477,7 @@ func TestDeleteWorkflowInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2458,7 +2518,7 @@ func TestDeleteWorkflowNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2540,7 +2600,7 @@ func TestDeleteWorkflowRevisionAliasBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2581,7 +2641,7 @@ func TestDeleteWorkflowRevisionAliasForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2622,7 +2682,7 @@ func TestDeleteWorkflowRevisionAliasInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2663,7 +2723,7 @@ func TestDeleteWorkflowRevisionAliasNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2757,7 +2817,7 @@ func TestDeleteWorkflowRevisionAliasUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2798,7 +2858,7 @@ func TestDeleteWorkflowUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2839,7 +2899,7 @@ func TestGetExecutionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2880,7 +2940,7 @@ func TestGetExecutionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2921,7 +2981,7 @@ func TestGetExecutionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -2962,7 +3022,7 @@ func TestGetExecutionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3003,7 +3063,7 @@ func TestGetExecutionOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
+		{Input: "{\"Execution\":{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3062,6 +3122,18 @@ func TestGetExecutionOKExecutionWorkflow_EncodeDecode(t *testing.T) {
 	var typ2 GetExecutionOKExecutionWorkflow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestGetExecutionOKExecutionWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ GetExecutionOKExecutionWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetExecutionOKExecutionWorkflowConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestGetExecutionOKExecutionWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ GetExecutionOKExecutionWorkflowServicePrincipalId
 	typ.SetFake()
@@ -3104,7 +3176,7 @@ func TestGetExecutionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3145,7 +3217,7 @@ func TestGetSubscriptionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3186,7 +3258,7 @@ func TestGetSubscriptionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3227,7 +3299,7 @@ func TestGetSubscriptionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3268,7 +3340,7 @@ func TestGetSubscriptionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3374,7 +3446,7 @@ func TestGetSubscriptionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3415,7 +3487,7 @@ func TestGetWorkflowBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3456,7 +3528,7 @@ func TestGetWorkflowForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3497,7 +3569,7 @@ func TestGetWorkflowInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3538,7 +3610,7 @@ func TestGetWorkflowNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3579,7 +3651,7 @@ func TestGetWorkflowOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3612,6 +3684,18 @@ func TestGetWorkflowOKWorkflow_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 GetWorkflowOKWorkflow
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestGetWorkflowOKWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ GetWorkflowOKWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 GetWorkflowOKWorkflowConcurrencyMode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestGetWorkflowOKWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
@@ -3656,7 +3740,7 @@ func TestGetWorkflowRevisionsBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3697,7 +3781,7 @@ func TestGetWorkflowRevisionsForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3738,7 +3822,7 @@ func TestGetWorkflowRevisionsInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3779,7 +3863,7 @@ func TestGetWorkflowRevisionsNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3873,7 +3957,7 @@ func TestGetWorkflowRevisionsUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3914,7 +3998,7 @@ func TestGetWorkflowUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3955,7 +4039,7 @@ func TestListExecutionBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -3996,7 +4080,7 @@ func TestListExecutionForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4037,7 +4121,7 @@ func TestListExecutionHistoryBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4078,7 +4162,7 @@ func TestListExecutionHistoryForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4119,7 +4203,7 @@ func TestListExecutionHistoryInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4160,7 +4244,7 @@ func TestListExecutionHistoryNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4266,7 +4350,7 @@ func TestListExecutionHistoryUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4307,7 +4391,7 @@ func TestListExecutionInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4348,7 +4432,7 @@ func TestListExecutionNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4389,7 +4473,7 @@ func TestListExecutionOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Count\":123,\"Executions\":[{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}}],\"From\":123,\"Total\":123,\"is_ok\":true}"},
+		{Input: "{\"Count\":123,\"Executions\":[{\"Args\":\"sampleString\",\"CancelRequestedAt\":\"2020-01-01T00:00:00Z\",\"CanceledAt\":\"2020-01-01T00:00:00Z\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Error\":\"sampleString\",\"ExecutionId\":\"sampleString\",\"FailedAt\":\"2020-01-01T00:00:00Z\",\"Name\":\"sampleString\",\"Result\":\"sampleString\",\"Revision\":123,\"RevisionAlias\":\"sampleString\",\"RunAt\":\"2020-01-01T00:00:00Z\",\"Status\":\"Queued\",\"SucceededAt\":\"2020-01-01T00:00:00Z\",\"UpdatedAt\":\"2020-01-01T00:00:00Z\",\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}}],\"From\":123,\"Total\":123,\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4448,6 +4532,18 @@ func TestListExecutionOKExecutionsItemWorkflow_EncodeDecode(t *testing.T) {
 	var typ2 ListExecutionOKExecutionsItemWorkflow
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
+func TestListExecutionOKExecutionsItemWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ ListExecutionOKExecutionsItemWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ListExecutionOKExecutionsItemWorkflowConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
 func TestListExecutionOKExecutionsItemWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
 	var typ ListExecutionOKExecutionsItemWorkflowServicePrincipalId
 	typ.SetFake()
@@ -4490,7 +4586,7 @@ func TestListExecutionUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4531,7 +4627,7 @@ func TestListPlansBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4572,7 +4668,7 @@ func TestListPlansForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4613,7 +4709,7 @@ func TestListPlansInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4654,7 +4750,7 @@ func TestListPlansNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4748,7 +4844,7 @@ func TestListPlansUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4789,7 +4885,7 @@ func TestListWorkflowBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4830,7 +4926,7 @@ func TestListWorkflowForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4871,7 +4967,7 @@ func TestListWorkflowInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4912,7 +5008,7 @@ func TestListWorkflowNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4953,7 +5049,7 @@ func TestListWorkflowOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Count\":123,\"From\":123,\"Total\":123,\"Workflows\":[{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}],\"is_ok\":true}"},
+		{Input: "{\"Count\":123,\"From\":123,\"Total\":123,\"Workflows\":[{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"}],\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -4986,6 +5082,18 @@ func TestListWorkflowOKWorkflowsItem_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 ListWorkflowOKWorkflowsItem
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestListWorkflowOKWorkflowsItemConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ ListWorkflowOKWorkflowsItemConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 ListWorkflowOKWorkflowsItemConcurrencyMode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestListWorkflowOKWorkflowsItemServicePrincipalId_EncodeDecode(t *testing.T) {
@@ -5030,7 +5138,7 @@ func TestListWorkflowRevisionsBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5071,7 +5179,7 @@ func TestListWorkflowRevisionsForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5112,7 +5220,7 @@ func TestListWorkflowRevisionsInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5153,7 +5261,7 @@ func TestListWorkflowRevisionsNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5247,7 +5355,7 @@ func TestListWorkflowRevisionsUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5288,7 +5396,7 @@ func TestListWorkflowSuggestBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5329,7 +5437,7 @@ func TestListWorkflowSuggestForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5370,7 +5478,7 @@ func TestListWorkflowSuggestInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5411,7 +5519,7 @@ func TestListWorkflowSuggestNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5505,7 +5613,7 @@ func TestListWorkflowSuggestUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5546,7 +5654,7 @@ func TestListWorkflowUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5587,7 +5695,7 @@ func TestUpdateWorkflowBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5628,7 +5736,7 @@ func TestUpdateWorkflowForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5669,7 +5777,7 @@ func TestUpdateWorkflowInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5710,7 +5818,7 @@ func TestUpdateWorkflowNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5751,7 +5859,7 @@ func TestUpdateWorkflowOK_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Workflow\":{\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
+		{Input: "{\"Workflow\":{\"ConcurrencyMode\":\"parallel\",\"CreatedAt\":\"2020-01-01T00:00:00Z\",\"Description\":\"sampleString\",\"Id\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}],\"UpdatedAt\":\"2020-01-01T00:00:00Z\"},\"is_ok\":true}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5784,6 +5892,18 @@ func TestUpdateWorkflowOKWorkflow_EncodeDecode(t *testing.T) {
 	require.True(t, std.Valid(data), "Encoded: %s", data)
 
 	var typ2 UpdateWorkflowOKWorkflow
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
+}
+func TestUpdateWorkflowOKWorkflowConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ UpdateWorkflowOKWorkflowConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateWorkflowOKWorkflowConcurrencyMode
 	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestUpdateWorkflowOKWorkflowServicePrincipalId_EncodeDecode(t *testing.T) {
@@ -5828,7 +5948,7 @@ func TestUpdateWorkflowReq_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Description\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}]}"},
+		{Input: "{\"ConcurrencyMode\":\"parallel\",\"Description\":\"sampleString\",\"Logging\":true,\"Name\":\"sampleString\",\"Publish\":true,\"Tags\":[{\"Name\":\"sampleString\"}]}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5850,6 +5970,18 @@ func TestUpdateWorkflowReq_Examples(t *testing.T) {
 			require.NoError(t, typ2.Decode(jx.DecodeBytes(e.Bytes())))
 		})
 	}
+}
+func TestUpdateWorkflowReqConcurrencyMode_EncodeDecode(t *testing.T) {
+	var typ UpdateWorkflowReqConcurrencyMode
+	typ.SetFake()
+
+	e := jx.Encoder{}
+	typ.Encode(&e)
+	data := e.Bytes()
+	require.True(t, std.Valid(data), "Encoded: %s", data)
+
+	var typ2 UpdateWorkflowReqConcurrencyMode
+	require.NoError(t, typ2.Decode(jx.DecodeBytes(data)))
 }
 func TestUpdateWorkflowReqTagsItem_EncodeDecode(t *testing.T) {
 	var typ UpdateWorkflowReqTagsItem
@@ -5881,7 +6013,7 @@ func TestUpdateWorkflowRevisionAliasBadRequest_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Bad Request\"}"},
+		{Input: "{\"Message\":\"Bad Request\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5922,7 +6054,7 @@ func TestUpdateWorkflowRevisionAliasConflict_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"Message\":\"sampleString\",\"is_ok\":true}"},
+		{Input: "{\"Message\":\"sampleString\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -5963,7 +6095,7 @@ func TestUpdateWorkflowRevisionAliasForbidden_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Forbidden\"}"},
+		{Input: "{\"Message\":\"Forbidden\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -6004,7 +6136,7 @@ func TestUpdateWorkflowRevisionAliasInternalServerError_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Internal Server Error\"}"},
+		{Input: "{\"Message\":\"Internal Server Error\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -6045,7 +6177,7 @@ func TestUpdateWorkflowRevisionAliasNotFound_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Not Found\"}"},
+		{Input: "{\"Message\":\"Not Found\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -6180,7 +6312,7 @@ func TestUpdateWorkflowRevisionAliasUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
@@ -6221,7 +6353,7 @@ func TestUpdateWorkflowUnauthorized_Examples(t *testing.T) {
 	for i, tc := range []struct {
 		Input string
 	}{
-		{Input: "{\"is_ok\":false,\"message\":\"Unauthorized\"}"},
+		{Input: "{\"Message\":\"Unauthorized\",\"is_ok\":false}"},
 	} {
 		tc := tc
 		t.Run(fmt.Sprintf("Test%d", i+1), func(t *testing.T) {
