@@ -1,5 +1,11 @@
 # Changelog
 
+## [v0.3.1](https://github.com/sacloud/workflows-api-go/compare/v0.3.0...v0.3.1) - 2026-03-16
+- go oldstableバージョンでのテスト追加 by @a2not in https://github.com/sacloud/workflows-api-go/pull/42
+- プロファイル/環境変数による接続先切り替えに対応 by @to-shoji in https://github.com/sacloud/workflows-api-go/pull/50
+- fix(test): retry execution delete to handle 409 errors by @a2not in https://github.com/sacloud/workflows-api-go/pull/51
+- OpenAPI定義の更新 by @a2not in https://github.com/sacloud/workflows-api-go/pull/52
+
 ## [v0.3.0](https://github.com/sacloud/workflows-api-go/compare/v0.2.0...v0.3.0) - 2026-02-10
 - OpenAPI定義ファイルの追加 by @a2not in https://github.com/sacloud/workflows-api-go/pull/36
 - chore(openapi): OpenAPI定義の更新を反映 by @a2not in https://github.com/sacloud/workflows-api-go/pull/40
