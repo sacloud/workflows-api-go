@@ -1,3 +1,11 @@
+> [!WARNING]
+>
+> このレポジトリの内容は下記に集約・移転しました。
+> github.com/sacloud/sacloud-sdk-go
+>
+> 今後は上記のレポジトリで開発を行います。
+> このライブラリを使用している方は、importを変更していただきますようお願いいたします。
+
 # sacloud/workflows-api-go
 
 Go言語向けのさくらのクラウド Workflows APIライブラリ
@@ -8,8 +16,6 @@ APIドキュメント: https://manual.sakura.ad.jp/api/cloud/workflows/
 ## 概要
 
 sacloud/workflows-api-goはさくらのクラウド Workflows APIをGo言語から利用するためのAPIライブラリです。
-
-:warning:  v1.0に達するまでは互換性のない形で変更される可能性がありますのでご注意ください。
 
 ## License
 
