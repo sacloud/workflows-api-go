@@ -5,6 +5,14 @@
 >
 > 今後は上記のレポジトリで開発を行います。
 > このライブラリを使用している方は、importを変更していただきますようお願いいたします。
+>
+> ```go
+> // 変更前
+> import "github.com/sacloud/workflows-api-go"
+>
+> // 変更後
+> import "github.com/sacloud/sacloud-sdk-go/api/workflows"
+> ```
 
 # sacloud/workflows-api-go
 
