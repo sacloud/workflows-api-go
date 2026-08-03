@@ -1,5 +1,8 @@
 # Changelog
 
+## [v0.4.1](https://github.com/sacloud/workflows-api-go/compare/v0.4.0...v0.4.1) - 2026-08-03
+- update README for repository transition by @shyouhei in https://github.com/sacloud/workflows-api-go/pull/68
+
 ## [v0.4.0](https://github.com/sacloud/workflows-api-go/compare/v0.3.0...v0.4.0) - 2026-03-23
 - go oldstableバージョンでのテスト追加 by @a2not in https://github.com/sacloud/workflows-api-go/pull/42
 - プロファイル/環境変数による接続先切り替えに対応 by @to-shoji in https://github.com/sacloud/workflows-api-go/pull/50
